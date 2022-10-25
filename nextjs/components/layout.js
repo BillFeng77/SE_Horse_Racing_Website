@@ -3,6 +3,7 @@ import Image from 'next/image';
 import styles from './layout.module.css';
 import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
+import Menu from './menu';
 
 const name = 'Horse Racing Web'
 export const siteTitle = 'Next.js Sample Website';
@@ -10,6 +11,7 @@ export const siteTitle = 'Next.js Sample Website';
 export default function Layout({ children, home }) {
   return (
     <div className={styles.container}>
+      <Menu />
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta
