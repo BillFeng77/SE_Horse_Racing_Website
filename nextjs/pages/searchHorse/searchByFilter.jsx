@@ -5,6 +5,7 @@ import { PageContainer } from '@ant-design/pro-layout';
 import { Link, useIntl, useModel, useRequest } from 'umi';
 
 //还需要加一个searchlist来存储需要搜索horse的信息
+//Call API to get Data
 const data = [
     {
       Name: ,
@@ -69,9 +70,9 @@ const data = [
         ellipsis: true,
       },
       {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
+        title: 'WinningDate',
+        dataIndex: 'WinningDate',
+        key: 'WinningDate',
         filters: [
           {
             text: 'London',
@@ -88,6 +89,46 @@ const data = [
         sortOrder: sortedInfo.columnKey === 'address' ? sortedInfo.order : null,
         ellipsis: true,
       },
+      {
+        title: 'Surf',
+        dataIndex: 'Surf',
+        key: 'surf',
+        filters: [
+          {
+            text: '',
+            value: '',
+          },
+          {
+            text: '',
+            value: '',
+          },
+        ],
+        filteredValue: filteredInfo.address || null,
+        onFilter: (value, record) => record.address.includes(value),
+        sorter: (a, b) => a.address.length - b.address.length,
+        sortOrder: sortedInfo.columnKey === 'address' ? sortedInfo.order : null,
+        ellipsis: true,
+      },
+      {
+        title: 'DistanceFurlongs',
+        dataIndex: 'DistanceFurlongs',
+        key: 'DistanceFurlongs',
+        filters: [
+          {
+            text: '',
+            value: '',
+          },
+          {
+            text: '',
+            value: '',
+          },
+        ],
+        filteredValue: filteredInfo.address || null,
+        onFilter: (value, record) => record.address.includes(value),
+        sorter: (a, b) => a.address.length - b.address.length,
+        sortOrder: sortedInfo.columnKey === 'address' ? sortedInfo.order : null,
+        ellipsis: true,
+      }
     ];
     return (
       <PageContainer>
