@@ -1,13 +1,121 @@
-import React from "react";
-function filter(){
-    return <Horse {...horseData}/>;
-}
-export default filter
+import React , { useCallback, useLayoutEffect, useRef,useState }from "react";
+import {Button,Table,Space} from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+import { PageContainer } from '@ant-design/pro-layout';
+import { Link, useIntl, useModel, useRequest } from 'umi';
 
+//还需要加一个searchlist来存储需要搜索horse的信息
+const data = [
+    {
+      Name: ,
+      BirthDate: ,
+      WinningDate: ,
+      Race Name: ,
+      Country:
+      Surf:
+      DistanceFurlongs:
+    },
+    
+  ];
+  const searchHorse = () => {
+    const [userState,getUserState]=React.userState()
+    const [filteredInfo, setFilteredInfo] = React.useState({});
+    const [sortedInfo, setSortedInfo] = React.useState({});
+    const handleChange = (pagination, filters, sorter) => {
+      console.log('Various parameters', pagination, filters, sorter);
+      setFilteredInfo(filters);
+      setSortedInfo(sorter);
+    };
+    const clearFilters = () => {
+      setFilteredInfo({});
+    };
+    const clearAll = () => {
+      setFilteredInfo({});
+      setSortedInfo({});
+    };
+    const setAgeSort = () => {
+      setSortedInfo({
+        order: 'descend',
+        columnKey: 'age',
+      });
+    };
+    const columns = [
+      {
+        title: 'Name',
+        dataIndex: 'name',
+        key: 'name',
+        filters: [
+          {
+            text: 'Joe',
+            value: 'Joe',
+          },
+          {
+            text: 'Jim',
+            value: 'Jim',
+          },
+        ],
+        filteredValue: filteredInfo.name || null,
+        onFilter: (value, record) => record.name.includes(value),
+        sorter: (a, b) => a.name.length - b.name.length,
+        sortOrder: sortedInfo.columnKey === 'name' ? sortedInfo.order : null,
+        ellipsis: true,
+      },
+      {
+        title: 'BirthDate',
+        dataIndex: 'BirthDate',
+        key: 'BirthDate',
+        sorter: (a, b) => a.BirthDate - b.BirthDate,
+        sortOrder: sortedInfo.columnKey === 'BirthDate' ? sortedInfo.order : null,
+        ellipsis: true,
+      },
+      {
+        title: 'Address',
+        dataIndex: 'address',
+        key: 'address',
+        filters: [
+          {
+            text: 'London',
+            value: 'London',
+          },
+          {
+            text: 'New York',
+            value: 'New York',
+          },
+        ],
+        filteredValue: filteredInfo.address || null,
+        onFilter: (value, record) => record.address.includes(value),
+        sorter: (a, b) => a.address.length - b.address.length,
+        sortOrder: sortedInfo.columnKey === 'address' ? sortedInfo.order : null,
+        ellipsis: true,
+      },
+    ];
+    return (
+      <PageContainer>
+        <Space
+          style={{
+            marginBottom: 16,
+          }}
+        >
+          <Button onClick={setAgeSort}>Sort age</Button>
+          <Button onClick={clearFilters}>Clear filters</Button>
+          <Button onClick={clearAll}>Clear filters and sorters</Button>
+        </Space>
+        <Table columns={columns} dataSource={data} onChange={handleChange} />
+      </PageContainer>
+    );
+  };
+
+
+export default searchHorse;
+
+//</PageContainer>function filter(){
+  //  return <Horse {...horseData}/>;
+//}
+//export default filter
 /*const selectHorse=()=>{
     ...
 }*/
-function Horse(props){
+/*function Horse(props){
     const {
         horseracing,
         navbarLInkPlace1,
@@ -46,8 +154,6 @@ function Horse(props){
                         <div className="text roboto-normal-ship-gray-17px">
                             {text1}
                         </div>
-
-
                     </div>
                     <div className="hi-jiani manrope-bold-au-chico-20px">
                         {hiJiani}
