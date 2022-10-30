@@ -4,22 +4,23 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-layout';
 import { Link, useIntl, useModel, useRequest } from 'umi';
 
-//还需要加一个searchlist来存储需要搜索horse的信息
 //Call API to get Data
+//Add verification after login part done
+const [userState,getUserState]=React.useState("user")
+
 const data = [
-    {
-      Name: ,
-      BirthDate: ,
-      WinningDate: ,
-      Race Name: ,
-      Country:
-      Surf:
-      DistanceFurlongs:
-    },
-    
-  ];
-  const searchHorse = () => {
-    const [userState,getUserState]=React.userState()
+  {
+    Name: ,
+    BirthDate: ,
+    WinningDate: ,
+    Race Name: ,
+    Country:
+    Surf:
+    DistanceFurlongs:
+  },
+  
+];
+const searchHorse = () => {
     const [filteredInfo, setFilteredInfo] = React.useState({});
     const [sortedInfo, setSortedInfo] = React.useState({});
     const handleChange = (pagination, filters, sorter) => {
@@ -37,7 +38,13 @@ const data = [
     const setAgeSort = () => {
       setSortedInfo({
         order: 'descend',
-        columnKey: 'age',
+        columnKey: 'BirthDate',
+      });
+    };
+    const setWinningDateSort = () => {
+      setSortedInfo({
+        order: 'descend',
+        columnKey: 'WinningDate',
       });
     };
     const columns = [
@@ -47,15 +54,16 @@ const data = [
         key: 'name',
         filters: [
           {
-            text: 'Joe',
-            value: 'Joe',
+            text: 'LeBron',
+            value: 'LeBron',
           },
           {
-            text: 'Jim',
-            value: 'Jim',
+            text: 'Jimmy',
+            value: 'Jimmy',
           },
         ],
         filteredValue: filteredInfo.name || null,
+        filterSearch: true,
         onFilter: (value, record) => record.name.includes(value),
         sorter: (a, b) => a.name.length - b.name.length,
         sortOrder: sortedInfo.columnKey === 'name' ? sortedInfo.order : null,
@@ -73,20 +81,6 @@ const data = [
         title: 'WinningDate',
         dataIndex: 'WinningDate',
         key: 'WinningDate',
-        filters: [
-          {
-            text: 'London',
-            value: 'London',
-          },
-          {
-            text: 'New York',
-            value: 'New York',
-          },
-        ],
-        filteredValue: filteredInfo.address || null,
-        onFilter: (value, record) => record.address.includes(value),
-        sorter: (a, b) => a.address.length - b.address.length,
-        sortOrder: sortedInfo.columnKey === 'address' ? sortedInfo.order : null,
         ellipsis: true,
       },
       {
@@ -103,16 +97,14 @@ const data = [
             value: '',
           },
         ],
-        filteredValue: filteredInfo.address || null,
-        onFilter: (value, record) => record.address.includes(value),
-        sorter: (a, b) => a.address.length - b.address.length,
-        sortOrder: sortedInfo.columnKey === 'address' ? sortedInfo.order : null,
+        filteredValue: filteredInfo.surf || null,
+        onFilter: (value, record) => record.surf.includes(value),
         ellipsis: true,
       },
       {
         title: 'DistanceFurlongs',
         dataIndex: 'DistanceFurlongs',
-        key: 'DistanceFurlongs',
+        key: 'distanceFurlongs',
         filters: [
           {
             text: '',
@@ -123,25 +115,22 @@ const data = [
             value: '',
           },
         ],
-        filteredValue: filteredInfo.address || null,
-        onFilter: (value, record) => record.address.includes(value),
-        sorter: (a, b) => a.address.length - b.address.length,
-        sortOrder: sortedInfo.columnKey === 'address' ? sortedInfo.order : null,
+        filteredValue: filteredInfo.distanceFurlongs || null,
+        onFilter: (value, record) => record.distanceFurlongs.includes(value),
+        sorter: (a, b) => a.distanceFurlongs - b.distanceFurlongs,
+        sortOrder: sortedInfo.columnKey === 'distanceFurlongs' ? sortedInfo.order : null,
         ellipsis: true,
       }
     ];
-    return (
+    return (//Waiting to integrate with Menu component and pageHeader
       <PageContainer>
-        <Space
-          style={{
-            marginBottom: 16,
-          }}
-        >
-          <Button onClick={setAgeSort}>Sort age</Button>
-          <Button onClick={clearFilters}>Clear filters</Button>
-          <Button onClick={clearAll}>Clear filters and sorters</Button>
-        </Space>
-        <Table columns={columns} dataSource={data} onChange={handleChange} />
+        <Space>
+        <Button onClick={setAgeSort}>Sort age</Button>
+        <Button onClick={clearFilters}>Clear filters</Button>
+        <Button onClick={setWinningDateSort}>Sort by Winning Date</Button>
+        <Button onClick={clearAll}>Clear filters and sorters</Button>
+      </Space>
+      <Table columns={columns} dataSource={data} onChange={handleChange} />
       </PageContainer>
     );
   };
