@@ -1,6 +1,15 @@
-.nav {
+.header{
+    display: flex; 
     width: 100%;
     border-bottom: 1px solid #ccc;
+    align-items:baseline;
+}
+
+.nav {
+    margin: 0 auto;
+    justify-content: center;
+    display: flex; 
+    width: 300px; 
 }
 
 .list {
@@ -10,5 +19,21 @@
 }
 
 .item {
-    margin-right: 12px;
+    margin-right: 40px;
 }
+
+.title{
+    margin-left: 100px;
+    width: 100px;
+    color: rgb(0, 0, 0);
+    justify-content: center;
+  }
+
+
+.userName{
+    margin-right: 100px;
+    width: 100px;
+    text-align: center;
+  }
+
+
