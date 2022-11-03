@@ -269,8 +269,8 @@ function Column(props){
             </div>  
         </div>
     );
-}
-function Frame27(props){
+}*/
+function Frame3(props){
     const {horse21}=props;
     return(
         <div className="horse-image">
