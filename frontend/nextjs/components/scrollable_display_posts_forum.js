@@ -1,6 +1,8 @@
 import { Avatar, Divider, List, Skeleton } from 'antd';
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import axios from 'axios'
+
 const ScrollableDisplayPostsForum = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
@@ -9,15 +11,25 @@ const ScrollableDisplayPostsForum = () => {
       return;
     }
     setLoading(true);
-    fetch('https://randomuser.me/api/?results=10&inc=name,gender,email,nat,picture&noinfo')
-      .then((res) => res.json())
-      .then((body) => {
-        setData([...data, ...body.results]);
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-      });
+    axios.get('http://127.0.0.1:5000/messages')
+        .then(function(response){
+            console.log(response.data);
+            setData(response.data);
+            setLoading(false);
+        })
+        .catch(() =>{
+            console.log(error);
+            setLoading(false);
+    })
+    // fetch('http://127.0.0.1:5000/messages')
+    //   .then((res) => res.json())
+    //   .then((body) => {
+    //     setData([...data, ...body.results]);
+    //     setLoading(false);
+    //   })
+    //   .catch(() => {
+    //     setLoading(false);
+    //   });
   };
   useEffect(() => {
     loadMoreData();
@@ -51,13 +63,13 @@ const ScrollableDisplayPostsForum = () => {
         <List
           dataSource={data}
           renderItem={(item) => (
-            <List.Item key={item.email}>
+            <List.Item key={item.userName}>
               <List.Item.Meta
-                avatar={<Avatar src={item.picture.large} />}
-                title={<a href="https://ant.design">{item.name.last}</a>}
-                description={item.email}
+                avatar={<Avatar src='https://joeschmoe.io/api/v1/random' />}
+                title={<a href="https://ant.design">{item.userName}</a>}
+                description={item.content}
               />
-              <div>Content</div>
+              {/* <div>Content</div> */}
             </List.Item>
           )}
         />
