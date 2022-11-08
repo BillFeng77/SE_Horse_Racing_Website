@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import styles from '../styles/menu.module.css';
 
+
 export default function Menu() {
     return (
         <div className={styles.header}>
@@ -19,7 +20,7 @@ export default function Menu() {
                     </Link>
                 </li>
                 <li className={styles.item}>
-                    <Link href="/posts">
+                    <Link href="/forum">
                         <a>Forum</a>
                     </Link>
                 </li>
@@ -32,7 +33,7 @@ export default function Menu() {
         </div>
         <div className={styles.userName}>
             {/* TODO: drop down 组件, 包括logout，administrator link*/}
-            <a>Hi, user!</a>
+            <p>Hi, user!</p>
         </div>
         </div>
     );

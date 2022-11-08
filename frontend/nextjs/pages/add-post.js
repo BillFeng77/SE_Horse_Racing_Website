@@ -49,7 +49,7 @@ export default function AddPost() {
 
     return (
         <div>
-            <Menu />
+            {/* <Menu /> */}
             <div className={styles.container}>
                 <form onSubmit={handlePost} className={styles.form}>
                     {error ? (
