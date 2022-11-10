@@ -7,12 +7,10 @@ import { Alert, Button, message, Tabs } from 'antd';
 //need import sha256 to encrypt the password
 import React, { useState } from 'react';
 import { FormattedMessage, history, Link, SelectLang, useIntl, useModel } from 'umi';
-import styles from 'nextjs/pages/Login/userlogin.less';
+import styles from 'pages/Login/userlogin.less';
 import type { LoginParams, LoginResult } from './service';
 
-const LoginMessage: React.FC<{
-  content: string;
-}> = ({ content }) => (
+const LoginMessage= ({ content }) => (
   <Alert
     style={{
       marginBottom: 24,
@@ -23,7 +21,7 @@ const LoginMessage: React.FC<{
   />
 );
 
-const Login: React.FC = () => {
+const Login= () => {
   const [submitting, setSubmitting] = useState(false);
   const [userLoginState, setUserLoginState] = useState<LoginResult>({});
   const [type, setType] = useState<string>('account');
@@ -38,19 +36,10 @@ const Login: React.FC = () => {
       const { data: isAdminRequest } = (await isAdminUsingPOST({ username: values.username })) as {
         data: API.ResponseBoolean_;
       };
-      const { data: isSuperAdminRequest } = (await isSuperAdminUsingPOST({
-        username: values.username,
-      })) as { data: API.ResponseBoolean_ };
-
-      const newUser = { name: values.username, isAdmin: false, isSuperAdmin: false };
+      const newUser = { name: values.username, isAdmin: false };
       if (isAdminRequest.success === true) {
         newUser.isAdmin = isAdminRequest.result || false;
       }
-
-      if (isSuperAdminRequest.success === true) {
-        newUser.isSuperAdmin = isSuperAdminRequest.result || false;
-      }
-
       // Identify user to rudderstack
       rudderanalytics?.identify(values.username, newUser);
       rudderanalytics?.track('User Logged In', newUser);
@@ -76,8 +65,7 @@ const Login: React.FC = () => {
       // console.log(values);
       if (msg.success === true) {
         const defaultLoginSuccessMessage = intl.formatMessage({
-          id: 'pages.login.success',
-          defaultMessage: '登录成功！',
+          defaultMessage: 'Login success',
         });
         message.success(defaultLoginSuccessMessage);
         // use localstorage here
@@ -103,8 +91,7 @@ const Login: React.FC = () => {
     } catch (error) {
       // console.log(error);
       const defaultLoginFailureMessage = intl.formatMessage({
-        id: 'pages.login.failure',
-        defaultMessage: '登录失败，请重试！',
+        defaultMessage: 'Login failed Please Try again',
       });
 
       message.error(defaultLoginFailureMessage);
@@ -117,7 +104,6 @@ const Login: React.FC = () => {
   // if (initialState?.currentUser?.name) {
   //   history.push('/');
   // }
-  // Handle Google Login
 
   return (
     <div className={styles.container}>
@@ -146,8 +132,7 @@ const Login: React.FC = () => {
             submitter={{
               searchConfig: {
                 submitText: intl.formatMessage({
-                  id: 'pages.login.submit',
-                  defaultMessage: '登录',
+                  defaultMessage: 'Login',
                 }),
               },
               render: (_, dom) => dom.pop(),
@@ -167,8 +152,7 @@ const Login: React.FC = () => {
               <Tabs.TabPane
                 key="account"
                 tab={intl.formatMessage({
-                  id: 'pages.login.accountLogin.tab',
-                  defaultMessage: '账户密码登录',
+                  defaultMessage: 'Account Login',
                 })}
               />
             </Tabs>
@@ -176,8 +160,7 @@ const Login: React.FC = () => {
             {status === 'error' && loginType === 'account' && (
               <LoginMessage
                 content={intl.formatMessage({
-                  id: 'pages.login.accountLogin.errorMessage',
-                  defaultMessage: '账户或密码错误(admin/ant.design)',
+                  defaultMessage: 'Account or password failed(admin/ant.design)',
                 })}
               />
             )}
@@ -190,16 +173,14 @@ const Login: React.FC = () => {
                     prefix: <UserOutlined className={styles.prefixIcon} />,
                   }}
                   placeholder={intl.formatMessage({
-                    id: 'pages.login.username.placeholder',
-                    defaultMessage: '用户名: admin or user',
+                    defaultMessage: 'Account: admin or user',
                   })}
                   rules={[
                     {
                       required: true,
                       message: (
                         <FormattedMessage
-                          id="pages.login.username.required"
-                          defaultMessage="请输入用户名!"
+                          defaultMessage="Please enter the username"
                         />
                       ),
                     },
@@ -213,7 +194,7 @@ const Login: React.FC = () => {
                   }}
                   placeholder={intl.formatMessage({
                     id: 'pages.login.password.placeholder',
-                    defaultMessage: '密码: ant.design',
+                    defaultMessage: 'Password: ant.design',
                   })}
                   rules={[
                     {
@@ -221,7 +202,7 @@ const Login: React.FC = () => {
                       message: (
                         <FormattedMessage
                           id="pages.login.password.required"
-                          defaultMessage="请输入密码！"
+                          defaultMessage="Please enter your password"
                         />
                       ),
                     },
@@ -236,7 +217,7 @@ const Login: React.FC = () => {
               }}
             >
               <ProFormCheckbox noStyle name="autoLogin">
-                <FormattedMessage id="pages.login.rememberMe" defaultMessage="自动登录" />
+                <FormattedMessage id="pages.login.rememberMe" defaultMessage="Auto login" />
               </ProFormCheckbox>
               {/* <a
                 style={{
@@ -249,13 +230,11 @@ const Login: React.FC = () => {
           </ProForm>
           <Button type="default" block size="large">
             <Link to="register">
-              <FormattedMessage id="pages.login.registerAccount" defaultMessage="注册账户" />
+              <FormattedMessage defaultMessage="注册账户" />
             </Link>
           </Button>
-          <GoogleSigninButton mode="login" />
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

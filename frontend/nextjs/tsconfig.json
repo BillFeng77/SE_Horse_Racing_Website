@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "pages/Login/userlogin.js"  ],
   "exclude": [
     "node_modules"
   ]

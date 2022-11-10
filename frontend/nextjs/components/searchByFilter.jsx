@@ -2,7 +2,8 @@ import React , { useCallback, useLayoutEffect, useRef,useState }from "react";
 import {Button,Table,Space} from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-layout';
-import { Link, useIntl, useModel, useRequest } from 'umi';
+import styles from 'styles/global.css';
+
 
 //Call API to get Data
 //Add verification after login part done
