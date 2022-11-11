@@ -47,7 +47,7 @@ const ScrollableDisplayPostsForum = () => {
       <InfiniteScroll
         dataLength={data.length}
         next={loadMoreData}
-        hasMore={data.length < 50}
+        hasMore={data.length < 5}
         loader={
           <Skeleton
             avatar
@@ -57,7 +57,7 @@ const ScrollableDisplayPostsForum = () => {
             active
           />
         }
-        endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
+        endMessage={<Divider plain>END</Divider>}
         scrollableTarget="scrollableDiv"
       >
         <List

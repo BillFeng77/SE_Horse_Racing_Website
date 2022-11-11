@@ -5,6 +5,7 @@ import PostCard from '../components/PostCard';
 import styles from '../styles/Home.module.css';
 // import AddPost from '../components/post_in_forum';
 import AddPost from './add-post';
+import PostAMessageForum from '../components/post_a_comment_forum';
 import Posts from '../components/display_posts_forum'; 
 import APost from '../components/display_a_post_forum';
 import ScrollableDisplayPostsForum from '../components/scrollable_display_posts_forum';
@@ -36,7 +37,8 @@ export default function Post({ posts }) {
             {/* <APost/> */}
             {/* <Posts/> */}
             <ScrollableDisplayPostsForum/>
-            <AddPost/>
+            {/* <AddPost/> */}
+            <PostAMessageForum/>
                                 
             {/* <Link href="/add-post">
                  <a>Add post</a>

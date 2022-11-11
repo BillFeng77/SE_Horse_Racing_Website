@@ -2,6 +2,7 @@ import json
 from flask import Flask, request, render_template
 from flask_cors import cross_origin, CORS
 from flask_pymongo import PyMongo
+from flask_pymongo import ObjectId
 from flask.json import jsonify
 from bson.json_util import dumps
 # pip uninstall bson  # pip uninstall pymongo    # pip install pymongo
@@ -11,6 +12,7 @@ app = Flask(__name__)
 CORS(app)
 app.config['MONGO_URI'] = "mongodb+srv://Pat:13008391115Sjc@cluster0.oamulll.mongodb.net/Horse_information_dataset_v1"
 mongo = PyMongo(app)
+db = mongo.db
 
 
 @app.route('/')
@@ -58,22 +60,45 @@ def get_dates():
 
 @app.route('/mongouser')
 def get_data_from_mongodb():
-    horse_info_db = mongo.db
-    # insert = horse_info_db["UserList"].insert_one(
+    db = mongo.db
+    # insert = db["UserList"].insert_one(
     #     {"email": "1111", "password": "2222", "userName": "2233"})
 
-    find = horse_info_db["UserList"].find()
+    find = db["UserList"].find()
     data = dumps(list(find))
     return data
 
 
-@app.route('/messages')
+# FORUM
+@app.route('/messages', methods=['GET'])
 def get_messages_from_mongodb():
-    horse_info_db = mongo.db
+    db = mongo.db
 
-    find = horse_info_db["Comments"].find()
+    find = db["Comments"].find().sort("count", -1)
     data = dumps(list(find))
     return data
+
+
+@app.route('/messages', methods=['POST'])
+def insert_message_to_mongodb():
+    db = mongo.db
+    data = request.get_json()
+    id = db["Comments"].insert_one(data).inserted_id
+    # get和使用id时 出现typeError  不影响使用
+    # TypeError: Object of type ObjectId is not JSON serializable     UNRESOLVED ERROR HERE!!!!
+    counter = update_counter_forum()
+    db["Comments"].update_one(
+        {'_id': ObjectId(id)}, {"$set": {'count': counter}})
+    return data
+
+
+def update_counter_forum():
+    db = mongo.db
+    db["Counters_Messages_Forum"].find_one_and_update(
+        {'type': "forum"},
+        {'$inc': {'counter': 1}})
+
+    return db["Counters_Messages_Forum"].find_one()['counter']
 
 
 if __name__ == '__main__':
