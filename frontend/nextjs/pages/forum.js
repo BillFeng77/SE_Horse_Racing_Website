@@ -36,7 +36,7 @@ export default function Post({ posts }) {
             </main> */}
             {/* <APost/> */}
             {/* <Posts/> */}
-            <ScrollableDisplayPostsForum/>
+            {/* <ScrollableDisplayPostsForum/> */}
             {/* <AddPost/> */}
             <PostAMessageForum/>
                                 
