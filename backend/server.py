@@ -107,6 +107,10 @@ def update_counter_forum():
 
     return db["Counters_Messages_Forum"].find_one()['counter']
 
+#拿马
+def getHorseInformation():
+    db=mongo.db
+    db[]
 
 if __name__ == '__main__':
     app.run(debug=True)

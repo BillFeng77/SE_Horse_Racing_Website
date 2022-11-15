@@ -1,12 +1,13 @@
 import React from 'react';
 import Menu from '../components/menu';
 import calender from '../components/calendar';
+import {Pagecontainer} from "umi";
 import {Layout} from 'antd';
 import carousel from '../components/Carousel';
 const {Header, Footer, Sider, Content}=Layout;
 const homePage=()=>{
     return (
-        <Layout>
+        <Pagecontainer>
             <Header>
                 <Menu></Menu>
                 <carousel></carousel>
@@ -20,8 +21,7 @@ const homePage=()=>{
                 </Sider>
                 <Sider>
                     <Space>
-                        <calender>
-                            
+                        <calender>                            
                         </calender>
                     </Space>
                 </Sider>
@@ -29,6 +29,6 @@ const homePage=()=>{
             <Footer>
 
             </Footer>
-        </Layout>
+        </Pagecontainer>
     )
 }
