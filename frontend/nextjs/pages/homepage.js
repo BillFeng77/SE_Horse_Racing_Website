@@ -12,7 +12,19 @@ const homePage=()=>{
                 <carousel></carousel>
             </Header>
             <Content>
-
+                <Sider>
+                    <Space>
+                        <Card>
+                        </Card>
+                    </Space>
+                </Sider>
+                <Sider>
+                    <Space>
+                        <calender>
+                            
+                        </calender>
+                    </Space>
+                </Sider>
             </Content>
             <Footer>
 
