@@ -17,8 +17,6 @@ def index():
 # send data to frontend by "serversideprops"
 
 # get data from frontend
-
-
 @app.route('/api/query', methods=['POST'])
 # @cross_origin(origins='http://localhost:3000')
 def get_query_from_react():

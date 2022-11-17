@@ -270,7 +270,7 @@ function Column(props){
             </div>  
         </div>
     );
-}*/
+}
 function Frame3(props){
     const {horse21}=props;
     return(
@@ -316,4 +316,4 @@ const horsedata={
     hiJiani:"Hi,Jiani",
     text2:"Filter search",
     displaySection11Props:displaySection11Data,
-}
+}*/

@@ -94,9 +94,11 @@ const Register =()=> {
           localStorage.setItem('password', params[0].password);
           // console.log(params);
           createUser(params[0].username);
+
           // identify user to rudderstack
           rudderanalytics?.identify(params[0].username);
           rudderanalytics?.track('User Registered', { username: params[0].username });
+
           history.push({
             pathname: '/user/register-result',
           });
