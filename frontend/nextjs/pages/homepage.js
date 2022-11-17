@@ -32,3 +32,4 @@ const homePage=()=>{
         </Pagecontainer>
     )
 }
+export default homePage()
