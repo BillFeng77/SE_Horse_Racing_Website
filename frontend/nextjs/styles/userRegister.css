@@ -1,0 +1,36 @@
+@import 'userLogin.css';
+
+  .password {
+    margin-bottom: 24px;
+    }
+
+
+  .getCaptcha {
+    display: block;
+    width: 100%;
+  }
+
+  .submit {
+    width: 50%;
+  }
+
+  .login {
+    float: right;
+    line-height: normal;
+  }
+
+.error {
+  transition: color 0.3s;
+}
+
+.success {
+  color: #1cdf6a;
+}
+
+.warning {
+  color: #eb1616;
+}
+
+.error {
+  color: #7b0ee8d0;
+}

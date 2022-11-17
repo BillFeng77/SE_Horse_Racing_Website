@@ -9,7 +9,7 @@ import styles from 'styles/global.css';
 //Add verification after login part done
 const [userState,getUserState]=React.useState("user")
 
-const data = [
+/*const data = [
   {
     Name: ,
     BirthDate: ,
@@ -20,7 +20,7 @@ const data = [
     DistanceFurlongs:
   },
   
-];
+];*/
 const searchHorse = () => {
     const [filteredInfo, setFilteredInfo] = React.useState({});
     const [sortedInfo, setSortedInfo] = React.useState({});
