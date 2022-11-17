@@ -32,3 +32,4 @@ const homePage=()=>{
         </Layout>
     )
 }
+export default homePage()

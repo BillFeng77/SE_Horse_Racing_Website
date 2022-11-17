@@ -8,7 +8,7 @@ import { Alert, Button, message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import { FormattedMessage, history, Link, SelectLang, useIntl, useModel } from 'umi';
 import styles from 'pages/Login/userlogin.less';
-import type { LoginParams, LoginResult } from './service';
+import  { LoginParams, LoginResult } from './service';
 
 const LoginMessage= ({ content }) => (
   <Alert
@@ -30,12 +30,12 @@ const Login= () => {
 
   const intl = useIntl();
 
-  const fetchUserInfo = async (values: LoginParams) => {
+  const fetchUserInfo = async (/*values: LoginParams*/) => {
     const userInfo = await initialState?.currentUser;
     if (userInfo && !userInfo.name) {
-      const { data: isAdminRequest } = (await isAdminUsingPOST({ username: values.username })) as {
+      const { data: isAdminRequest } = (await isAdminUsingPOST({ username: values.username })) /*as {
         data: API.ResponseBoolean_;
-      };
+      };*/
       const newUser = { name: values.username, isAdmin: false };
       if (isAdminRequest.success === true) {
         newUser.isAdmin = isAdminRequest.result || false;
@@ -51,7 +51,7 @@ const Login= () => {
     }
   };
 
-  const handleSubmit = async (values: LoginParams) => {
+  const handleSubmit = /*async (values: LoginParams)*/() => {
     setSubmitting(true);
     try {
       // 登录
@@ -59,7 +59,7 @@ const Login= () => {
       const hashedPassword = sha256(values.password).toString();
       values.password = hashedPassword;
 
-      const { data: msg } = (await loginUsingPOST({ ...values })) as { data: API.ResponseBoolean_ };
+      const { data: msg } = (await loginUsingPOST({ ...values })) /*as { data: API.ResponseBoolean_ }*/;
       // console.log(msg);
       // console.log(msg);
       // console.log(values);
@@ -78,7 +78,7 @@ const Login= () => {
         /** 此方法会跳转到 redirect 参数所在的位置 */
         if (!history) return;
         const { query } = history.location;
-        const { redirect } = query as { redirect: string };
+        const { redirect } = query;
         history.push(redirect || '/');
         return;
       } else {
@@ -113,10 +113,6 @@ const Login= () => {
       <div className={styles.content}>
         <div className={styles.top}>
           <div className={styles.header}>
-            <Link to="/">
-              <img alt="logo" className={styles.logo} src="/logo.png" />
-              <span className={styles.title}>Horse Website</span>
-            </Link>
           </div>
           <div className={styles.desc}>
             {intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
@@ -145,7 +141,7 @@ const Login= () => {
               },
             }}
             onFinish={async (values) => {
-              await handleSubmit(values as LoginParams);
+              await handleSubmit/*(values as LoginParams)*/;
             }}
           >
             <Tabs activeKey={type} onChange={setType}>
@@ -160,7 +156,7 @@ const Login= () => {
             {status === 'error' && loginType === 'account' && (
               <LoginMessage
                 content={intl.formatMessage({
-                  defaultMessage: 'Account or password failed(admin/ant.design)',
+                  defaultMessage: 'Account or password failed',
                 })}
               />
             )}
@@ -193,15 +189,13 @@ const Login= () => {
                     prefix: <LockOutlined className={styles.prefixIcon} />,
                   }}
                   placeholder={intl.formatMessage({
-                    id: 'pages.login.password.placeholder',
-                    defaultMessage: 'Password: ant.design',
+                    defaultMessage: 'Password:',
                   })}
                   rules={[
                     {
                       required: true,
                       message: (
                         <FormattedMessage
-                          id="pages.login.password.required"
                           defaultMessage="Please enter your password"
                         />
                       ),
