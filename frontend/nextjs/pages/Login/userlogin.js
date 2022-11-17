@@ -8,7 +8,7 @@ import { Alert, Button, message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import { FormattedMessage, history, Link, SelectLang, useIntl, useModel } from 'umi';
 import styles from 'pages/Login/userlogin.less';
-import type { LoginParams, LoginResult } from './service';
+import  { LoginParams, LoginResult } from './service';
 
 const LoginMessage= ({ content }) => (
   <Alert
@@ -30,12 +30,12 @@ const Login= () => {
 
   const intl = useIntl();
 
-  const fetchUserInfo = async (values: LoginParams) => {
+  const fetchUserInfo = async (/*values: LoginParams*/) => {
     const userInfo = await initialState?.currentUser;
     if (userInfo && !userInfo.name) {
-      const { data: isAdminRequest } = (await isAdminUsingPOST({ username: values.username })) as {
+      const { data: isAdminRequest } = (await isAdminUsingPOST({ username: values.username })) /*as {
         data: API.ResponseBoolean_;
-      };
+      }*/;
       const newUser = { name: values.username, isAdmin: false };
       if (isAdminRequest.success === true) {
         newUser.isAdmin = isAdminRequest.result || false;
@@ -51,7 +51,7 @@ const Login= () => {
     }
   };
 
-  const handleSubmit = async (values: LoginParams) => {
+  const handleSubmit = async (/*values: LoginParams*/) => {
     setSubmitting(true);
     try {
       // 登录
@@ -59,7 +59,7 @@ const Login= () => {
       const hashedPassword = sha256(values.password).toString();
       values.password = hashedPassword;
 
-      const { data: msg } = (await loginUsingPOST({ ...values })) as { data: API.ResponseBoolean_ };
+      const { data: msg } = (await loginUsingPOST({ ...values })) /*as { data: API.ResponseBoolean_ }*/;
       // console.log(msg);
       // console.log(msg);
       // console.log(values);
@@ -78,7 +78,7 @@ const Login= () => {
         /** 此方法会跳转到 redirect 参数所在的位置 */
         if (!history) return;
         const { query } = history.location;
-        const { redirect } = query as { redirect: string };
+        const { redirect } = query /*as { redirect: string }*/;
         history.push(redirect || '/');
         return;
       } else {
@@ -145,7 +145,7 @@ const Login= () => {
               },
             }}
             onFinish={async (values) => {
-              await handleSubmit(values as LoginParams);
+              await handleSubmit(/*values as LoginParams*/);
             }}
           >
             <Tabs activeKey={type} onChange={setType}>
