@@ -2,7 +2,6 @@ import Head from 'next/head';
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 import { useState } from 'react';
-import NewsLinks from '../components/newsLinks';
 import Menu from '../components/menu';
 import News from '../components/newsDisplay'
 

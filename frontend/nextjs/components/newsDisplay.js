@@ -1,8 +1,8 @@
 import React, {useState} from "react"
 import axios from "axios"
 import Link from 'next/link'
-export default function News(){
 
+export default function News(){
     const styles = {
         container: {
             display:"flex",
@@ -17,14 +17,13 @@ export default function News(){
         },
         newsTitles:{
             display: 'flex',
-            flesWrap: 'wrap',
+            flexWrap: 'wrap',
             width: 400,
-            height: 400,
+            height: 300,
             background: "#fff0f5"
         },
         newsTitle:{
-            width: '25%',
-            boxSizing: 'border-box'
+            width: '50%'
         }
     }
 
@@ -46,8 +45,9 @@ export default function News(){
             <div style={styles.container}>
             <div style={styles.compTitle}>What's new</div>
             <div style={styles.newsTitles}>
-                <Link style={styles.newsTitles} href={`/news/${news[0].title}`}>{news[0].title}</Link>
-                <Link style={styles.newsTitles} href={`/news/${news[1].title}`}>{news[1].title}</Link>
+                <div style={styles.newsTitle}><Link href={`/news/${news[0].title}`}>{news[0].title}</Link></div>
+                <div style={styles.newsTitle}><Link href={`/news/${news[1].title}`}>{news[1].title}</Link></div>
+                <div style={styles.newsTitle}><Link href={`/news/${news[2].title}`}>{news[2].title}</Link></div>
             </div>
             </div>
             </>

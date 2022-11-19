@@ -36,10 +36,8 @@ export default function newsContent() {
 
   const styles = {
     container: {
-        display:"flex",
-        flexDirection: "column",
         marginLeft: 100,
-        width:500
+        width:'80%'
     }
   }
 
@@ -59,16 +57,15 @@ export default function newsContent() {
     return (
       <>
         <Menu/>
-        <div style={{display:"flex",flexDirection:"column"}}>
         <div style={styles.container}>
-          <div><h2 style={{color:'darkred'}}>{newsInfo.title}</h2></div>
-          <hr style={{background:'lime', color:'black', height:'3px'}}/>
-          <div><h5 style={{fontSize:'10'}}>{newsInfo.publishInformation}</h5></div>
+          <h2 style={{color:'darkred'}}>{newsInfo.title}</h2>
+          <hr style={{color:'black', height:'1px'}}/>
+          <h5 style={{fontSize:'10'}}>{newsInfo.publishInformation}</h5>
+          <hr style={{color:'black', height:'1px'}}/>
           <Image src={`/images/newsImage/${pictureID}.jpg`} width={300} height={300}/>
-          <div><h4>{newsInfo.content}</h4></div>
+          <h4>{newsInfo.content}</h4>
         </div>
-        <PostAMessageForum style={{width:400}}/>
-        </div>
+        <PostAMessageForum/>
       </>
     )
   }
