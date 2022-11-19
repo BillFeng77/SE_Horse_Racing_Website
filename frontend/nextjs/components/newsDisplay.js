@@ -1,0 +1,60 @@
+import React, {useState} from "react"
+import axios from "axios"
+import Link from 'next/link'
+export default function News(){
+
+    const styles = {
+        container: {
+            display:"flex",
+            flexDirection: "column"
+        },
+        compTitle:{
+            display: 'inline-block',
+            width: 400,
+            height: 30,
+            color: 'white',
+            background: "#8b0000"
+        },
+        newsTitles:{
+            display: 'flex',
+            flesWrap: 'wrap',
+            width: 400,
+            height: 400,
+            background: "#fff0f5"
+        },
+        newsTitle:{
+            width: '25%',
+            boxSizing: 'border-box'
+        }
+    }
+
+    const [news, setNews] = useState([])
+    if (news.length==0){
+        axios.get('http://127.0.0.1:5000/news')
+            .then(function(response){
+                console.log(response.data)
+                setNews(response.data)
+            })
+            .catch(function(error){
+                console.log(error)
+        })
+    }
+    console.log(news)
+    if (news.length!=0 && news[0].title!=undefined){
+        return (
+            <>
+            <div style={styles.container}>
+            <div style={styles.compTitle}>What's new</div>
+            <div style={styles.newsTitles}>
+                <Link style={styles.newsTitles} href={`/news/${news[0].title}`}>{news[0].title}</Link>
+                <Link style={styles.newsTitles} href={`/news/${news[1].title}`}>{news[1].title}</Link>
+            </div>
+            </div>
+            </>
+        )
+    } else {
+        return (
+            <>Loading...</>
+        )
+    }
+}

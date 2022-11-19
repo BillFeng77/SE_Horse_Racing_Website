@@ -4,11 +4,15 @@ import utilStyles from '../styles/utils.module.css';
 import { useState } from 'react';
 import NewsLinks from '../components/newsLinks';
 import Menu from '../components/menu';
+import News from '../components/newsDisplay'
 
 
 export default function Home() {
   return (
-    <Menu/>
+    <>
+      <Menu/>
+      <News/>
+    </>
   );
 }
 
