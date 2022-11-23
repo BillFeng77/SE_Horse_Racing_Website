@@ -11,7 +11,6 @@ import React from 'react';
 import {Alert,Card} from 'antd';
 import {Layout} from'antd';
 import {Col,Divider, Row} from 'antd';
-import { Badge, Calendar } from 'antd';
 import {Content} from 'antd/lib/layout/layout';
 import Horse from '../public/images/Horse.png';
 import Horse1 from '../public/images/Horse1.jpg';
@@ -21,51 +20,7 @@ import Horse4 from '../public/images/Horse4.jpg';
 import Horse5 from '../public/images/Horse5.jpg';
 import Horse6 from '../public/images/Horse6.jpg';
 import Horse7 from '../public/images/Horse7.jpeg';
-const getListData = (value) => {
-  let listData;
-  switch (value.date()) {
-    case 1:
-      listData = [
-        {
-          type: 'delby',
-          content: 'It is 2022 delby final today',
-        },
-        {
-          type: 'horse opening day',
-          content: 'Go to opening day right now',
-        },
-      ];
-      break;
-    default:
-  }
-  return listData || [];
-};
-const getMonthData = (value) => {
-  if (value.month() === 8) {
-    return 1394;
-  }
-};
-const monthCellRender = (value) => {
-  const num = getMonthData(value);
-  return num ? (
-    <div className="notes-month">
-      <section>{num}</section>
-      <span>Backlog number</span>
-    </div>
-  ) : null;
-};
-const dateCellRender = (value) => {
-  const listData = getListData(value);
-  return (
-    <ul className="events">
-      {listData.map((item) => (
-        <li key={item.content}>
-          <Badge status={item.type} text={item.content} />
-        </li>
-      ))}
-    </ul>
-  );
-};
+
 const carouselStyle = {
   height: '600px',
   color: '#e6e6e6',
@@ -79,7 +34,7 @@ const {Meta}=Card;
 export default function Home() {
   return (<>
     <Menu/>
-    <Carousel autoplay='true' dotPosition='bottom' display='flex' margin="0 auto" color = "#e6e6e6">
+    <Carousel autoplay='true' dotPosition='bottom' display='flex' margin="0 auto" style = {{backgroundColor:"#88322F"}}>
     <div>
       <h1 style={carouselStyle}><Image src={Horse4} layout="intrinsic" /></h1>
     </div>
@@ -114,13 +69,9 @@ export default function Home() {
       </Card>
       </Col>
     
-    <Col >
-    <Calendar style={{width:650,height:360}} dateCellRender={dateCellRender} monthCellRender={monthCellRender} />
-    {/* </Card> */}
-    </Col>
     </Space>
     </Row>
-    <Footer>
+    <Footer style = {{marginTop: "300px", height:"300px", backgroundColor: "#88322F"}}>
     </Footer>
     </>
   );

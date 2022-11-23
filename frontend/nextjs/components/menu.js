@@ -15,6 +15,11 @@ export default function Menu() {
                     </Link>
                 </li>
                 <li className={styles.item}>
+                    <Link href="/calendar">
+                        <a>Calendar</a>
+                    </Link>
+                </li>
+                <li className={styles.item}>
                     <Link href="/horses">
                         <a>Horse</a>
                     </Link>
@@ -29,6 +34,7 @@ export default function Menu() {
                         <a>Login</a>
                     </Link>
                 </li>
+                
             </ul>
         </div>
         <div className={styles.userName}>
