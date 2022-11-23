@@ -4,11 +4,14 @@ from bson.json_util import dumps
 
 from main import *
 from news import *
+from users import *
 from forum import *
 from horseInfo import *
+from announcement import *
 # pip uninstall bson  # pip uninstall pymongo    # pip install pymongo
 
-db=mongo.db
+db = mongo.db
+
 
 @app.route('/')
 def index():
@@ -17,6 +20,8 @@ def index():
 # send data to frontend by "serversideprops"
 
 # get data from frontend
+
+
 @app.route('/api/query', methods=['POST'])
 # @cross_origin(origins='http://localhost:3000')
 def get_query_from_react():
@@ -33,20 +38,13 @@ def get_dates():
     return
 
 
-@app.route('/user')
-def get_data_from_mongodb():
-    db = mongo.db
-    # insert = db["UserList"].insert_one(
-    #     {"email": "1111", "password": "2222", "userName": "2233"})
+# 拿马
 
-    find = db["UserList"].find()
-    data = dumps(list(find))
-    return data
 
-#拿马
 def getHorseInformation():
-    db=mongo.db
-    #db[]
+    db = mongo.db
+    # db[]
+
 
 if __name__ == '__main__':
     app.run(debug=True)
