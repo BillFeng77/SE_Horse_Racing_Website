@@ -5,6 +5,7 @@ from bson.json_util import dumps
 from main import *
 from news import *
 from forum import *
+from horseInfo import *
 # pip uninstall bson  # pip uninstall pymongo    # pip install pymongo
 
 db=mongo.db
