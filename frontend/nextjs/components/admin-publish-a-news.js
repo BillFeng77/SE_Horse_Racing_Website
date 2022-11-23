@@ -17,7 +17,7 @@ const Editor = ({ onChange1,onChange2, onChange3, onSubmit, submitting, value1, 
   <>
   <Form.Item>
     <p>News Title</p>
-   <Input onChange={onChange1} value={value1} placeholder="title" style={{marginTop: '7px', border: '1.5px solid rgba(136, 50, 47, 0.4)'}}/>
+   <Input onChange={onChange1} value={value1} style={{marginTop: '7px', border: '1.5px solid rgba(136, 50, 47, 0.4)'}}/>
    </Form.Item>
    <Form.Item>
     <p>News Information</p>

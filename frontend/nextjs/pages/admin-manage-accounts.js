@@ -34,8 +34,8 @@ export default function Home() {
         <Sider className="site-layout-background" width={250}>
           <Menu
             mode="inline"
-            defaultSelectedKeys={['2']}
-            defaultOpenKeys={['2']}
+            defaultSelectedKeys={['3']}
+            defaultOpenKeys={['3']}
             style={{
               height: '100%',
             }}
