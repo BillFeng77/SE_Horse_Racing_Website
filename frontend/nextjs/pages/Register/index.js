@@ -294,7 +294,6 @@ const Register =()=> {
               </Link>
             </FormItem>
           </Form>
-          <GoogleSigninButton mode="register" />
         </div>
       </div>
       <Footer />

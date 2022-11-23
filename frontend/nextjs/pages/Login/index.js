@@ -112,10 +112,6 @@ const Login= () => {
       <div className={styles.content}>
         <div className={styles.top}>
           <div className={styles.header}>
-            <Link to="/">
-              <img alt="logo" className={styles.logo} src="/logo.png" />
-              <span className={styles.title}>Horse Website</span>
-            </Link>
           </div>
           <div className={styles.desc}>
             {intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
@@ -159,7 +155,7 @@ const Login= () => {
             {status === 'error' && loginType === 'account' && (
               <LoginMessage
                 content={intl.formatMessage({
-                  defaultMessage: 'Account or password failed(admin/ant.design)',
+                  defaultMessage: 'Account or password failed',
                 })}
               />
             )}
@@ -192,8 +188,7 @@ const Login= () => {
                     prefix: <LockOutlined className={styles.prefixIcon} />,
                   }}
                   placeholder={intl.formatMessage({
-                    id: 'pages.login.password.placeholder',
-                    defaultMessage: 'Password: ant.design',
+                    defaultMessage: 'Password:',
                   })}
                   rules={[
                     {

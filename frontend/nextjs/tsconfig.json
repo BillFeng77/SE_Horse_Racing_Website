@@ -22,8 +22,8 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "pages/Login/index.js", "pages/Register/index.js"  ],
+    "**/*.tsx", 
+    "pages/Login/userlogin.js" ,"pages/Register/index.js" ],
   "exclude": [
     "node_modules"
   ]

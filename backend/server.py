@@ -37,15 +37,12 @@ def get_data_from_mongodb():
     db = mongo.db
     # insert = db["UserList"].insert_one(
     #     {"email": "1111", "password": "2222", "userName": "2233"})
-
     find = db["UserList"].find()
     data = dumps(list(find))
     return data
 
-#拿马
-def getHorseInformation():
-    db=mongo.db
-    #db[]
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
