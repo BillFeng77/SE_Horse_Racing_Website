@@ -2,17 +2,16 @@
 //need Import LoginPost from controller
 //Need import administratorPost userPost from controller
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import ProForm, { ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
 import { Alert, Button, message, Tabs } from 'antd';
 //need import sha256 to encrypt the password
 import React, { useState } from 'react';
-import { FormattedMessage, history, Link, SelectLang, useIntl, useModel } from 'umi';
-import styles from 'pages/Login/userlogin.less';
-import  { LoginParams, LoginResult } from './service';
+import { FormattedMessage, history, Link, SelectLang, useIntl, useModel } from 'next';
+//import styles from 'pages/Login/userlogin.less';
+//import  { LoginParams, LoginResult } from './service';
 
 const LoginMessage= ({ content }) => (
   <Alert
-    style={{
+    style={{ 
       marginBottom: 24,
     }}
     message={content}
@@ -201,7 +200,6 @@ const Login= () => {
                       required: true,
                       message: (
                         <FormattedMessage
-                          id="pages.login.password.required"
                           defaultMessage="Please enter your password"
                         />
                       ),
@@ -217,7 +215,7 @@ const Login= () => {
               }}
             >
               <ProFormCheckbox noStyle name="autoLogin">
-                <FormattedMessage id="pages.login.rememberMe" defaultMessage="Auto login" />
+                <FormattedMessage  defaultMessage="Auto login" />
               </ProFormCheckbox>
               {/* <a
                 style={{
@@ -238,5 +236,4 @@ const Login= () => {
     </div>
   );
 };
-
 export default Login;

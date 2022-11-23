@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Menu from '../components/menu';
-import PostCard from '../components/PostCard';
+import PostCard from '../components/postCard';
 import styles from '../styles/Home.module.css';
 // import AddPost from '../components/post_in_forum';
 import AddPost from './add-post';
