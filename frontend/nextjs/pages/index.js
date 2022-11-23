@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import utilStyles from '../styles/utils.module.css';
-import NewsLinks from '../components/newsLinks';
+// import NewsLinks from '../components/newsLinks';
 import Image from 'next/image';
 import Menu from '../components/menu';
 import {Space} from 'antd';
@@ -17,6 +17,10 @@ import Horse from '../public/images/Horse.png';
 import Horse1 from '../public/images/Horse1.jpg';
 import Horse2 from '../public/images/Horse2.jpeg';
 import Horse3 from '../public/images/Horse3.jpg';
+import Horse4 from '../public/images/Horse4.jpg';
+import Horse5 from '../public/images/Horse5.jpg';
+import Horse6 from '../public/images/Horse6.jpg';
+import Horse7 from '../public/images/Horse7.jpeg';
 const getListData = (value) => {
   let listData;
   switch (value.date()) {
@@ -63,53 +67,56 @@ const dateCellRender = (value) => {
   );
 };
 const carouselStyle = {
-  height: '300px',
-  color: '#fff',
-  lineHeight: '300px',
-  width:"700px",
+  height: '600px',
+  color: '#e6e6e6',
+  lineHeight: '600px',
+  width:"65%",
+  display: 'flex',
+  margin: "0 auto",
 };
 const {Footer}=Layout;
 const {Meta}=Card;
 export default function Home() {
   return (<>
     <Menu/>
-    <Carousel autoplay='true' dotPosition='bottom' >
+    <Carousel autoplay='true' dotPosition='bottom' display='flex' margin="0 auto" color = "#e6e6e6">
     <div>
-      <h1 style={carouselStyle}><Image src={Horse} layout="intrinsic" display='flex' margin="0 auto"/></h1>
+      <h1 style={carouselStyle}><Image src={Horse4} layout="intrinsic" /></h1>
     </div>
     <div>
-      <h2 style={carouselStyle}><Image src={Horse1} layout="intrinsic"/></h2>
+      <h2 style={carouselStyle}><Image src={Horse5} layout="intrinsic"/></h2>
     </div>
     <div>
-      <h3 style={carouselStyle}><Image src={Horse2}layout="intrinsic"/></h3>
+      <h3 style={carouselStyle}><Image src={Horse6}layout="intrinsic"/></h3>
     </div>
     <div>
-      <h4 style={carouselStyle}><Image src={Horse3} layout="intrinsic"/></h4>
+      <h4 style={carouselStyle}><Image src={Horse7} layout="intrinsic"/></h4>
     </div>
   </Carousel>
-    <Alert banner message={'Announcement Testing Testing Testing'}>
+    <Alert message={'Announcement Testing Testing Testing'} type="info" style = {{display:'flex', margin:"0 auto",marginTop: "50px", width:"50%", height:"25px", fontSize:"14px"}}>
     </Alert>
-    <Row>
+    <Row style = {{display:'flex', margin:"0 auto",marginTop: "100px", width:"70%"}}>
+    <Space 
+        size="large"
+        style={{
+        display: 'flex',
+    }}>
         <Col>
-        <Space>
       <Card hoverable style={{width:240}}
       cover={<Image alt="example" src={Horse}/>}>
-        <Meta title="TestNews" description={NewsLinks}/>
+         <Meta title="TestNews" />  
       </Card>
-      </Space>
       </Col>
+
         <Col>
-        <Space>
       <Card hoverable style={{width:240}} cover={<Image alt="example" src={Horse1}/>}>
-        <Meta title="TestNews2" description={NewsLinks}/>
+        <Meta title="TestNews2" />  {/*description={NewsLinks} */}
       </Card>
-      </Space>
       </Col>
-    <Space>
-    <Col>
-    <Card>
-    <Calendar style={{width:240,height:360}} dateCellRender={dateCellRender} monthCellRender={monthCellRender} />
-    </Card>
+    
+    <Col >
+    <Calendar style={{width:650,height:360}} dateCellRender={dateCellRender} monthCellRender={monthCellRender} />
+    {/* </Card> */}
     </Col>
     </Space>
     </Row>
