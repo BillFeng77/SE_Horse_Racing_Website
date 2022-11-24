@@ -20,6 +20,7 @@ import Horse4 from '../public/images/Horse4.jpg';
 import Horse5 from '../public/images/Horse5.jpg';
 import Horse6 from '../public/images/Horse6.jpg';
 import Horse7 from '../public/images/Horse7.jpeg';
+import Link from 'next/link';
 
 const carouselStyle = {
   height: '600px',
@@ -56,17 +57,28 @@ export default function Home() {
         style={{
         display: 'flex',
     }}>
-        <Col>
-      <Card hoverable style={{width:240}}
-      cover={<Image alt="example" src={Horse}/>}>
-         <Meta title="TestNews" />  
+      <Col>
+      <Link href="/news/Advances in Equine Infectious Disease Detection">
+      <Card hoverable style={{width:260}} cover={<Image alt="example" src={Horse}/>}>
+         <Meta title="Infectious Disease" />  
       </Card>
+      </Link>
       </Col>
 
-        <Col>
-      <Card hoverable style={{width:240}} cover={<Image alt="example" src={Horse1}/>}>
-        <Meta title="TestNews2" />  {/*description={NewsLinks} */}
+      <Col>
+      <Link href="/news/Is Your Horse at Risk of Colic">
+      <Card hoverable style={{width:260}} cover={<Image alt="example" src={Horse1}/>}>
+        <Meta title="Risk of Colic" />
       </Card>
+      </Link>
+      </Col>
+
+      <Col>
+      <Link href="/news/Advances in Diagnosing Equine Dental Disease">
+      <Card hoverable style={{width:260}} cover={<Image alt="example" src={Horse2}/>}>
+        <Meta title="Dental Disease" />
+      </Card>
+      </Link>
       </Col>
     
     </Space>
