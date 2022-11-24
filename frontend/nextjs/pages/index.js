@@ -59,7 +59,7 @@ export default function Home() {
     }}>
       <Col>
       <Link href="/news/Advances in Equine Infectious Disease Detection">
-      <Card hoverable style={{width:260}} cover={<Image alt="example" src={Horse}/>}>
+      <Card hoverable style={{width:260, height:260, borderColor:"#eee7e7", borderWidth:"2px"}} cover={<Image alt="example" src={Horse} />}>
          <Meta title="Infectious Disease" />  
       </Card>
       </Link>
@@ -67,7 +67,7 @@ export default function Home() {
 
       <Col>
       <Link href="/news/Is Your Horse at Risk of Colic">
-      <Card hoverable style={{width:260}} cover={<Image alt="example" src={Horse1}/>}>
+      <Card hoverable style={{width:260, height:260, borderColor:"#eee7e7", borderWidth:"2px"}} cover={<Image alt="example" src={Horse1}  />}>
         <Meta title="Risk of Colic" />
       </Card>
       </Link>
@@ -75,7 +75,7 @@ export default function Home() {
 
       <Col>
       <Link href="/news/Advances in Diagnosing Equine Dental Disease">
-      <Card hoverable style={{width:260}} cover={<Image alt="example" src={Horse2}/>}>
+      <Card hoverable style={{width:260, height:260, borderColor:"#eee7e7", borderWidth:"2px"}} cover={<Image alt="example" src={Horse2} />}>
         <Meta title="Dental Disease" />
       </Card>
       </Link>
