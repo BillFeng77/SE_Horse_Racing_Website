@@ -8,6 +8,7 @@ from users import *
 from forum import *
 from horseInfo import *
 from announcement import *
+from news_comments import *
 # pip uninstall bson  # pip uninstall pymongo    # pip install pymongo
 
 db = mongo.db
