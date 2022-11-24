@@ -7,7 +7,10 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
-    "@ant-design/pro-form":"^2.3.2",
+    "@ant-design/pro-form": "^2.3.2",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.10.15",
     "ant-design": "^1.0.0",
     "antd": "^4.24.1",
     "axios": "^1.1.3",
