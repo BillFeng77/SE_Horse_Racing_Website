@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import {useRouter} from 'next/router'
-import Layout from '../../components/layout'
 import Menu from '../../components/menu'
 // import PostAMessageForum from '../../components/post_a_comment_forum'
 import Image from 'next/image'
 import {Col,Space, Row} from 'antd';
 import PostACommentNews from '../../components/post_a_comment_news'
+import {Layout} from'antd';
+const {Footer}=Layout;
 
 export default function newsContent() {
   const router =useRouter()
@@ -74,6 +75,8 @@ export default function newsContent() {
         <PostACommentNews news_id={pictureId}/>
         </Col>
         </Row>
+        <Footer style = {{marginTop: "300px", height:"300px", backgroundColor: "#88322F"}}>
+    </Footer>
       </>
     )
   }

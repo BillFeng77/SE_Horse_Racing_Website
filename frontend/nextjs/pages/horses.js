@@ -1,8 +1,9 @@
 import searchHorse from '../components/searchByFilter';
-import Layout from '../components/layout';
 import Menu from '../components/menu';
 import React , { useCallback, useLayoutEffect, useRef,useState }from "react";
 import {Button,Table,Space} from 'antd';
+import {Layout} from'antd';
+const {Footer}=Layout;
 function Horsespage(){
     const data = [
         {key:"1",
@@ -133,7 +134,8 @@ const columns = [
         <Button onClick={clearAll}>Clear filters and sorters</Button>
       </Space>
       <Table columns={columns} dataSource={data} onChange={handleChange} />
-        
+      <Footer style = {{marginTop: "300px", height:"300px", backgroundColor: "#88322F"}}>
+    </Footer>
         </>
     )
 }

@@ -9,7 +9,8 @@ import PostAMessageForum from '../components/post_a_comment_forum';
 import Posts from '../components/display_posts_forum'; 
 import APost from '../components/display_a_post_forum';
 import ScrollableDisplayPostsForum from '../components/scrollable_display_posts_forum';
-
+import {Layout} from'antd';
+const {Footer}=Layout;
 import { server } from '../config';
 
 export default function Post({ posts }) {
@@ -43,7 +44,8 @@ export default function Post({ posts }) {
             {/* <Link href="/add-post">
                  <a>Add post</a>
              </Link> */}
-             
+        <Footer style = {{marginTop: "300px", height:"300px", backgroundColor: "#88322F"}}>
+    </Footer>
         </div>
     );
 }
