@@ -1,22 +1,37 @@
 import React , { useCallback, useLayoutEffect, useRef,useState }from "react";
 import {Button,Table,Space} from 'antd';
-//Call API to get Data
-//Add verification after login part done
+import axios from 'axios'; 
 
-/*const data = [
-  {
-    Name: ,
-    BirthDate: ,
-    WinningDate: ,
-    Race Name: ,
-    Country:
-    Surf:
-    DistanceFurlongs:
-  },
-  
-];*/
+const getHorseData=()=>{
+  const[value0,setID]=useState('')
+  const [value1,setName]=useState('')
+  const [value2,setBirthDate]=useState('')
+  const [value3,setWinningDate]=useState('')
+  const [value4,setRaceName]=useState('')
+  const [value5,setCountry]=useState('')
+  const [value6,setSurf]=useState("")
+  const [value7,setDistanceFurlongs]=useState("")
+  axios.get('http://127.0.0.1:5000/api/horseInfo', {
+    key:value0,
+    Name:value1,
+    BirthDate:value2,
+    WinningDate:value3,
+    RaceName:value4,
+    Country:value5,
+    Surf:value6,
+    distanceFurlongs:value7,
+}).then (function (response){console.log(response.data);
+  setID(response.data);
+  setName(response.data);
+  setBirthDate(response.data);
+  setWinningDate(response.data);
+  setRaceName(response.data);
+  setCountry(response.data);
+  setSurf(response.data);
+  setDistanceFurlongs(response.data)
+    }).catch(function(error){console.log(error)}) };
+const data = getHorseData
 const searchHorse = () => {
-    const [userState,getUserState]=React.useState("user")
     const [filteredInfo, setFilteredInfo] = React.useState({});
     const [sortedInfo, setSortedInfo] = React.useState({});
     const handleChange = (pagination, filters, sorter) => {
