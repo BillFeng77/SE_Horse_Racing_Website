@@ -1,19 +1,20 @@
 
-import Menu from '../../components/menu';
+import Menu from '../../components/menu'
+import Login from '../../components/login'
+import useToken from '../../components/useToken'
 
-function loginpage(){
-    return (
+function loginPage(){
+    const { token, removeToken, setToken } = useToken()
+    return(
         <>
-        <Menu />
-        <form action="/api/login" method="post">
-            <label for="first">First name:</label>
-            <input type="text" id="first" name="first" />
-            <label for="last">Last name:</label>
-            <input type="text" id="last" name="last" />
-            <button type="submit">Submit</button>
-        </form>
+        <Menu/>
+        {!token && token!=="" &&token!== undefined
+        ?<Login setToken={setToken}/>
+        :(
+            <h1>You've already logged in</h1>
+        )
+        }
         </>
     )
 }
-
-export default loginpage
+export default loginPage

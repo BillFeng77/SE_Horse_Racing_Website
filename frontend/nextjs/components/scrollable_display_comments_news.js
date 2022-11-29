@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import axios from 'axios'
 
-export default function ScrollableDisplayPostsForum({
+export default function ScrollableDisplayCommentsNews({
   loadMoreData,
   data = [],
 }) {
@@ -94,13 +94,18 @@ export default function ScrollableDisplayPostsForum({
     <div
       id="scrollableDiv"
       style={{
-        width: 1000,
+        width: 400,
         height: 500,
         overflow: 'auto',
         padding: '0 16px',
-        border: '1px solid rgba(140, 140, 140, 0.35)',
-        margin: 50,
+        border: '0.5px solid',
+        borderColor: "#a14845",
+        backgroundColor:"#faf6f6",
+        // borderWidth:"2px",
+        // margin: 50,
         margin: '0px auto',
+        marginTop:"60px",
+        marginLeft:"100px",
       }}
     >
       <InfiniteScroll

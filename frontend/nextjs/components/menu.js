@@ -2,14 +2,42 @@ import Link from 'next/link';
 import React from 'react';
 import {Dropdown,Space} from 'antd';
 import styles from '../styles/menu.module.css';
-import {Menu} from'antd';
+import useToken from './useToken';
+import Router from 'next/router';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 
-export default function Definemenu() {
-    const userItems=[{key:'1',label:(<a target="_blank" rel="noopener noreferrer" href='/auth/logout'>Logout</a>)},
-    {key:"2",label:(<a target="_blank" rel="noopener noreferrer" href="admin-manage-accounts">Admin Login</a>)}]
+export default function Menu() {
+    const { token, removeToken, setToken } = useToken()
+    
+    const [username, setUserName] = useState("")
+
+    useEffect(() => {
+        const data = localStorage.getItem('username')
+        setUserName(data)
+    }, [])
+    
+
+    function logMeOut() {
+        axios({
+          method: "POST",
+          url:"http://127.0.0.1:5000/logout",
+        })
+        .then((response) => {
+           removeToken()
+           localStorage.removeItem('username')
+           window.location.reload()
+        }).catch((error) => {
+          if (error.response) {
+            console.log(error.response)
+            console.log(error.response.status)
+            console.log(error.response.headers)
+            }
+        })}
+
     return (
-        <Menu mode="horizontal" className={styles.header}title="Horse Racing">
+        /*<Menu mode="horizontal" className={styles.header}title="Horse Racing">
             <li>
                 <a>Horse racing</a>
             </li>
@@ -53,14 +81,19 @@ export default function Definemenu() {
                     </Link>
                 </Menu>
             </Menu.SubMenu>
-        </Menu>
-        /*<div className={styles.header}>
+        </Menu>*/
+        <div className={styles.header}>
             <b className={styles.title}>Horseracing</b>
         <div className={styles.nav}>
             <ul className={styles.list}>
                 <li className={styles.item}>
                     <Link href="/">
                         <a>Home</a>
+                    </Link>
+                </li>
+                <li className={styles.item}>
+                    <Link href="/calendar">
+                        <a>Calendar</a>
                     </Link>
                 </li>
                 <li className={styles.item}>
@@ -78,9 +111,23 @@ export default function Definemenu() {
                         <a>Login</a>
                     </Link>
                 </li>
+                
             </ul>
         </div>
         <div className={styles.userName}>
-            {/* TODO: Login 完善后实时显示用户名字 */
+            {/* TODO: drop down 组件, 包括logout，administrator link*/}
+            { username!=="" && username!==undefined && !username
+            ?<p></p>
+            :(
+                <>
+                <p>Welcome, {username}!</p>
+                <button onClick={logMeOut}> 
+                    Logout
+                </button>
+                </>
+            )
+            }
+        </div>
+        </div>
     );
 }

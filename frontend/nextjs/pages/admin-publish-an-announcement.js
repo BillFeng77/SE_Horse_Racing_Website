@@ -81,7 +81,8 @@ export default function Home() {
     </Content>
     
   </Layout>
-
+  <Footer style = {{marginTop: "300px", height:"300px", backgroundColor: "#88322F"}}>
+    </Footer>
     
     </>
   );
