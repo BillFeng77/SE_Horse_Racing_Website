@@ -24,7 +24,6 @@ export default function newsContent() {
   },[router.isReady, slug])
   
   const populate_data = async (slug) => {
-    console.log(slug)
     if (news.length==0){
       axios.get('http://127.0.0.1:5000/news')
           .then(function(response){
@@ -46,9 +45,6 @@ export default function newsContent() {
 
   useEffect(()=>{
     for (let i=0; i<news.length; i++){
-      console.log(slug)
-      console.log(i)
-      console.log(news[i].title)
       if (slug[0]==news[i].title){
         setNewsInfo(news[i])
         setId(i)
