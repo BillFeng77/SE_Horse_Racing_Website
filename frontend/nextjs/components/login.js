@@ -7,18 +7,37 @@ import { useEffect, useState } from 'react'
 import Router from 'next/router'
 
 function Login(props){
-    const [loginForm, setLoginForm] = useState({email:"",password:""})
     const [error, setError] = useState(false)
+    const [emailEmpty, setEmailEmpty] = useState(false)
+    const [passwordEmpty, setPasswordEmpty] = useState(false)
+    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("")
     function handleChange(event){
+        setError(false)
         const {value, name} = event.target
-        setLoginForm(prevForm => ({
-            ...prevForm, [name]: value})
-    )}
+        if (name=='email') {
+            setEmail(value)
+        }
+        if (name=='password') {
+            setPassword(value)
+        }
+    }
+
+    useEffect(()=>{
+        if (email.length!=0){
+            setEmailEmpty(false)
+        }
+        if (password.length!=0){
+            setPasswordEmpty(false)
+        }
+    },[email,password])
 
     async function handleSubmit(event){
+        setPasswordEmpty(false)
+        setEmailEmpty(false)
         await axios.post("http://127.0.0.1:5000/api/usertoken",{
-            email:loginForm.email,
-            password:loginForm.password
+            email:email,
+            password:password
           },{
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -32,16 +51,20 @@ function Login(props){
             Router.push('/')
           }).catch((error) => {
             if (error.response) {
-              setError(true)
+              if (password.length==0){
+                setPasswordEmpty(true)
+              }
+              if (email.length==0){
+                setEmailEmpty(true)
+              }
+              if (email.length!=0 && password.length!=0){
+                setError(true)
+              }
               console.log(error.response)
               console.log(error.response.status)
               console.log(error.response.headers)
               }
           })
-
-        setLoginForm(({
-            email: "",
-            password: ""}))
         event.preventDefault()
     }
 
@@ -59,9 +82,27 @@ function Login(props){
             autoComplete="off"
             >
             <h1 style={{color:'darkred'}}>Login For More Fun!</h1>
-            <TextField id="standard-basic" onChange={handleChange} label="Email" name="email" variant="standard" />
+            <TextField 
+            id="standard-basic" 
+            onChange={handleChange}
+            error={emailEmpty==true}
+            helperText={emailEmpty === true ? 'Empty field!':''}
+            value={email} 
+            label="Email" 
+            name="email" 
+            variant="standard" 
+            />
             <br/>
-            <TextField id="standard-basic" onChange={handleChange} label="Password" name="password" variant="standard" />
+            <TextField 
+            id="standard-basic" 
+            onChange={handleChange} 
+            error={passwordEmpty==true}
+            helperText={passwordEmpty === true ? 'Empty field!':''}
+            value={password}
+            label="Password" 
+            name="password" 
+            variant="standard" 
+            />
             { error==false
             ?<p></p>
             :(
