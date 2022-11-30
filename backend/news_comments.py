@@ -3,6 +3,7 @@ from bson.json_util import dumps
 from main import app, mongo
 from flask_pymongo import ObjectId
 from flask import request
+from flask_jwt_extended import jwt_required
 
 
 @app.route('/api/<news_id>/comments', methods=['GET'])
@@ -21,6 +22,7 @@ def get_comments_from_mongodb(news_id):
 
 
 @app.route('/api/<news_id>/comments', methods=['POST'])
+@jwt_required
 def insert_comments_to_mongodb(news_id):
     db = mongo.db
     data = request.form

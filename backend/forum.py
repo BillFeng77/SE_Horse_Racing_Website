@@ -4,6 +4,7 @@ from bson.json_util import dumps
 from main import app, mongo
 from flask_pymongo import ObjectId
 from flask import request
+from flask_jwt_extended import jwt_required
 
 
 @app.route('/api/messages', methods=['GET'])
@@ -22,6 +23,7 @@ def get_messages_from_mongodb():
 
 
 @app.route('/api/messages', methods=['POST'])
+@jwt_required()
 def insert_message_to_mongodb():
     db = mongo.db
     data = request.form

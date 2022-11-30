@@ -2,6 +2,8 @@ import { Avatar, Button, Comment, Form, Input, List } from 'antd';
 import moment from 'moment';
 import axios from 'axios'
 import React, { useEffect, useState } from 'react';
+import Router from 'next/router';
+import useToken from './useToken';
 import ScrollableDisplayPostsForum from './scrollable_display_posts_forum';
 const { TextArea } = Input;
 
@@ -31,6 +33,7 @@ const PostAMessageForum = () => {
   const [messages, setMessages] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const [value, setValue] = useState('');
+  const { token, removeToken, setToken } = useToken()
 
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
@@ -38,6 +41,8 @@ const PostAMessageForum = () => {
   const updatedData = []
 
   const handleSubmit = () => {
+    console.log("here we are")
+    console.log(token)
     if (!value) return;
     setSubmitting(true);
     setTimeout(() => {
@@ -62,7 +67,8 @@ const PostAMessageForum = () => {
       }
       ,{
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'   // seems only pass data as string type
+            'Content-Type': 'application/x-www-form-urlencoded',   // seems only pass data as string type
+            'Authorization': 'Bearer ' + token
           }
       }
       )
@@ -73,7 +79,9 @@ const PostAMessageForum = () => {
        //Perform action based on response
         })
         .catch(function(error){
-            console.log(error);
+          console.log(error)
+          alert('please login before posting a comment!')
+          Router.push('/auth/login')
     })
 
     }, 1000);
