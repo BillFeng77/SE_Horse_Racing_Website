@@ -22,7 +22,7 @@ def get_comments_from_mongodb(news_id):
 
 
 @app.route('/api/<news_id>/comments', methods=['POST'])
-@jwt_required
+@jwt_required()
 def insert_comments_to_mongodb(news_id):
     db = mongo.db
     data = request.form
