@@ -3,37 +3,26 @@ import Menu from '../components/menu';
 import React , { useCallback, useLayoutEffect, useRef,useState }from "react";
 import {Button,Table,Space} from 'antd';
 import axios from 'axios'; 
+import {Player} from 'video-react';
+import ReactPlayer from'react-player/youtube';
+//import Video from "../public/vecteezy_a-dirty-white-horse-is-eating-fresh-plants-at-burgaz-island-in-istanbul_2020599.mp4";
+//import "../node_modules/video-react/dist/video-react.css";
 
-const getHorseData=()=>{
-  const[value0,setID]=useState('')
-  const [value1,setName]=useState('')
-  const [value2,setBirthDate]=useState('')
-  const [value3,setWinningDate]=useState('')
-  const [value4,setRaceName]=useState('')
-  const [value5,setCountry]=useState('')
-  const [value6,setSurf]=useState("")
-  const [value7,setDistanceFurlongs]=useState("")
-  axios.get('http://127.0.0.1:5000/api/horseInfo', {
-    key:value0,
-    Name:value1,
-    BirthDate:value2,
-    WinningDate:value3,
-    RaceName:value4,
-    Country:value5,
-    Surf:value6,
-    distanceFurlongs:value7,
+export default function horse(){
+  return(<>
+        <Menu/>
+        <ReactPlayer url='https://www.youtube.com/watch?v=VEddhvKNKrQ'/> 
+  </>)
+}
+/*const gethorseData=()=>{
+
+  axios.get('http://127.0.0.1:5000/api/horseInfo', {params:{id:"1"}
+
 }).then (function (response){console.log(response.data);
-  setID(response.data);
-  setName(response.data);
-  setBirthDate(response.data);
-  setWinningDate(response.data);
-  setRaceName(response.data);
-  setCountry(response.data);
-  setSurf(response.data);
-  setDistanceFurlongs(response.data)
+
     }).catch(function(error){console.log(error)}) };
 
-const data=getHorseData;
+const data={getHorseData};
 
 export default function searchHorse  ()  {
   const [filteredInfo, setFilteredInfo] = React.useState({});
@@ -146,7 +135,11 @@ export default function searchHorse  ()  {
       <Button onClick={setWinningDateSort}>Sort by Winning Date</Button>
       <Button onClick={clearAll}>Clear filters and sorters</Button>
     </Space>
-    <Table columns={columns} dataSource={data} onChange={handleChange} />
+    <Player ref="player" videoId="video-1">
+      <source src={"../public/vecteezy_a-dirty-white-horse-is-eating-fresh-plants-at-burgaz-island-in-istanbul_2020599.mov"}/>
+    </Player>
+    <Table columns={columns}onChange={handleChange} />
+
     </>
   );
-};
+};*/

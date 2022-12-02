@@ -39,12 +39,6 @@ def get_dates():
     return
 
 
-# 拿马
-
-
-def getHorseInformation():
-    db = mongo.db
-    # db[]
 
 
 if __name__ == '__main__':
