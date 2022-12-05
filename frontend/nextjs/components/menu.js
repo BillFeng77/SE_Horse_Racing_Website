@@ -6,8 +6,6 @@ import useToken from './useToken';
 import Router from 'next/router';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-
-
 export default function Menu() {
     const { token, removeToken, setToken } = useToken()
     
@@ -35,7 +33,6 @@ export default function Menu() {
             console.log(error.response.headers)
             }
         })}
-
     return (
         /*<Menu mode="horizontal" className={styles.header}title="Horse Racing">
             <li>
@@ -82,6 +79,7 @@ export default function Menu() {
                 </Menu>
             </Menu.SubMenu>
         </Menu>*/
+        <>
         <div className={styles.header}>
             <b className={styles.title}>Horseracing</b>
         <div className={styles.nav}>
@@ -106,14 +104,9 @@ export default function Menu() {
                         <a>Forum</a>
                     </Link>
                 </li>
-                <li className={styles.item}>
-                    <Link href="/auth/login">
-                        <a>Login</a>
-                    </Link>
-                </li>
-                
             </ul>
         </div>
+
         <div className={styles.userName}>
             {/* TODO: drop down 组件, 包括logout，administrator link*/}
             { username!=="" && username!==undefined && !username
@@ -129,5 +122,7 @@ export default function Menu() {
             }
         </div>
         </div>
+        </>
+        
     );
 }

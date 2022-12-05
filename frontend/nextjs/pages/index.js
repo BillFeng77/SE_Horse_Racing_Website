@@ -2,6 +2,7 @@ import Head from 'next/head';
 import utilStyles from '../styles/utils.module.css';
 // import NewsLinks from '../components/newsLinks';
 import Image from 'next/image';
+import Selfmenu from '../components/menuv2';
 import Menu from '../components/menu';
 import {Space} from 'antd';
 import carousel from '../components/Carousel';
@@ -33,8 +34,9 @@ const carouselStyle = {
 const {Footer}=Layout;
 const {Meta}=Card;
 export default function Home() {
+  const onClick=()=>{search}
   return (<>
-    <Menu/>
+    <Selfmenu/>
     <Carousel autoplay='true' dotPosition='bottom' display='flex' margin="0 auto" style = {{backgroundColor:"#88322F"}}>
     <div>
       <h1 style={carouselStyle}><Image src={Horse4} layout="intrinsic" /></h1>
@@ -51,6 +53,9 @@ export default function Home() {
   </Carousel>
     <Alert message={'Announcement Testing Testing Testing'} type="info" style = {{display:'flex', margin:"0 auto",marginTop: "50px", width:"50%", height:"25px", fontSize:"14px"}}>
     </Alert>
+    <Row>
+
+    </Row>
     <Row style = {{display:'flex', margin:"0 auto",marginTop: "100px", width:"70%"}}>
     <Space 
         size="large"
