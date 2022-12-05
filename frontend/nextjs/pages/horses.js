@@ -1,5 +1,6 @@
 import Layout from '../components/layout';
 import Menu from '../components/menu';
+import Selfmenu from '../components/menuv2';
 import React , { useCallback, useLayoutEffect, useRef,useState }from "react";
 import {Button,Table,Space} from 'antd';
 import axios from 'axios'; 
@@ -8,13 +9,8 @@ import ReactPlayer from'react-player/youtube';
 //import Video from "../public/vecteezy_a-dirty-white-horse-is-eating-fresh-plants-at-burgaz-island-in-istanbul_2020599.mp4";
 //import "../node_modules/video-react/dist/video-react.css";
 
-export default function horse(){
-  return(<>
-        <Menu/>
-        <ReactPlayer url='https://www.youtube.com/watch?v=VEddhvKNKrQ'/> 
-  </>)
-}
-/*const gethorseData=()=>{
+
+const getHorseData=()=>{
 
   axios.get('http://127.0.0.1:5000/api/horseInfo', {params:{id:"1"}
 
@@ -128,7 +124,8 @@ export default function searchHorse  ()  {
   ];
   return (//Waiting to integrate with Menu component and pageHeader
       <>
-      <Menu/>
+      <Selfmenu/>
+      <ReactPlayer url='https://www.youtube.com/watch?v=VEddhvKNKrQ'/> 
       <Space>
       <Button onClick={setAgeSort}>Sort age</Button>
       <Button onClick={clearFilters}>Clear filters</Button>
@@ -142,4 +139,4 @@ export default function searchHorse  ()  {
 
     </>
   );
-};*/
+};

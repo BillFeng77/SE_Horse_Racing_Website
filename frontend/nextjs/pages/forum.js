@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Menu from '../components/menu';
+import Selfmenu from '../components/menuv2';
 import PostCard from '../components/postCard';
 import styles from '../styles/Home.module.css';
 // import AddPost from '../components/post_in_forum';
@@ -20,7 +21,7 @@ export default function Post({ posts }) {
                 <title>Post</title>
             </Head>
 
-            <Menu />
+            <Selfmenu />
 
             {/* <main>
                 <div className={styles.container}>
