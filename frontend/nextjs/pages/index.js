@@ -54,22 +54,13 @@ export default function Home() {
   
     <Alert message={<marquee>'2022 Horse Racing World Cup is Approaching, Keep focus on our Horse Racing Website'</marquee>} type="info" style = {{display:'flex', margin:"0 auto",marginTop: "50px", width:"50%", height:"25px", fontSize:"14px"}}>
     </Alert>
-    <Row>
-    <Space size="large"
-        style={{
-        display: 'flex',
-    }}>
-    
-      <Search placeholder="Search horse news here" onSearch={Search} style={{width:500}}/>
-    </Space>
-    </Row>
-    
     <Row style = {{display:'flex', margin:"0 auto",marginTop: "100px", width:"70%"}}>
     <Space 
         size="large"
         style={{
         display: 'flex',
     }}>
+      <Search placeholder="Search horse news here" onSearch={Search} style = {{display:'flex', margin:"0 auto",marginTop: "200px", width:"50", height:"25px", fontSize:"15px"}}/>
       <Col>
       <Link href="/news/Advances in Equine Infectious Disease Detection">
       <Card hoverable style={{width:260, height:260, borderColor:"#eee7e7", borderWidth:"2px"}} cover={<Image alt="example" src={Horse} />}>

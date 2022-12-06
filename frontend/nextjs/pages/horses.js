@@ -8,17 +8,22 @@ import {Player} from 'video-react';
 import ReactPlayer from'react-player/youtube';
 //import Video from "../public/vecteezy_a-dirty-white-horse-is-eating-fresh-plants-at-burgaz-island-in-istanbul_2020599.mp4";
 //import "../node_modules/video-react/dist/video-react.css";
-
+/*const [date,setDate]=useRef();
+const [horse,setHorse]=useRef();
+const [age,setAge]=useRef();
+const [country,setCountry]=useRef();
+const [raceName,setRaceName]=useRef();
+const[distanceFurlongs,setdistanceFurlongs]=useRef();
+const [surface,setSurface]=useRef();*/
+const [data,setHorseData]=useState([]);
 
 const getHorseData=()=>{
 
-  axios.get('http://127.0.0.1:5000/api/horseInfo', {params:{id:"1"}
-
-}).then (function (response){console.log(response.data);
-
+  axios.get('http://127.0.0.1:5000/api/horseInfo').then (function (response){console.log(response.data);
+  setData(response.data);
+  
     }).catch(function(error){console.log(error)}) };
 
-const data={getHorseData};
 
 export default function searchHorse  ()  {
   const [filteredInfo, setFilteredInfo] = React.useState({});
