@@ -1,94 +1,38 @@
-import { Avatar, Divider, List, Skeleton } from 'antd';
+import { Avatar, Divider, Space, List, Skeleton } from 'antd';
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import axios from 'axios'
+import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-design/icons';
+import { Comment, Tooltip } from 'antd';
+import useItems from 'antd/lib/menu/hooks/useItems';
 
 export default function ScrollableDisplayPostsForum({
   loadMoreData,
-  data = [],
+  loadMessages,
+  data,
 }) {
-  // const [loading, setLoading] = useState(false);
-  // const [data, setData] = useState([]);
-  // const loadMoreData = () => {
-  //   if (loading) {
-  //     return;
-  //   }
-  //   setLoading(true);
-  //   axios.get('http://127.0.0.1:5000/messages')
-  //       .then(function(response){
-  //           console.log(response.data);
-  //           setData(response.data);
-  //           setLoading(false);
-  //       })
-  //       .catch(() =>{
-  //           console.log(error);
-  //           setLoading(false);
-  //   })
 
-    // fetch('http://127.0.0.1:5000/messages')
-    //   .then((res) => res.json())
-    //   .then((body) => {
-    //     setData([...data, ...body.results]);
-    //     setLoading(false);
-    //   })
-    //   .catch(() => {
-    //     setLoading(false);
-    //   });
-  // };
+  const handleLikeClick =(id) =>{
+    axios.post(`http://127.0.0.1:5000/api/messages/${id}/likes`)
+    .then(function(response){
+      console.log("posted: ",response.data);
+    }
+    )
+setTimeout(() => {
+  loadMessages();
+}, 800);
+  }
 
-  // if (reload == true) {
-  //   console.log("reload");
-  //   setLoading(true);
-  //   axios.get('http://127.0.0.1:5000/messages')
-  //       .then(function(response){
-  //           console.log(response.data);
-  //           setData(response.data);
-  //           setLoading(false);
-  //       })
-  //       .catch(() =>{
-  //           console.log(error);
-  //           setLoading(false);
-  //   })
-  //   reload = False;
-  // };
-
-    // const updateMessages = (message = getMessage()) => {
-    //   setData([message, ...data])
-    //   if (!value) return;
-    //   setSubmitting(true);
-    //   setTimeout(() => {
-    //     setSubmitting(false);
-    //     setValue('');
-        
-    //   axios.post('http://127.0.0.1:5000/messages', {
-    //       userName: "jny223",
-    //       content: value,
-    //       dislikes: 0,
-    //       likes: 0,
-    //       count: 0
-    //     }
-    // //   ,{
-    // //     headers: {
-    // //         'Content-Type': 'application/x-www-form-urlencoded'
-    // //       }
-    // //   }
-    //   )
-    //         .then(function(comment){
-    //             console.log(comment.data);
-    //             setData([comment, ...data])
-    //             // setMessages(response.data)
-    //    //Perform action based on response
-    //     })
-    //     .catch(function(error){
-    //         console.log(error);
-    // })
-
-    // }, 1000);
-  // };
-
-  // useEffect(() => {
-  //   loadMoreData();
-  // }, []);
+  const handleDislikeClick =(id) =>{
+    axios.post(`http://127.0.0.1:5000/api/messages/${id}/dislikes`)
+    .then(function(response){
+      console.log("posted: ",response.data);
+    }
+    )
+setTimeout(() => {
+  loadMessages();
+}, 800);
+  }
 
   return (
     <div
@@ -106,7 +50,7 @@ export default function ScrollableDisplayPostsForum({
       <InfiniteScroll
         dataLength={data.length}
         next={loadMoreData}
-        hasMore={data.length < 0}
+        hasMore={data.length < 1}
         loader={
           <Skeleton
             avatar
@@ -120,21 +64,26 @@ export default function ScrollableDisplayPostsForum({
         scrollableTarget="scrollableDiv"
       >
         <List
+        itemLayout="horizontal"
           dataSource={data}
           renderItem={(item) => (
-            <List.Item key={item.count}>
+            <List.Item 
+            key={item.id} 
+            actions = {
+             [<span onClick={()=>{handleLikeClick(item.id)}}> <LikeFilled style={{color:"#a14845", cursor:"pointer" }}></LikeFilled><span> {item.likes}</span></span>,
+             <span onClick={()=>{handleDislikeClick(item.id)}}> <DislikeFilled style={{cursor:"pointer" }}></DislikeFilled><span> {item.dislikes}</span></span>]
+          }
+            >
               <List.Item.Meta
                 avatar={<Avatar src='https://joeschmoe.io/api/v1/1' />}
                 title={item.userName}
                 description={item.content}
               />
-              {/* <div>Content</div> */}
             </List.Item>
           )}
         />
       </InfiniteScroll>
-      {/* <PostAMessageForum handleSubmit={addAMessage}/> */}
+      
     </div>
   );
 };
-// export default ScrollableDisplayPostsForum;
