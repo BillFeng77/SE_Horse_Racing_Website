@@ -5,7 +5,7 @@ from flask import request
 db = mongo.db
 
 
-@app.route("/news", methods=['GET'])
+@app.route("/api/news", methods=['GET'])
 def get_news_from_db():
     print(db)
     find = db["News"].find()
@@ -13,7 +13,7 @@ def get_news_from_db():
     return data
 
 
-@app.route("/news", methods=['POST'])
+@app.route("/api/news", methods=['POST'])
 def insert_a_news_to_db():
     data = request.form
     newdata = json.dumps(data)  # type: str

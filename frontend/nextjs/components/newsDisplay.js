@@ -29,7 +29,7 @@ export default function News(){
 
     const [news, setNews] = useState([])
     if (news.length==0){
-        axios.get('http://127.0.0.1:5000/news')
+        axios.get('http://127.0.0.1:5000/api/news')
             .then(function(response){
                 console.log(response.data)
                 setNews(response.data)
