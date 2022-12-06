@@ -73,7 +73,7 @@ const PublishANews = () => {
     //     },
     //   ]);
 
-    axios.post('http://127.0.0.1:5000/news', {
+    axios.post('http://127.0.0.1:5000/api/news', {
         title: value1,
         publishInformation: value2,
         content: value3,
