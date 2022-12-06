@@ -46,7 +46,7 @@ const Selfmenu=()=> {
     function logMeOut() {
         axios({
           method: "POST",
-          url:"http://127.0.0.1:5000/logout",
+          url:"http://127.0.0.1:5000/api/logout",
         })
         .then((response) => {
            removeToken()

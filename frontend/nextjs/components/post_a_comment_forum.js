@@ -7,15 +7,6 @@ import useToken from './useToken';
 import ScrollableDisplayPostsForum from './scrollable_display_posts_forum';
 const { TextArea } = Input;
 
-// const CommentList = ({ comments }) => (
-//   <List
-//     dataSource={comments}
-//     header={`${comments.length} ${comments.length > 1 ? 'replies' : 'reply'}`}
-//     itemLayout="horizontal"
-//     renderItem={(props) => <Comment {...props} />}
-//   />
-// );
-
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
   <>
     <Form.Item>
@@ -40,6 +31,19 @@ const PostAMessageForum = () => {
 
   const updatedData = []
 
+  const loadMessages = () => {
+    axios.get('http://127.0.0.1:5000/api/messages')
+        .then(function(response){
+            console.log(response.data);
+            setData(response.data);
+            setLoading(false);
+        })
+        .catch(() =>{
+            console.log(error);
+            setLoading(false);
+    })
+  }
+
   const handleSubmit = () => {
     console.log("here we are")
     console.log(token)
@@ -48,22 +52,10 @@ const PostAMessageForum = () => {
     setTimeout(() => {
       setSubmitting(false);
       setValue('');
-    //   setComments([
-    //     ...comments,
-    //     {
-    //       author: 'Han Solo',
-    //       avatar: 'https://joeschmoe.io/api/v1/random',
-    //       content: <p>{value}</p>,
-    //       datetime: moment('2016-11-22').fromNow(),
-    //     },
-    //   ]);
 
     axios.post('http://127.0.0.1:5000/api/messages', {
         userName: "jny223",
         content: value,
-        dislikes: '0',
-        likes: '0',
-        count: 0
       }
       ,{
         headers: {
@@ -97,32 +89,22 @@ const PostAMessageForum = () => {
       return;
     }
     setLoading(true);
-    axios.get('http://127.0.0.1:5000/api/messages')
-        .then(function(response){
-            console.log(response.data);
-            setData(response.data);
-            setLoading(false);
-        })
-        .catch(() =>{
-            console.log(error);
-            setLoading(false);
-    })
+    loadMessages();
   };
 
    useEffect(() => {
      loadMoreData();
   }, []);
 
+
   return (
     <>
-    <ScrollableDisplayPostsForum loadMoreData={loadMoreData} data = {data}/>
-      {/* {messages.length > 0 && <CommentList messages={messages} />} */}
+    <ScrollableDisplayPostsForum  loadMessages= {loadMessages} loadMoreData={loadMoreData} data = {data}/>
       <Comment 
       style = {{
         width: 1000,
         margin: '0px auto',
     }}
-        // avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
         content={
           <Editor
             onChange={handleChange}

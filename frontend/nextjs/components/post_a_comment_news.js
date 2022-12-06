@@ -7,15 +7,6 @@ import useToken from './useToken';
 import ScrollableDisplayCommentsNews from './scrollable_display_comments_news';
 const { TextArea } = Input;
 
-// const CommentList = ({ comments }) => (
-//   <List
-//     dataSource={comments}
-//     header={`${comments.length} ${comments.length > 1 ? 'replies' : 'reply'}`}
-//     itemLayout="horizontal"
-//     renderItem={(props) => <Comment {...props} />}
-//   />
-// );
-
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
   <>
     <Form.Item>
@@ -46,15 +37,6 @@ const PostACommentNews = ({news_id}) => {
     setTimeout(() => {
       setSubmitting(false);
       setValue('');
-    //   setComments([
-    //     ...comments,
-    //     {
-    //       author: 'Han Solo',
-    //       avatar: 'https://joeschmoe.io/api/v1/random',
-    //       content: <p>{value}</p>,
-    //       datetime: moment('2016-11-22').fromNow(),
-    //     },
-    //   ]);
 
     axios.post(`http://127.0.0.1:5000/api/${news_id}/comments`, {
         userName: "jny223",
@@ -119,7 +101,6 @@ const PostACommentNews = ({news_id}) => {
          marginLeft:"100px",
         // display: "flex",
     }}
-        // avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
         content={
           <Editor
             onChange={handleChange}
