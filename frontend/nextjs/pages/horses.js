@@ -1,11 +1,13 @@
 import Layout from '../components/layout';
 import Menu from '../components/menu';
 import Selfmenu from '../components/menuv2';
-import React , { useCallback, useLayoutEffect, useRef,useState }from "react";
+import React , { useEffect,useState,useRef}from "react";
 import {Button,Table,Space} from 'antd';
+import {useRouter} from 'next/router'
 import axios from 'axios'; 
 import {Player} from 'video-react';
 import ReactPlayer from'react-player/youtube';
+import newsContent from './news/[...slug]';
 //import Video from "../public/vecteezy_a-dirty-white-horse-is-eating-fresh-plants-at-burgaz-island-in-istanbul_2020599.mp4";
 //import "../node_modules/video-react/dist/video-react.css";
 /*const [date,setDate]=useRef();
@@ -15,17 +17,24 @@ const [country,setCountry]=useRef();
 const [raceName,setRaceName]=useRef();
 const[distanceFurlongs,setdistanceFurlongs]=useRef();
 const [surface,setSurface]=useRef();*/
-const [data,setHorseData]=useState([]);
-
-const getHorseData=()=>{
-
-  axios.get('http://127.0.0.1:5000/api/horseInfo').then (function (response){console.log(response.data);
-  setData(response.data);
-  
-    }).catch(function(error){console.log(error)}) };
-
 
 export default function searchHorse  ()  {
+  const router =useRouter()
+  const [slug, setSLug] = useState({})
+  const [data,setHorseData]=useState([]);
+  const getHorseData=()=>{
+    axios.get('http://127.0.0.1:5000/api/horseInfo').then (function (response){
+      console.log(response.data);
+      setHorseData(response.data)
+      }).catch(function(error){console.log(error)}) };
+  getHorseData()
+  
+
+  var dataSource=[];
+  for (var i=0;i<data.length;i++){
+    dataSource.push(data[i]);
+  }
+
   const [filteredInfo, setFilteredInfo] = React.useState({});
   const [sortedInfo, setSortedInfo] = React.useState({});
   const handleChange = (pagination, filters, sorter) => {
@@ -55,16 +64,16 @@ export default function searchHorse  ()  {
   const columns = [
     {
       title: 'Name',
-      dataIndex: 'name',
+      dataIndex: 'Horse',
       key: 'name',
       filters: [
         {
-          text: 'LeBron',
-          value: 'LeBron',
+          text: 'Havre de Grace',
+          value: 'Havre de Grace',
         },
         {
-          text: 'Jimmy',
-          value: 'Jimmy',
+          text: 'Hills and Stars',
+          value: 'Hills and Stars',
         },
       ],
       filteredValue: filteredInfo.name || null,
@@ -75,31 +84,31 @@ export default function searchHorse  ()  {
       ellipsis: true,
     },
     {
-      title: 'BirthDate',
-      dataIndex: 'BirthDate',
-      key: 'BirthDate',
-      sorter: (a, b) => a.BirthDate - b.BirthDate,
-      sortOrder: sortedInfo.columnKey === 'BirthDate' ? sortedInfo.order : null,
+      title: 'Age',
+      dataIndex: 'Age',
+      key: 'Age',
+      sorter: (a, b) => a.Age - b.Age,
+      sortOrder: sortedInfo.columnKey === 'Age' ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
       title: 'WinningDate',
-      dataIndex: 'WinningDate',
+      dataIndex: 'Date',
       key: 'WinningDate',
       ellipsis: true,
     },
     {
       title: 'Surf',
-      dataIndex: 'Surf',
+      dataIndex: 'Surface',
       key: 'surf',
       filters: [
         {
-          text: '',
-          value: '',
+          text: 'Turf',
+          value: '2',
         },
         {
-          text: '',
-          value: '',
+          text: 'Dirt',
+          value: '1',
         },
       ],
       filteredValue: filteredInfo.surf || null,
@@ -108,18 +117,8 @@ export default function searchHorse  ()  {
     },
     {
       title: 'DistanceFurlongs',
-      dataIndex: 'DistanceFurlongs',
+      dataIndex: 'Distance Furlongs',
       key: 'distanceFurlongs',
-      filters: [
-        {
-          text: '',
-          value: '',
-        },
-        {
-          text: '',
-          value: '',
-        },
-      ],
       filteredValue: filteredInfo.distanceFurlongs || null,
       onFilter: (value, record) => record.distanceFurlongs.includes(value),
       sorter: (a, b) => a.distanceFurlongs - b.distanceFurlongs,
@@ -127,20 +126,29 @@ export default function searchHorse  ()  {
       ellipsis: true,
     }
   ];
+
   return (//Waiting to integrate with Menu component and pageHeader
       <>
-      <Selfmenu/>
-      <ReactPlayer url='https://www.youtube.com/watch?v=VEddhvKNKrQ'/> 
-      <Space>
+      <Menu/>
+      <Space direction="vertical"
+    size="middle"
+    style={{
+      display: 'flex',
+    }}>
+      <ReactPlayer style = {{display:'flex', margin:"0 auto",marginTop: "10px", width:"70%"}}controls={true} url='https://www.youtube.com/watch?v=VEddhvKNKrQ'/> 
+      </Space>
+      <Space direction="horizontal"
+    size="middle"
+    style={{
+      display: 'flex',
+    }}>
       <Button onClick={setAgeSort}>Sort age</Button>
       <Button onClick={clearFilters}>Clear filters</Button>
       <Button onClick={setWinningDateSort}>Sort by Winning Date</Button>
       <Button onClick={clearAll}>Clear filters and sorters</Button>
     </Space>
-    <Player ref="player" videoId="video-1">
-      <source src={"../public/vecteezy_a-dirty-white-horse-is-eating-fresh-plants-at-burgaz-island-in-istanbul_2020599.mov"}/>
-    </Player>
-    <Table columns={columns}onChange={handleChange} />
+    
+    <Table dataSource={dataSource}columns={columns}onChange={handleChange} />
 
     </>
   );

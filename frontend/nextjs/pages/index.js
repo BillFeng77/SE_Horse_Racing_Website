@@ -22,6 +22,7 @@ import Horse6 from '../public/images/Horse6.jpg';
 import Horse7 from '../public/images/Horse7.jpeg';
 import Link from 'next/link';
 import {Input,Space} from 'antd';
+import Searchnews from '../components/searchNews';
 
 const carouselStyle = {
   height: '600px',
@@ -36,7 +37,7 @@ const {Meta}=Card;
 const {Search}=Input;
 export default function Home() {
   return (<>
-    <Selfmenu/>
+    <Menu/>
     <Carousel autoplay='true' dotPosition='bottom' display='flex' margin="0 auto" style = {{backgroundColor:"#88322F"}}>
     <div>
       <h1 style={carouselStyle}><Image src={Horse4} layout="intrinsic" /></h1>
@@ -60,7 +61,7 @@ export default function Home() {
         style={{
         display: 'flex',
     }}>
-      <Search placeholder="Search horse news here" onSearch={Search} style = {{display:'flex', margin:"0 auto",marginTop: "200px", width:"50", height:"25px", fontSize:"15px"}}/>
+      <Searchnews/>
       <Col>
       <Link href="/news/Advances in Equine Infectious Disease Detection">
       <Card hoverable style={{width:260, height:260, borderColor:"#eee7e7", borderWidth:"2px"}} cover={<Image alt="example" src={Horse} />}>
