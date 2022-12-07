@@ -1,10 +1,15 @@
 from flask import Flask
 from flask import request,Quotes
+from main import app, mongo
 db = mongo.db
-@app.route('api/search',methods=['get'])
+@app.route('api/search',methods=['GET'])
 def search():
-    content=request.form.get('content')
+    content=request.args.get('value')
     if content is None:
         content=''
-    quotes=Quotes.query.filter(Quotes.content.like("%"+content+"%")if content is not None else "").all()
+    quotes=Quotes.query.filter(
+    Quotes.content.like("%" + content + "%") if content is not None else ""
+
+ ).all()
+
     return quotes
