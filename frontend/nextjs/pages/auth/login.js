@@ -8,7 +8,7 @@ function loginPage(){
     return(
         <>
         <Menu/>
-        {!token && token!=="" &&token!== undefined
+        {!token || token=="" || token == undefined
         ?<Login setToken={setToken}/>
         :(
             <h1>You've already logged in</h1>

@@ -1,5 +1,5 @@
 from bson.json_util import dumps
-from main import app, mongo
+from config import app, mongo
 
 
 @app.route('/api/horseInfo', methods=['GET'])

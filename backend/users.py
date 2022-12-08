@@ -1,5 +1,5 @@
 from bson.json_util import dumps
-from main import app, mongo, jwt
+from config import app, mongo
 import json
 from flask import request, jsonify
 from flask_cors import cross_origin

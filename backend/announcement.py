@@ -1,5 +1,5 @@
 from bson.json_util import dumps
-from main import app, mongo
+from config import app, mongo
 import json
 from flask import request
 db = mongo.db

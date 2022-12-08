@@ -1,6 +1,6 @@
 import json
 from bson.json_util import dumps
-from main import app, mongo
+from config import app, mongo
 from flask_pymongo import ObjectId
 from flask import request
 from flask_jwt_extended import jwt_required
