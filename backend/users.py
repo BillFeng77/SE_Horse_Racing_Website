@@ -34,7 +34,6 @@ def create_token():
     password = request.form.get("password")
     find = db["UserList"].find({"email": email, "password": password})
     result_list = list(find)
-    print(result_list)
     if len(result_list) == 0:
         return {"msg": "Wrong email or password"}, 401
     access_token = create_access_token(identity=email)
@@ -42,6 +41,19 @@ def create_token():
                 "username": result_list[0]['userName']}
     return response
 
+@app.route('/api/register',methods=["POST"])
+def register():
+    email = request.form.get("email")
+    username = request.form.get("username")
+    password = request.form.get("password")
+    usertype = request.form.get("usertype")
+    find = db["UserList"].find({"email": email})
+    result_list = list(find)
+    if len(result_list) == 0:
+        insert = db["UserList"].insert_one({"email":email,"username":username,"password":password,"usertype":usertype})
+        return {"msg":"successfully registered!"}
+    else:
+        return {"msg":"account already existed"}, 409
 
 @app.route("/api/logout", methods=["POST"])
 def logout():
