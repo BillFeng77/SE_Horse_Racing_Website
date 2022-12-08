@@ -110,7 +110,7 @@ function Login(props){
             )
             }
             <Button color='primary' variant='contained' sx={{marginTop:2}} onClick={handleSubmit}>Login</Button>
-            <Link sx={{marginTop:4}} href="#">No account? Please register here</Link>
+            <Link sx={{marginTop:4}} href="/auth/register">No account? Please register here</Link>
         </Box>
         </>
     )
