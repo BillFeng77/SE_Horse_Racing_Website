@@ -6,14 +6,17 @@ import useToken from './useToken';
 import Router from 'next/router';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Button } from '@mui/material';
 export default function Menu() {
     const { token, removeToken, setToken } = useToken()
-    
-    const [username, setUserName] = useState("")
+    const [usertype, setUserType] = useState(null)
+    const [username, setUserName] = useState(null)
 
     useEffect(() => {
-        const data = localStorage.getItem('username')
-        setUserName(data)
+        const name = localStorage.getItem('username')
+        const usertype = localStorage.getItem('usertype')
+        setUserName(name)
+        setUserType(usertype)
     }, [])
     
 
@@ -25,6 +28,7 @@ export default function Menu() {
         .then((response) => {
            removeToken()
            localStorage.removeItem('username')
+           localStorage.removeItem('usertype')
            window.location.reload()
         }).catch((error) => {
           if (error.response) {
@@ -104,21 +108,34 @@ export default function Menu() {
                         <a>Forum</a>
                     </Link>
                 </li>
+                <li className={styles.item}>
+
+                </li>
             </ul>
         </div>
 
         <div className={styles.userName}>
             {/* TODO: drop down 组件, 包括logout，administrator link*/}
-            { username!=="" && username!==undefined && !username
-            ?<p></p>
-            :(
-                <>
+            { username!==null && usertype!==null
+            ?(
+                <div style={{display:"flex",flexDirection:"row"}}>
                 <p>Welcome, {username}!</p>
-                <button onClick={logMeOut}> 
+                { usertype=="admin"
+                    ?(
+                        <>
+                        <Button variant='text'>
+                            <Link href="/admin-publish-a-news">Admin</Link>
+                        </Button>
+                        </>
+                    )
+                    :<></>
+                }
+                <Button variant='text' onClick={logMeOut}> 
                     Logout
-                </button>
-                </>
+                </Button>
+                </div>
             )
+            :<></>
             }
         </div>
         </div>

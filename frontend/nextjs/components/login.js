@@ -47,6 +47,7 @@ function Login(props){
           .then((response) => {
             props.setToken(response.data.access_token)
             localStorage.setItem('username', response.data.username)
+            localStorage.setItem('usertype',response.data.usertype)
             setError(false)
             Router.push('/')
           }).catch((error) => {

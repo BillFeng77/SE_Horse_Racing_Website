@@ -37,8 +37,7 @@ def create_token():
     if len(result_list) == 0:
         return {"msg": "Wrong email or password"}, 401
     access_token = create_access_token(identity=email)
-    response = {"access_token": access_token, "category": "agent",
-                "username": result_list[0]['userName']}
+    response = {"access_token": access_token,"username": result_list[0]['userName'],"usertype":result_list[0]['usertype']}
     return response
 
 @app.route('/api/register',methods=["POST"])
