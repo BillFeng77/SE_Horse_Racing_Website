@@ -108,17 +108,13 @@ export default function Menu() {
                         <a>Forum</a>
                     </Link>
                 </li>
-                <li className={styles.item}>
-                <Link href="/auth/login">
-                        <a>Login</a>
-                    </Link>
-
-                </li>
             </ul>
         </div>
 
         <div className={styles.userName}>
-            {/* TODO: drop down 组件, 包括logout，administrator link*/}
+            {username==null&&usertype==null&&(<div><Link href="/auth/login">
+                        <a>Login</a>
+                    </Link></div>)}
             { username!==null && usertype!==null
             ?(
                 <div style={{display:"flex",flexDirection:"row"}}>
@@ -133,7 +129,7 @@ export default function Menu() {
                     )
                     :<></>
                 }
-                <Button variant='text' onClick={logMeOut}> 
+                <Button variant='text' onClick={logMeOut} className={styles.nav}> 
                     Logout
                 </Button>
                 </div>

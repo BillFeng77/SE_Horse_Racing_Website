@@ -5,6 +5,6 @@ from config import app, mongo
 @app.route('/api/horseInfo', methods=['GET'])
 def getHorseInformation():
     db = mongo.db
-    find = db["Test"].find()
+    find = db["Horse"].find()
     data = dumps(list(find))
     return data

@@ -21,7 +21,7 @@ export default function Post({ posts }) {
                 <title>Post</title>
             </Head>
 
-            <Selfmenu />
+            <Menu />
 
             {/* <main>
                 <div className={styles.container}>

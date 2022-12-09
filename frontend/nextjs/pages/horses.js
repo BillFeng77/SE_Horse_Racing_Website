@@ -1,26 +1,14 @@
-import Layout from '../components/layout';
+
 import Menu from '../components/menu';
 import Selfmenu from '../components/menuv2';
-import React , { useEffect,useState,useRef}from "react";
+import React , { useState}from "react";
 import {Button,Table,Space} from 'antd';
-import {useRouter} from 'next/router'
 import axios from 'axios'; 
-import {Player} from 'video-react';
+
 import ReactPlayer from'react-player/youtube';
-import newsContent from './news/[...slug]';
-//import Video from "../public/vecteezy_a-dirty-white-horse-is-eating-fresh-plants-at-burgaz-island-in-istanbul_2020599.mp4";
-//import "../node_modules/video-react/dist/video-react.css";
-/*const [date,setDate]=useRef();
-const [horse,setHorse]=useRef();
-const [age,setAge]=useRef();
-const [country,setCountry]=useRef();
-const [raceName,setRaceName]=useRef();
-const[distanceFurlongs,setdistanceFurlongs]=useRef();
-const [surface,setSurface]=useRef();*/
+
 
 export default function searchHorse  ()  {
-  const router =useRouter()
-  const [slug, setSLug] = useState({})
   const [data,setHorseData]=useState([]);
   const getHorseData=()=>{
     axios.get('http://127.0.0.1:5000/api/horseInfo').then (function (response){
@@ -33,6 +21,14 @@ export default function searchHorse  ()  {
   var dataSource=[];
   for (var i=0;i<data.length;i++){
     dataSource.push(data[i]);
+  }
+  var nameFilter=[];
+  for (var i=0;i<data.length;i++){
+    nameFilter.push({"text":data[i].Horse,"value":data[i].Horse})
+  }
+  var raceNameFilter=[];
+  for (var i=0;i<data.length;i++){
+    raceNameFilter.push({"text":data[i].RaceName,"value":data[i].RaceName})
   }
 
   const [filteredInfo, setFilteredInfo] = React.useState({});
@@ -66,21 +62,20 @@ export default function searchHorse  ()  {
       title: 'Name',
       dataIndex: 'Horse',
       key: 'name',
-      filters: [
-        {
-          text: 'Havre de Grace',
-          value: 'Havre de Grace',
-        },
-        {
-          text: 'Hills and Stars',
-          value: 'Hills and Stars',
-        },
-      ],
+      filters: raceNameFilter,
       filteredValue: filteredInfo.name || null,
       filterSearch: true,
-      onFilter: (value, record) => record.name.includes(value),
-      sorter: (a, b) => a.name.length - b.name.length,
-      sortOrder: sortedInfo.columnKey === 'name' ? sortedInfo.order : null,
+      onFilter: (value, record) => record.Horse.includes(value),
+      ellipsis: true,
+    },
+    {
+      title: 'RaceName',
+      dataIndex: 'RaceName',
+      key: 'RaceName',
+      filters: nameFilter,
+      filteredValue: filteredInfo.Racename || null,
+      filterSearch: true,
+      onFilter: (value, record) => record.RaceName.includes(value),
       ellipsis: true,
     },
     {
@@ -112,16 +107,16 @@ export default function searchHorse  ()  {
         },
       ],
       filteredValue: filteredInfo.surf || null,
-      onFilter: (value, record) => record.surf.includes(value),
+      onFilter: (value, record) => record.Surface.includes(value),
       ellipsis: true,
     },
     {
       title: 'DistanceFurlongs',
-      dataIndex: 'Distance Furlongs',
+      dataIndex: 'DistanceFurlongs',
       key: 'distanceFurlongs',
-      filteredValue: filteredInfo.distanceFurlongs || null,
-      onFilter: (value, record) => record.distanceFurlongs.includes(value),
-      sorter: (a, b) => a.distanceFurlongs - b.distanceFurlongs,
+      filteredValue: filteredInfo.DistanceFurlongs || null,
+      onFilter: (value, record) => record.DistanceFurlongs.includes(value),
+      sorter: (a, b) => a.DistanceFurlongs - b.DistanceFurlongs,
       sortOrder: sortedInfo.columnKey === 'distanceFurlongs' ? sortedInfo.order : null,
       ellipsis: true,
     }

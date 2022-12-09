@@ -1,6 +1,6 @@
 import React from 'react';
 import Nav from '../components/menu';
-import AdminSider from '../components/admin_sider';
+
 
 const { Header, Content, Footer, Sider } = Layout;
 import { Layout, Menu } from 'antd';
