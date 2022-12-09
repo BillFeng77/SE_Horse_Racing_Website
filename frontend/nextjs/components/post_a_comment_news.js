@@ -25,7 +25,7 @@ const PostACommentNews = ({news_id}) => {
   const [submitting, setSubmitting] = useState(false);
   const [value, setValue] = useState('');
   const { token, removeToken, setToken } = useToken()
-
+  const [username, setUserName] = useState(null)
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
 
@@ -39,7 +39,7 @@ const PostACommentNews = ({news_id}) => {
       setValue('');
 
     axios.post(`http://127.0.0.1:5000/api/${news_id}/comments`, {
-        userName: "jny223",
+        userName: username,
         content: value,
       }
       ,{
@@ -88,6 +88,8 @@ const PostACommentNews = ({news_id}) => {
 
    useEffect(() => {
      loadMoreData();
+     const username = localStorage.getItem('username')
+     setUserName(username)
   }, []);
 
   return (

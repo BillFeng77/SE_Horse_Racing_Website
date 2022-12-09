@@ -25,7 +25,7 @@ const PostAMessageForum = () => {
   const [submitting, setSubmitting] = useState(false);
   const [value, setValue] = useState('');
   const { token, removeToken, setToken } = useToken()
-
+  const [username, setUserName] = useState(null)
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
 
@@ -54,7 +54,7 @@ const PostAMessageForum = () => {
       setValue('');
 
     axios.post('http://127.0.0.1:5000/api/messages', {
-        userName: "jny223",
+        userName: username,
         content: value,
       }
       ,{
@@ -94,6 +94,8 @@ const PostAMessageForum = () => {
 
    useEffect(() => {
      loadMoreData();
+     const username = localStorage.getItem('username')
+     setUserName(username)
   }, []);
 
 
