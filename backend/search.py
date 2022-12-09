@@ -1,15 +1,12 @@
-from flask import Flask
-from flask import request,Quotes
+from flask import Flask,jsonify
+from flask import request
 from config import app, mongo
 db = mongo.db
-@app.route('api/search',methods=['GET'])
+@app.route('/api/search')
 def search():
-    content=request.args.get('value')
-    if content is None:
-        content=''
-    quotes=Quotes.query.filter(
-    Quotes.content.like("%" + content + "%") if content is not None else ""
-
- ).all()
-
-    return quotes
+    query=request.args.get("q")
+    results= db["News"].find({ '$or': [
+      { 'title': { '$regex': query } },
+      { 'content': { '$regex': query } }
+    ] })
+    return results

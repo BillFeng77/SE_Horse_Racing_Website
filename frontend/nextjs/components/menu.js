@@ -109,6 +109,9 @@ export default function Menu() {
                     </Link>
                 </li>
                 <li className={styles.item}>
+                <Link href="/auth/login">
+                        <a>Login</a>
+                    </Link>
 
                 </li>
             </ul>
