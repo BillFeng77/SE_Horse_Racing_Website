@@ -99,7 +99,7 @@ export default function newsContent() {
         </span>
         </Col>
         <Col span = {9}>
-        <PostACommentNews news_id={pictureId}/>
+        <PostACommentNews newsTitle={newsInfo.title}/>
         </Col>
         </Row>
         <Footer style = {{marginTop: "300px", height:"300px", backgroundColor: "#88322F"}}>

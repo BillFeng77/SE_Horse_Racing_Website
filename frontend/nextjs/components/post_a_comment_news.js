@@ -20,7 +20,7 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
   </>
 );
 
-const PostACommentNews = ({news_id}) => {
+const PostACommentNews = ({newsTitle}) => {
   const [messages, setMessages] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const [value, setValue] = useState('');
@@ -38,7 +38,7 @@ const PostACommentNews = ({news_id}) => {
       setSubmitting(false);
       setValue('');
 
-    axios.post(`http://127.0.0.1:5000/api/${news_id}/comments`, {
+    axios.post(`http://127.0.0.1:5000/api/${newsTitle}/comments`, {
         userName: username,
         content: value,
       }
@@ -74,7 +74,7 @@ const PostACommentNews = ({news_id}) => {
       return;
     }
     setLoading(true);
-    axios.get(`http://127.0.0.1:5000/api/${news_id}/comments`)
+    axios.get(`http://127.0.0.1:5000/api/${newsTitle}/comments`)
         .then(function(response){
             console.log(response.data);
             setData(response.data);

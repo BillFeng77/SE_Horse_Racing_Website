@@ -6,40 +6,30 @@ from flask import request
 from flask_jwt_extended import jwt_required
 
 
-@app.route('/api/<news_id>/comments', methods=['GET'])
-def get_comments_from_mongodb(news_id):
+@app.route('/api/<news_title>/comments', methods=['GET'])
+def get_comments_from_mongodb(news_title):
     db = mongo.db
-
-    result = db["News_Comments"].find({'type': news_id}).sort("id", -1)
-
-    # query path '/api/messages?userName=userName'
-    # args = request.args
-    # userName = args.get('userName')
-    # if userName is not None:
-    #     result = db["Comments"].find({"userName": userName})
-
+    result = db["News_Comments"].find({'type': news_title}).sort("id", -1)
     return dumps(list(result))
 
 
-@app.route('/api/<news_id>/comments', methods=['POST'])
+@app.route('/api/<news_title>/comments', methods=['POST'])
 @jwt_required()
-def insert_comments_to_mongodb(news_id):
+def insert_comments_to_mongodb(news_title):
     db = mongo.db
     data = request.form
     newdata = json.dumps(data)  # type: str
     doc = json.loads(newdata)  # str to json
     id = db["News_Comments"].insert_one(doc).inserted_id
-    counter = update_counter_news_comments(news_id)
+    counter = update_counter_news_comments(news_title)
     db["News_Comments"].update_one(
         {'_id': ObjectId(id)}, {"$set": {'id': counter}})  # assign new id based on 评论的先后顺序
     db["News_Comments"].update_one(
-        {'_id': ObjectId(id)}, {"$set": {'type': news_id}})
+        {'_id': ObjectId(id)}, {"$set": {'type': news_title}})
 
-    # print('request.form:', request.form)    all data in string type
-    # returnData = db["Comments"].find(ObjectId(id))
     userName = data["userName"]
     content = data["content"]
-    type = news_id
+    type = news_title
     count = counter
     returnData = {"userName": userName,
                   "content": content,
@@ -49,20 +39,21 @@ def insert_comments_to_mongodb(news_id):
     return returnData
 
 
-def update_counter_news_comments(news_id):
+# generate a increasing number as the new id of news comments, according to time sequence
+def update_counter_news_comments(news_title):
     db = mongo.db
     is_exist = db["Counters_News_Comments"].count_documents(
-        {'type': news_id}, limit=1)
+        {'type': news_title}, limit=1)
     print("try to find")
     if is_exist == False:
         db["Counters_News_Comments"].insert_one(
-            {'type': news_id, 'counter': 0})
+            {'type': news_title, 'counter': 0})
         print("insert")
         return 0
     else:
         db["Counters_News_Comments"].find_one_and_update(
-            {'type': news_id},
+            {'type': news_title},
             {'$inc': {'counter': 1}})
         print("update")
 
-        return db["Counters_News_Comments"].find_one({'type': news_id})['counter']
+        return db["Counters_News_Comments"].find_one({'type': news_title})['counter']

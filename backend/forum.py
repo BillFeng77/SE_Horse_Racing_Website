@@ -10,15 +10,8 @@ from flask_jwt_extended import jwt_required
 @app.route('/api/messages', methods=['GET'])
 def get_messages_from_mongodb():
     db = mongo.db
-
+    # return messages based on time sequence
     result = db["Comments"].find().sort("id", -1)
-
-    # query path '/api/messages?userName=userName'
-    # args = request.args
-    # userName = args.get('userName')
-    # if userName is not None:
-    #     result = db["Comments"].find({"userName": userName})
-
     return dumps(list(result))
 
 
@@ -32,14 +25,12 @@ def insert_message_to_mongodb():
     id = db["Comments"].insert_one(doc).inserted_id
     counter = update_counter_forum()
     db["Comments"].update_one(
-        {'_id': ObjectId(id)}, {"$set": {'id': counter}})  # assign new id based on 评论的先后顺序
+        {'_id': ObjectId(id)}, {"$set": {'id': counter}})  # assign new id to messages
     db["Comments"].update_one(
         {'_id': ObjectId(id)}, {"$set": {'likes': 0}})
     db["Comments"].update_one(
         {'_id': ObjectId(id)}, {"$set": {'dislikes': 0}})
 
-    # print('request.form:', request.form)    all data in string type
-    # returnData = db["Comments"].find(ObjectId(id))
     userName = data["userName"]
     content = data["content"]
     likes = 0
@@ -61,12 +52,10 @@ def like_a_message_in_mongodb(message_id):
     if is_exist == False:
         return "Posting Error: message id does not exist", 400
 
-    db["Comments"].update_one({"id": int(message_id)}, {"$inc": {'likes': 1}})
-    # find = db["Comments"].find_one({"id": int(message_id)})
-    # data = dumps(find)
-    find = db["Comments"].find().sort("id", -1)
-    data = dumps(list(find))
-    return data
+    db["Comments"].update_one(
+        {"id": int(message_id)}, {"$inc": {'likes': 1}})
+    data = db["Comments"].find_one({"id": int(message_id)})["likes"]
+    return str(data)
 
 
 @app.route('/api/messages/<message_id>/dislikes', methods=['POST'])
@@ -78,16 +67,14 @@ def dislike_a_message_in_mongodb(message_id):
 
     db["Comments"].update_one({"id": int(message_id)}, {
                               "$inc": {'dislikes': 1}})
-    find = db["Comments"].find_one({"id": int(message_id)})
-    data = dumps(find)
-    return data
+    data = db["Comments"].find_one({"id": int(message_id)})["dislikes"]
+    return str(data)
 
 
 @app.route('/api/messages/<message_id>', methods=['DELETE'])
 def delete_a_message_in_mongodb(message_id):
 
     db = mongo.db
-    # db["Comments"].delete_many({})   # delete all data
     is_exist = db["Comments"].count_documents({"id": int(message_id)}, limit=1)
     if is_exist == False:
         return "Deleting Error: message id does not exist", 400
@@ -95,9 +82,8 @@ def delete_a_message_in_mongodb(message_id):
     db["Comments"].delete_one({"id": int(message_id)})
     return "message " + str(message_id) + " is deleted"
 
-    # generate a increasing number as the new id of messages in forum, according to 评论的先后顺序
 
-
+# generate a increasing number as the new id of messages in forum, according to time sequence
 def update_counter_forum():
     db = mongo.db
     db["Counters_Messages_Forum"].find_one_and_update(

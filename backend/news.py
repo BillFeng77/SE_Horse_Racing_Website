@@ -19,7 +19,6 @@ def insert_a_news_to_db():
     data = request.form
     newdata = json.dumps(data)  # type: str
     doc = json.loads(newdata)  # str to json
-    # insert = db["News"].insert_one(doc)
     id = db["News"].insert_one(doc).inserted_id
     db["News"].update_one(
         {'_id': ObjectId(id)}, {"$set": {'likes': 0}})
@@ -36,11 +35,8 @@ def like_a_news(news_title):
         return "Posting Error: news does not exist", 400
 
     db["News"].update_one({"title": news_title}, {"$inc": {'likes': 1}})
-    # find = db["Comments"].find_one({"id": int(news_title)})
-    # data = dumps(find)
-    # find = db["News"].find().sort("id", -1)
-    # data = dumps(list(find))
-    return "updated"
+    data = db["News"].find_one({"title": news_title})["likes"]
+    return str(data)
 
 
 @app.route('/api/news/<news_title>/dislikes', methods=['POST'])
@@ -52,6 +48,5 @@ def dislike_a_news(news_title):
 
     db["News"].update_one({"title": news_title}, {
         "$inc": {'dislikes': 1}})
-    # find = db["News"].find_one({"id": int(news_title)})
-    # data = dumps(find)
-    return "updated"
+    data = db["News"].find_one({"title": news_title})["dislikes"]
+    return str(data)
