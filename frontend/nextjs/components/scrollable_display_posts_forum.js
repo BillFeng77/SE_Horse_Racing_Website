@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import axios from 'axios'
 import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-design/icons';
-import { Comment, Tooltip } from 'antd';
-import useItems from 'antd/lib/menu/hooks/useItems';
+import { UserOutlined } from '@ant-design/icons';
 
 export default function ScrollableDisplayPostsForum({
   loadMoreData,
@@ -75,7 +74,7 @@ setTimeout(() => {
           }
             >
               <List.Item.Meta
-                avatar={<Avatar src='https://joeschmoe.io/api/v1/1' />}
+                avatar={<Avatar size="large" icon={<UserOutlined />} />}
                 title={item.userName}
                 description={item.content}
               />

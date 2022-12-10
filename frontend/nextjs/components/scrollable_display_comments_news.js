@@ -1,6 +1,7 @@
 import { Avatar, Divider, List, Skeleton } from 'antd';
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { UserOutlined } from '@ant-design/icons';
 import axios from 'axios'
 
 export default function ScrollableDisplayCommentsNews({
@@ -129,7 +130,7 @@ export default function ScrollableDisplayCommentsNews({
           renderItem={(item) => (
             <List.Item key={item.count}>
               <List.Item.Meta
-                avatar={<Avatar src='https://joeschmoe.io/api/v1/1' />}
+                avatar={<Avatar size="large" icon={<UserOutlined />} />}
                 title={item.userName}
                 description={item.content}
               />
