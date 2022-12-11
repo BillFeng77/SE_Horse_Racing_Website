@@ -36,12 +36,11 @@ def register():
     username = request.form.get("username")
     password = request.form.get("password")
     usertype = request.form.get("usertype")
-    find = db["UserList"].find({"email": email})
-    result_list = list(find)
-    if len(result_list) == 0:
-        insert = db["UserList"].insert_one(
-            {"email": email, "username": username, "password": password, "usertype": usertype})
-        return {"msg": "successfully registered!"}
+    find_email = db["UserList"].find({"email": email})
+    find_username = db["UserList"].find({"username":username})
+    if len(list(find_email)) == 0 and len(list(find_username)) == 0:
+        insert = db["UserList"].insert_one({"email":email,"username":username,"password":password,"usertype":usertype})
+        return {"msg":"successfully registered!"}
     else:
         return {"msg": "account already existed"}, 409
 

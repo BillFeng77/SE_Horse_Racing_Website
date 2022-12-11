@@ -1,7 +1,6 @@
 import React from 'react';
 import Nav from '../components/menu';
 
-
 const { Header, Content, Footer, Sider } = Layout;
 import { Layout, Menu } from 'antd';
 import Link from 'next/link';
