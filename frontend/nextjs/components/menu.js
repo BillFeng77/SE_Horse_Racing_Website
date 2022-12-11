@@ -111,25 +111,25 @@ export default function Menu() {
             </ul>
         </div>
 
-        <div className={styles.userName}>
+        <div className={styles.userName} style={{marginRight:"200px"}}>
             {username==null&&usertype==null&&(<div><Link href="/auth/login">
                         <a>Login</a>
                     </Link></div>)}
             { username!==null && usertype!==null
             ?(
                 <div style={{display:"flex",flexDirection:"row"}}>
-                <p>Welcome, {username}!</p>
+                <p style={{fontSize:"15px", marginRight:"15px"}}>Welcome, {username}!</p>
                 { usertype=="admin"
                     ?(
                         <>
-                        <Button variant='text'>
-                            <Link href="/admin">Admin</Link>
+                        <Button variant='text' style={{marginRight:"15px"}}>
+                            <Link href="/admin"><a>Admin</a></Link>
                         </Button>
                         </>
                     )
                     :<></>
                 }
-                <Button variant='text' onClick={logMeOut} className={styles.nav}> 
+                <Button variant='text' onClick={logMeOut} className={styles.nav} style={{color:"#88322F"}}> 
                     Logout
                 </Button>
                 </div>
