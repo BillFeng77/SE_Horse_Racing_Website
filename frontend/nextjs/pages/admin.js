@@ -1,12 +1,36 @@
-import React from 'react';
+import { React, useState } from 'react';
 import Nav from '../components/menu';
-
-const { Header, Content, Footer, Sider } = Layout;
 import { Layout, Menu } from 'antd';
-import Link from 'next/link';
+import ManageAccounts from '../components/admin-manage-accounts';
+import PublishAnAnnouncement from '../components/admin-publish-an-announcement'
 import PublishANews from '../components/admin-publish-a-news';
-
-export default function Home() {
+const { Header, Content, Footer, Sider } = Layout;
+export default function Admin() {
+    const [menuItem, setMenuItem]= useState('3');
+    const componentsSwitch = (key) => {
+    switch (key) {
+      case '1':
+        return (<PublishANews 
+            style={{
+            padding: '0 20px',
+          }}>
+        </PublishANews>);
+      case '2':
+        return (<PublishAnAnnouncement 
+            style={{
+            padding: '0 20px',
+          }}>
+        </PublishAnAnnouncement>);
+      case '3':
+        return (<ManageAccounts
+            style={{
+            padding: '0 20px',
+          }}>
+        </ManageAccounts>);
+      default:
+        break;
+     }
+    }
   return (
     <>
     <Nav/>
@@ -33,30 +57,25 @@ export default function Home() {
         <Sider className="site-layout-background" width={250}>
           <Menu
             mode="inline"
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['1']}
+            defaultSelectedKeys={['3']}
+            defaultOpenKeys={['3']}
+            selectedKeys={menuItem}
+            onClick={(e) => 
+                setMenuItem(e.key)}
             style={{
               height: '100%',
             }}
-            // items={items1}
-            // onclick = {handleclick({ item, key, keyPath, domEvent})}
           >
             <Menu.Item key="1" >
-            <Link href="/admin-publish-a-news">
-                <a>Publish a News</a>
-            </Link>
+                Publish a News
             </Menu.Item>
 
             <Menu.Item key="2" >
-            <Link href="/admin-publish-an-announcement">
-                <a>Publish an Announcement</a>
-            </Link>
+                Publish an Announcement
             </Menu.Item>
 
             <Menu.Item key="3" >
-            <Link href="/admin-manage-accounts">
-                <a>Manage Accounts</a>
-            </Link>
+                Manage Accounts
             </Menu.Item>
           </Menu>
         </Sider>
@@ -67,15 +86,8 @@ export default function Home() {
             minHeight: 280,
           }}
         >
-          {/* Content */}
-         
-          
         </Content>
-        <PublishANews 
-            style={{
-            padding: '0 20px',
-          }}>
-        </PublishANews>
+        {componentsSwitch(menuItem)}
       </Layout>
     </Content>
     
@@ -86,5 +98,3 @@ export default function Home() {
     </>
   );
 }
-
-

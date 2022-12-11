@@ -123,7 +123,7 @@ export default function Menu() {
                     ?(
                         <>
                         <Button variant='text'>
-                            <Link href="/admin-publish-a-news">Admin</Link>
+                            <Link href="/admin">Admin</Link>
                         </Button>
                         </>
                     )
