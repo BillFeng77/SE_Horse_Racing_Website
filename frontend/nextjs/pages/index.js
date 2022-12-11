@@ -12,6 +12,8 @@ import {Alert,Card} from 'antd';
 import {Layout} from'antd';
 import {Col,Divider, Row} from 'antd';
 import {Content} from 'antd/lib/layout/layout';
+import { useState } from 'react';
+import axios from 'axios'
 import Horse from '../public/images/Horse.png';
 import Horse1 from '../public/images/Horse1.jpg';
 import Horse2 from '../public/images/Horse2.jpeg';
@@ -24,6 +26,7 @@ import Link from 'next/link';
 import {Input,Space} from 'antd';
 import Searchnews from '../components/searchNews';
 
+
 const carouselStyle = {
   height: '600px',
   color: '#e6e6e6',
@@ -35,7 +38,17 @@ const carouselStyle = {
 const {Footer}=Layout;
 const {Meta}=Card;
 const {Search}=Input;
+
 export default function Home() {
+  const [annoucements, setAnnouncements] = useState("");
+  axios.get('http://127.0.0.1:5000/api/announcements')
+        .then(function(response){
+            console.log(response.data);
+            setAnnouncements(response.data.content);
+        })
+        .catch(() =>{
+            console.log(error);
+    })
   return (<>
     <Menu/>
     <Carousel autoplay='true' dotPosition='bottom' display='flex' margin="0 auto" style = {{backgroundColor:"#88322F"}}>
@@ -52,8 +65,8 @@ export default function Home() {
       <h4 style={carouselStyle}><Image src={Horse7} layout="intrinsic"/></h4>
     </div>
   </Carousel>
-  
-    <Alert message={<marquee>'2022 Horse Racing World Cup is Approaching, Keep focus on our Horse Racing Website'</marquee>} type="info" style = {{display:'flex', margin:"0 auto",marginTop: "50px", width:"50%", height:"25px", fontSize:"14px"}}>
+  {/* '2022 Horse Racing World Cup is approaching, keep focus on our Horse Racing Website' */}
+    <Alert message={<marquee>{annoucements}</marquee>} type="info" style = {{display:'flex', margin:"0 auto",marginTop: "50px", width:"50%", height:"25px", fontSize:"14px"}}>
     </Alert>
     <Row style = {{display:'flex', margin:"0 auto",marginTop: "100px", width:"70%"}}>
     <Space 
