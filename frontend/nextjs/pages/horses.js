@@ -10,12 +10,11 @@ import ReactPlayer from'react-player/youtube';
 
 export default function searchHorse  ()  {
   const [data,setHorseData]=useState([]);
-  const getHorseData=()=>{
-    axios.get('http://127.0.0.1:5000/api/horseInfo').then (function (response){
+  axios.get('http://127.0.0.1:5000/api/horseInfo').then (function (response){
       console.log(response.data);
       setHorseData(response.data)
-      }).catch(function(error){console.log(error)}) };
-  getHorseData()
+      }).catch(function(error){console.log(error)}) 
+  
   
 
   var dataSource=[];
@@ -122,7 +121,7 @@ export default function searchHorse  ()  {
     }
   ];
 
-  return (//Waiting to integrate with Menu component and pageHeader
+  return (
       <>
       <Menu/>
       <Space direction="vertical"

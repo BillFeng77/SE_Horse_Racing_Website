@@ -1,11 +1,7 @@
-import Head from 'next/head';
-import utilStyles from '../styles/utils.module.css';
 // import NewsLinks from '../components/newsLinks';
 import Image from 'next/image';
 import Selfmenu from '../components/menuv2';
 import Menu from '../components/menu';
-import carousel from '../components/Carousel';
-//import Marquee from 'react-fast-marquee';
 import { Carousel } from 'antd';
 import React from 'react';
 import {Alert,Card} from 'antd';
