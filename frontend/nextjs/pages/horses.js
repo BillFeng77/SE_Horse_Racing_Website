@@ -10,12 +10,11 @@ import ReactPlayer from'react-player/youtube';
 
 export default function searchHorse  ()  {
   const [data,setHorseData]=useState([]);
-  const getHorseData=()=>{
-    axios.get('http://127.0.0.1:5000/api/horseInfo').then (function (response){
+  axios.get('http://127.0.0.1:5000/api/horseInfo').then (function (response){
       console.log(response.data);
       setHorseData(response.data)
-      }).catch(function(error){console.log(error)}) };
-  getHorseData()
+      }).catch(function(error){console.log(error)}) 
+  
   
 
   var dataSource=[];
@@ -48,7 +47,7 @@ export default function searchHorse  ()  {
   const setAgeSort = () => {
     setSortedInfo({
       order: 'descend',
-      columnKey: 'BirthDate',
+      columnKey: 'Age',
     });
   };
   const setWinningDateSort = () => {
@@ -62,7 +61,7 @@ export default function searchHorse  ()  {
       title: 'Name',
       dataIndex: 'Horse',
       key: 'name',
-      filters: raceNameFilter,
+      filters: nameFilter,
       filteredValue: filteredInfo.name || null,
       filterSearch: true,
       onFilter: (value, record) => record.Horse.includes(value),
@@ -72,7 +71,7 @@ export default function searchHorse  ()  {
       title: 'RaceName',
       dataIndex: 'RaceName',
       key: 'RaceName',
-      filters: nameFilter,
+      filters: raceNameFilter,
       filteredValue: filteredInfo.Racename || null,
       filterSearch: true,
       onFilter: (value, record) => record.RaceName.includes(value),
@@ -122,7 +121,7 @@ export default function searchHorse  ()  {
     }
   ];
 
-  return (//Waiting to integrate with Menu component and pageHeader
+  return (
       <>
       <Menu/>
       <Space direction="vertical"

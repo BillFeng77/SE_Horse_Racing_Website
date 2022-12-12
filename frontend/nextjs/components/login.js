@@ -5,6 +5,10 @@ import Link from '@mui/material/Link'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Router from 'next/router'
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Stack from '@mui/material/Stack';
+import { red } from '@mui/material/colors';
 
 function Login(props){
     const [error, setError] = useState(false)
@@ -69,6 +73,13 @@ function Login(props){
         event.preventDefault()
     }
 
+    const ColorButton = styled(Button)(({ theme }) => ({
+      color: theme.palette.getContrastText(red[900]),
+      backgroundColor: red[900],
+      '&:hover': {
+        backgroundColor: red[700],
+      },
+    }));
     return (
         <>
         <Box
@@ -110,8 +121,8 @@ function Login(props){
                 <p style={{color:'red'}}>email or password is incorrect!</p>
             )
             }
-            <Button color='primary' variant='contained' sx={{marginTop:2}} onClick={handleSubmit}>Login</Button>
-            <Link sx={{marginTop:4}} href="/auth/register">No account? Please register here</Link>
+            <ColorButton variant='contained' sx={{marginTop:2}} onClick={handleSubmit}>Login</ColorButton>
+            <Link color={red[900]}sx={{marginTop:4}} href="/auth/register">No account? Please register here</Link>
         </Box>
         </>
     )
