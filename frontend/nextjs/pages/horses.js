@@ -48,7 +48,7 @@ export default function searchHorse  ()  {
   const setAgeSort = () => {
     setSortedInfo({
       order: 'descend',
-      columnKey: 'BirthDate',
+      columnKey: 'Age',
     });
   };
   const setWinningDateSort = () => {
@@ -62,7 +62,7 @@ export default function searchHorse  ()  {
       title: 'Name',
       dataIndex: 'Horse',
       key: 'name',
-      filters: raceNameFilter,
+      filters: nameFilter,
       filteredValue: filteredInfo.name || null,
       filterSearch: true,
       onFilter: (value, record) => record.Horse.includes(value),
@@ -72,7 +72,7 @@ export default function searchHorse  ()  {
       title: 'RaceName',
       dataIndex: 'RaceName',
       key: 'RaceName',
-      filters: nameFilter,
+      filters: raceNameFilter,
       filteredValue: filteredInfo.Racename || null,
       filterSearch: true,
       onFilter: (value, record) => record.RaceName.includes(value),
