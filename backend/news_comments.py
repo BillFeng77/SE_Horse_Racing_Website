@@ -6,6 +6,7 @@ from flask import request
 from flask_jwt_extended import jwt_required
 
 
+# get all comments of a news from db and sort them based on their ids
 @app.route('/api/<news_title>/comments', methods=['GET'])
 def get_comments_from_mongodb(news_title):
     db = mongo.db
@@ -13,6 +14,7 @@ def get_comments_from_mongodb(news_title):
     return dumps(list(result))
 
 
+# save a comments in db (check login status prior), add new fields(id, type)
 @app.route('/api/<news_title>/comments', methods=['POST'])
 @jwt_required()
 def insert_comments_to_mongodb(news_title):
@@ -39,7 +41,7 @@ def insert_comments_to_mongodb(news_title):
     return returnData
 
 
-# generate a increasing number as the new id of news comments, according to time sequence
+# generate new ids for each news's comments based on time sequence
 def update_counter_news_comments(news_title):
     db = mongo.db
     is_exist = db["Counters_News_Comments"].count_documents(

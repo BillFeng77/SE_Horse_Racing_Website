@@ -1,31 +1,30 @@
-# FORUM
 import json
 from bson.json_util import dumps
 from config import app, mongo
 from flask_pymongo import ObjectId
 from flask import request
 from flask_jwt_extended import jwt_required
+db = mongo.db
 
 
+# get all messages from db and sort them based on their ids
 @app.route('/api/messages', methods=['GET'])
 def get_messages_from_mongodb():
-    db = mongo.db
-    # return messages based on time sequence
     result = db["Comments"].find().sort("id", -1)
     return dumps(list(result))
 
 
+# save a message in db (check login status prior), add new fields(id, likes, dislikes)
 @app.route('/api/messages', methods=['POST'])
 @jwt_required()
 def insert_message_to_mongodb():
-    db = mongo.db
     data = request.form
-    newdata = json.dumps(data)  # type: str
-    doc = json.loads(newdata)  # str to json
+    newdata = json.dumps(data)
+    doc = json.loads(newdata)
     id = db["Comments"].insert_one(doc).inserted_id
     counter = update_counter_forum()
     db["Comments"].update_one(
-        {'_id': ObjectId(id)}, {"$set": {'id': counter}})  # assign new id to messages
+        {'_id': ObjectId(id)}, {"$set": {'id': counter}})
     db["Comments"].update_one(
         {'_id': ObjectId(id)}, {"$set": {'likes': 0}})
     db["Comments"].update_one(
@@ -45,9 +44,9 @@ def insert_message_to_mongodb():
     return returnData
 
 
+# increase likes number of a message by 1
 @app.route('/api/messages/<message_id>/likes', methods=['POST'])
 def like_a_message_in_mongodb(message_id):
-    db = mongo.db
     is_exist = db["Comments"].count_documents({"id": int(message_id)}, limit=1)
     if is_exist == False:
         return "Posting Error: message id does not exist", 400
@@ -58,9 +57,9 @@ def like_a_message_in_mongodb(message_id):
     return str(data)
 
 
+# increase dislikes number of a message by 1
 @app.route('/api/messages/<message_id>/dislikes', methods=['POST'])
 def dislike_a_message_in_mongodb(message_id):
-    db = mongo.db
     is_exist = db["Comments"].count_documents({"id": int(message_id)}, limit=1)
     if is_exist == False:
         return "Posting Error: message id does not exist", 400
@@ -71,21 +70,8 @@ def dislike_a_message_in_mongodb(message_id):
     return str(data)
 
 
-@app.route('/api/messages/<message_id>', methods=['DELETE'])
-def delete_a_message_in_mongodb(message_id):
-
-    db = mongo.db
-    is_exist = db["Comments"].count_documents({"id": int(message_id)}, limit=1)
-    if is_exist == False:
-        return "Deleting Error: message id does not exist", 400
-
-    db["Comments"].delete_one({"id": int(message_id)})
-    return "message " + str(message_id) + " is deleted"
-
-
-# generate a increasing number as the new id of messages in forum, according to time sequence
+# generate new ids for messages based on time sequence
 def update_counter_forum():
-    db = mongo.db
     db["Counters_Messages_Forum"].find_one_and_update(
         {'type': "forum"},
         {'$inc': {'counter': 1}})

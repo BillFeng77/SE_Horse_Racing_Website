@@ -6,6 +6,7 @@ from flask_pymongo import ObjectId
 db = mongo.db
 
 
+# get all news from db
 @app.route("/api/news", methods=['GET'])
 def get_news_from_db():
     print(db)
@@ -14,6 +15,7 @@ def get_news_from_db():
     return data
 
 
+# save a news to db and add new fields(likes, dislikes)
 @app.route("/api/news", methods=['POST'])
 def insert_a_news_to_db():
     data = request.form
@@ -27,6 +29,7 @@ def insert_a_news_to_db():
     return "Published sccessfully"
 
 
+# increase likes number of a news by 1
 @app.route('/api/news/<news_title>/likes', methods=['POST'])
 def like_a_news(news_title):
     db = mongo.db
@@ -39,6 +42,7 @@ def like_a_news(news_title):
     return str(data)
 
 
+# increase dislikes number of a news by 1
 @app.route('/api/news/<news_title>/dislikes', methods=['POST'])
 def dislike_a_news(news_title):
     db = mongo.db
