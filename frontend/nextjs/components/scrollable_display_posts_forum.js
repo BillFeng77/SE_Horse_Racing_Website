@@ -1,36 +1,34 @@
-import { Avatar, Divider, Space, List, Skeleton } from 'antd';
-import React, { useEffect, useState } from 'react';
-import InfiniteScroll from 'react-infinite-scroll-component';
+import { Avatar, Divider, Space, List, Skeleton } from 'antd'
+import React from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
 import axios from 'axios'
-import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-design/icons';
-import { UserOutlined } from '@ant-design/icons';
+import { DislikeFilled, LikeFilled,  UserOutlined } from '@ant-design/icons'
 
-export default function ScrollableDisplayPostsForum({
+export default function ScrollableDisplayPostsForum ({
   loadMoreData,
   loadMessages,
-  data,
+  data
 }) {
-
-  const handleLikeClick =(id) =>{
+  const handleLikeClick = (id) => {
     axios.post(`http://127.0.0.1:5000/api/messages/${id}/likes`)
-    .then(function(response){
-      console.log("posted: ",response.data);
-    }
-    )
-setTimeout(() => {
-  loadMessages();
-}, 800);
+      .then(function (response) {
+        console.log('posted: ', response.data)
+      }
+      )
+    setTimeout(() => {
+      loadMessages()
+    }, 800)
   }
 
-  const handleDislikeClick =(id) =>{
+  const handleDislikeClick = (id) => {
     axios.post(`http://127.0.0.1:5000/api/messages/${id}/dislikes`)
-    .then(function(response){
-      console.log("posted: ",response.data);
-    }
-    )
-setTimeout(() => {
-  loadMessages();
-}, 800);
+      .then(function (response) {
+        console.log('posted: ', response.data)
+      }
+      )
+    setTimeout(() => {
+      loadMessages()
+    }, 800)
   }
 
   return (
@@ -43,7 +41,7 @@ setTimeout(() => {
         padding: '0 16px',
         border: '1px solid rgba(140, 140, 140, 0.35)',
         margin: 50,
-        margin: '0px auto',
+        margin: '0px auto'
       }}
     >
       <InfiniteScroll
@@ -54,23 +52,23 @@ setTimeout(() => {
           <Skeleton
             avatar
             paragraph={{
-              rows: 1,
+              rows: 1
             }}
             active
           />
         }
-        endMessage={<Divider plain style={{color: 'rgba(0, 0, 0, 0.45)'}}>END</Divider>}
+        endMessage={<Divider plain style={{ color: 'rgba(0, 0, 0, 0.45)' }}>END</Divider>}
         scrollableTarget="scrollableDiv"
       >
         <List
         itemLayout="horizontal"
           dataSource={data}
           renderItem={(item) => (
-            <List.Item 
-            key={item.id} 
+            <List.Item
+            key={item.id}
             actions = {
-             [<span onClick={()=>{handleLikeClick(item.id)}}> <LikeFilled style={{color:"#a14845", cursor:"pointer" }}></LikeFilled><span> {item.likes}</span></span>,
-             <span onClick={()=>{handleDislikeClick(item.id)}}> <DislikeFilled style={{cursor:"pointer" }}></DislikeFilled><span> {item.dislikes}</span></span>]
+             [<span onClick={() => { handleLikeClick(item.id) }}> <LikeFilled style={{ color: '#a14845', cursor: 'pointer' }}></LikeFilled><span> {item.likes}</span></span>,
+             <span onClick={() => { handleDislikeClick(item.id) }}> <DislikeFilled style={{ cursor: 'pointer' }}></DislikeFilled><span> {item.dislikes}</span></span>]
           }
             >
               <List.Item.Meta
@@ -82,7 +80,7 @@ setTimeout(() => {
           )}
         />
       </InfiniteScroll>
-      
+
     </div>
-  );
+  )
 };

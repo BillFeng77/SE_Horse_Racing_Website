@@ -1,9 +1,8 @@
-import { Avatar, Button, Comment, Form, Input, List } from 'antd';
-import moment from 'moment';
+import { Avatar, Button, Comment, Form, Input, List, message, Popconfirm } from 'antd'
+import moment from 'moment'
 import axios from 'axios'
-import React, { useEffect, useState } from 'react';
-const { TextArea } = Input;
-import { message, Popconfirm } from 'antd';
+import React, { useEffect, useState } from 'react'
+const { TextArea } = Input
 
 // const CommentList = ({ comments }) => (
 //   <List
@@ -14,21 +13,20 @@ import { message, Popconfirm } from 'antd';
 //   />
 // );
 
-
 const confirm = (e) => {
-  console.log(e);
-  message.success('Click on Yes');
-};
+  console.log(e)
+  message.success('Click on Yes')
+}
 const cancel = (e) => {
-  console.log(e);
+  console.log(e)
   // message.error('Click on No');
-};
+}
 
 const Editor = ({ onChange1, onSubmit, submitting, value1, messages }) => (
   <>
   <Form.Item>
     <p>User Name</p>
-   <Input onChange={onChange1} value={value1} style={{marginTop: '7px', border: '1.5px solid rgba(136, 50, 47, 0.4)'}}/>
+   <Input onChange={onChange1} value={value1} style={{ marginTop: '7px', border: '1.5px solid rgba(136, 50, 47, 0.4)' }}/>
    </Form.Item>
     <Form.Item>
     <Popconfirm
@@ -38,84 +36,80 @@ const Editor = ({ onChange1, onSubmit, submitting, value1, messages }) => (
     okText="Yes"
     cancelText="No"
   >
-    <Button htmlType="submit" loading={submitting} type="primary" style={{fontWeight: '500'}}>
+    <Button htmlType="submit" loading={submitting} type="primary" style={{ fontWeight: '500' }}>
         Terminate Account
       </Button>
     {/* <a href="#">Delete</a> */}
   </Popconfirm>
-      
-      <p 
+
+      <p
         style={{
-        fontSize: '14px',
-        margin: '10px 0px',
-        color: '#C19090'
-      }}>{messages}</p>
+          fontSize: '14px',
+          margin: '10px 0px',
+          color: '#C19090'
+        }}>{messages}</p>
     </Form.Item>
-    
+
   </>
-);
+)
 
 const PublishAnAnnouncement = () => {
-  const [messages, setMessages] = useState(' ');
-  const [submitting, setSubmitting] = useState(false);
-  const [value1, setValue1] = useState('');
+  const [messages, setMessages] = useState(' ')
+  const [submitting, setSubmitting] = useState(false)
+  const [value1, setValue1] = useState('')
 
   // const [loading, setLoading] = useState(false);
 
-
   const handleSubmit = () => {
-    if (!value1) return;
-    setSubmitting(true);
-    setMessages(' ');
+    if (!value1) return
+    setSubmitting(true)
+    setMessages(' ')
     setTimeout(() => {
-      setSubmitting(false);
-      setValue1('');
+      setSubmitting(false)
+      setValue1('')
 
-    //   setComments([
-    //     ...comments,
-    //     {
-    //       author: 'Han Solo',
-    //       avatar: 'https://joeschmoe.io/api/v1/random',
-    //       content: <p>{value}</p>,
-    //       datetime: moment('2016-11-22').fromNow(),
-    //     },
-    //   ]);
+      //   setComments([
+      //     ...comments,
+      //     {
+      //       author: 'Han Solo',
+      //       avatar: 'https://joeschmoe.io/api/v1/random',
+      //       content: <p>{value}</p>,
+      //       datetime: moment('2016-11-22').fromNow(),
+      //     },
+      //   ]);
 
-    axios.delete(`http://127.0.0.1:5000/api/users/${value1}`
-      ,{
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'   // seems only pass data as string type
+      axios.delete(`http://127.0.0.1:5000/api/users/${value1}`
+        , {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded' // seems only pass data as string type
           }
-      }
+        }
       )
-            .then(function(response){
-                console.log(response.data);
-                setMessages(response.data);
-                // setData([])
-                // loadMoreData();  // update messages display after posting
-       //Perform action based on response
+        .then(function (response) {
+          console.log(response.data)
+          setMessages(response.data)
+          // setData([])
+          // loadMoreData();  // update messages display after posting
+          // Perform action based on response
         })
-        .catch(function(error){
-            console.log(error);
-    })
-
-    }, 500);
-    
-  };
+        .catch(function (error) {
+          console.log(error)
+        })
+    }, 500)
+  }
 
   const handleChange1 = (e) => {
-    setValue1(e.target.value);
-    setMessages(' ');
-  };
-
+    setValue1(e.target.value)
+    setMessages(' ')
+  }
 
   return (
     <>
-      <Comment 
+      <Comment
       style = {{
         width: 1000,
-        margin: '0px auto',
-    }}
+        margin: '0px auto'
+      }}
         // avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
         content={
           <Editor
@@ -128,9 +122,9 @@ const PublishAnAnnouncement = () => {
         }
       />
       <div>
-        
+
         </div>
     </>
-  );
-};
-export default PublishAnAnnouncement;
+  )
+}
+export default PublishAnAnnouncement
