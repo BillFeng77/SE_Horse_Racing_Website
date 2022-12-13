@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Menu from '../components/menu'
 import PostCard from '../components/PostCard'
 import styles from '../styles/Home.module.css'
+import React from 'react'
 
 import { server } from '../config'
 

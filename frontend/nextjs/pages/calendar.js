@@ -1,6 +1,5 @@
 import React from 'react'
-import Nav from '../components/menu'
-import Selfmenu from '../components/menuv2'
+// import Selfmenu from '../components/menuv2'
 import Menu from '../components/menu'
 import { Badge, Calendar, Layout } from 'antd'
 import styles from '../styles/calendar.module.css'
@@ -25,11 +24,6 @@ export default function Home () {
       default:
     }
     return listData || []
-  }
-  const getMonthData = (value) => {
-    // if (value.month() === 8) {
-    //   return 1394;
-    // }
   }
   const monthCellRender = (value) => {
     // const num = getMonthData(value);

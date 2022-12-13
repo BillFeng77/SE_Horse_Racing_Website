@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import Menu from '../../components/menu'
-// import PostAMessageForum from '../../components/post_a_comment_forum'
-import Image from 'next/image'
-import { Col, Space, Row, Layout } from 'antd'
+import { Col, Row, Layout } from 'antd'
 import PostACommentNews from '../../components/post_a_comment_news'
 import { DislikeFilled, LikeFilled } from '@ant-design/icons'
 const { Footer } = Layout
@@ -21,12 +19,12 @@ export default function newsContent () {
   useEffect(() => {
     if (router.isReady) {
       setSLug(router.query.slug)
-      populate_data(router.query.slug)
+      populateData(router.query.slug)
     }
   }, [router.isReady, slug])
 
-  const populate_data = async (slug) => {
-    if (news.length == 0) {
+  const populateData = async () => {
+    if (news.length === 0) {
       axios.get('http://127.0.0.1:5000/api/news')
         .then(function (response) {
           console.log(response.data)
@@ -47,7 +45,7 @@ export default function newsContent () {
 
   useEffect(() => {
     for (let i = 0; i < news.length; i++) {
-      if (slug[0] == news[i].title) {
+      if (slug[0] === news[i].title) {
         setNewsInfo(news[i])
         setId(i)
         setLikes(news[i].likes)
@@ -56,7 +54,6 @@ export default function newsContent () {
     }
   }, [news])
 
-  // like/dislike news
   const like = () => {
     axios.post(`http://127.0.0.1:5000/api/news/${newsInfo.title}/likes`)
       .then(function (response) {

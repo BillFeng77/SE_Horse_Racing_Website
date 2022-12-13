@@ -1,7 +1,7 @@
 
 import Menu from '../components/menu'
-import Selfmenu from '../components/menuv2'
-import React, { useState } from 'react'
+// import Selfmenu from '../components/menuv2'
+import React, { useState, useEffect } from 'react'
 import { Button, Table, Space } from 'antd'
 import axios from 'axios'
 
@@ -9,22 +9,24 @@ import ReactPlayer from 'react-player/youtube'
 
 export default function searchHorse () {
   const [data, setHorseData] = useState([])
-  axios.get('http://127.0.0.1:5000/api/horseInfo').then(function (response) {
-    console.log(response.data)
-    setHorseData(response.data)
-  }).catch(function (error) { console.log(error) })
+  useEffect(() => {
+    axios.get('http://127.0.0.1:5000/api/horseInfo').then(function (response) {
+      console.log(response.data)
+      setHorseData(response.data)
+    }).catch(function (error) { console.log(error) })
+  }, [])
 
   const dataSource = []
-  for (var i = 0; i < data.length; i++) {
+  for (let i = 0; i < data.length; i++) {
     dataSource.push(data[i])
   }
   const nameFilter = []
-  for (var i = 0; i < data.length; i++) {
-    nameFilter.push({ text: data[i].Horse, value: data[i].Horse })
+  for (let j = 0; j < data.length; j++) {
+    nameFilter.push({ text: data[j].Horse, value: data[j].Horse })
   }
   const raceNameFilter = []
-  for (var i = 0; i < data.length; i++) {
-    raceNameFilter.push({ text: data[i].RaceName, value: data[i].RaceName })
+  for (let k = 0; k < data.length; k++) {
+    raceNameFilter.push({ text: data[k].RaceName, value: data[k].RaceName })
   }
 
   const [filteredInfo, setFilteredInfo] = React.useState({})

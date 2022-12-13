@@ -1,15 +1,13 @@
 // import NewsLinks from '../components/newsLinks';
 import Image from 'next/image'
-import Selfmenu from '../components/menuv2'
+// import Selfmenu from '../components/menuv2'
 import Menu from '../components/menu'
-import { Carousel, Alert, Card, Layout, Col, Divider, Row, Input, Space } from 'antd'
+import { Carousel, Alert, Card, Layout, Col, Row, Space } from 'antd'
 import React, { useState } from 'react'
-import { Content } from 'antd/lib/layout/layout'
 import axios from 'axios'
 import Horse from '../public/images/Horse.png'
 import Horse1 from '../public/images/Horse1.jpg'
 import Horse2 from '../public/images/Horse2.jpeg'
-import Horse3 from '../public/images/Horse3.jpg'
 import Horse4 from '../public/images/Horse4.jpg'
 import Horse5 from '../public/images/Horse5.jpg'
 import Horse6 from '../public/images/Horse6.jpg'
@@ -27,7 +25,6 @@ const carouselStyle = {
 }
 const { Footer } = Layout
 const { Meta } = Card
-const { Search } = Input
 
 export default function Home () {
   const [annoucements, setAnnouncements] = useState('')
@@ -36,7 +33,7 @@ export default function Home () {
       console.log(response.data)
       setAnnouncements(response.data.content)
     })
-    .catch(() => {
+    .catch(function (error) {
       console.log(error)
     })
   return (<>
@@ -55,7 +52,6 @@ export default function Home () {
       <h4 style={carouselStyle}><Image src={Horse7} layout="intrinsic"/></h4>
     </div>
   </Carousel>
-  {/* '2022 Horse Racing World Cup is approaching, keep focus on our Horse Racing Website' */}
     <Alert message={<marquee>{annoucements}</marquee>} type="info" style = {{ display: 'flex', margin: '0 auto', marginTop: '50px', width: '50%', height: '25px', fontSize: '14px' }}>
     </Alert>
     <Row style = {{ display: 'flex', margin: '0 auto', marginTop: '100px', width: '70%' }}>
