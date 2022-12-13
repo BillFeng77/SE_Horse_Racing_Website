@@ -5,7 +5,7 @@ import styles from '../styles/calendar.module.css'
 const { Footer } = Layout
 
 // calendar implementation, manually set events
-export default function Calendar () {
+export default function SelfCalendar () {
   const getListData = (value) => {
     let listData
     switch (value.date()) {
