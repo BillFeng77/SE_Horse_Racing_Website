@@ -1,14 +1,13 @@
-import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-design/icons';
-import { Comment, List, Tooltip } from 'antd';
-import React, { Component, createElement, useState } from 'react';
+import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-design/icons'
+import { Comment, List, Tooltip } from 'antd'
+import React, { Component, createElement, useState } from 'react'
 
-var likes = 3;
-var dislikes = 0;
-var action = "";
-
+let likes = 3
+let dislikes = 0
+let action = ''
 
 // 尝试用this.state更新likes number 未成功
-//////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////
 // class Like extends Component {
 //   constructor(props){
 //     super(props)
@@ -36,36 +35,34 @@ var action = "";
 //   }
 // }
 
-
-
 // hooks不能用 因为hooks不能被用在循环中，需放在最外层function中
 // 以下方法未能更新页面上的likes number
-const Actions = () =>{
+const Actions = () => {
   // const [likes, setLikes] = useState(0);
   // const [dislikes, setDislikes] = useState(0);
   // const [action, setAction] = useState(null);
 
   const like = () => {
-    likes += 1;
-    action = "liked";
-    console.log("clicked", likes)  // works
+    likes += 1
+    action = 'liked'
+    console.log('clicked', likes) // works
     // setLikes(1);
     // setDislikes(0);
     // setAction('liked');
-  };
+  }
   const dislike = () => {
-    dislikes += 1;
-    action = "disliked";
+    dislikes += 1
+    action = 'disliked'
     // setLikes(0);
     // setDislikes(1);
     // setAction('disliked');
-  };
+  }
 
   const actions = [
     <Tooltip key="comment-basic-like" title="Like">
       <span onClick= {like}>
         {createElement(action === 'liked' ? LikeFilled : LikeOutlined)}
-        <span onClick = {like} className="comment-action">{likes}</span> 
+        <span onClick = {like} className="comment-action">{likes}</span>
       </span>
     </Tooltip>,
     <Tooltip key="comment-basic-dislike" title="Dislike">
@@ -73,11 +70,11 @@ const Actions = () =>{
         {React.createElement(action === 'disliked' ? DislikeFilled : DislikeOutlined)}
         <span className="comment-action">{dislikes}</span>
       </span>
-    </Tooltip>,
+    </Tooltip>
     // <span key="comment-basic-reply-to">Reply to</span>,
-  ];
-  return(actions)
-};
+  ]
+  return (actions)
+}
 
 const data = [
   {
@@ -95,7 +92,7 @@ const data = [
       <Tooltip title="2016-11-22 11:22:33">
         <span>8 hours ago</span>
       </Tooltip>
-    ),
+    )
   },
   {
     actions: [Actions()],
@@ -112,10 +109,9 @@ const data = [
       <Tooltip title="2016-11-22 10:22:33">
         <span>9 hours ago</span>
       </Tooltip>
-    ),
-  },
-];
-
+    )
+  }
+]
 
 const Posts = () => (
   <List
@@ -135,5 +131,5 @@ const Posts = () => (
       </li>
     )}
   />
-);
-export default Posts;
+)
+export default Posts

@@ -1,37 +1,36 @@
-import React from 'react';
-import Nav from '../components/menu';
-import Selfmenu from '../components/menuv2';
-import Menu from '../components/menu';
-import { Badge, Calendar } from 'antd';
-import styles from '../styles/calendar.module.css';
-import {Layout} from'antd';
-const {Footer}=Layout;
+import React from 'react'
+import Nav from '../components/menu'
+import Selfmenu from '../components/menuv2'
+import Menu from '../components/menu'
+import { Badge, Calendar, Layout } from 'antd'
+import styles from '../styles/calendar.module.css'
+const { Footer } = Layout
 
-export default function Home() {
+export default function Home () {
   const getListData = (value) => {
-    let listData;
+    let listData
     switch (value.date()) {
       case 1:
         listData = [
           {
             type: 'warning',
-            content: '2022 delby final',
+            content: '2022 delby final'
           },
           {
             type: 'warning',
-            content: 'horse opening day',
-          },
-        ];
-        break;
+            content: 'horse opening day'
+          }
+        ]
+        break
       default:
     }
-    return listData || [];
-  };
+    return listData || []
+  }
   const getMonthData = (value) => {
     // if (value.month() === 8) {
     //   return 1394;
     // }
-  };
+  }
   const monthCellRender = (value) => {
     // const num = getMonthData(value);
     // return num ? (
@@ -40,9 +39,9 @@ export default function Home() {
     //     <span>Backlog number</span>
     //   </div>
     // ) : null;
-  };
+  }
   const dateCellRender = (value) => {
-    const listData = getListData(value);
+    const listData = getListData(value)
     return (
       <ul className={styles.events}>
         {listData.map((item) => (
@@ -51,20 +50,18 @@ export default function Home() {
           </li>
         ))}
       </ul>
-    );
-  };
+    )
+  }
 
   return (
     <>
     <Menu/>
 
-    <Calendar style={{width:"80%", margin:"0 auto", backgroundColor:"#88322F"}} dateCellRender={dateCellRender} monthCellRender={monthCellRender} />
+    <Calendar style={{ width: '80%', margin: '0 auto', backgroundColor: '#88322F' }} dateCellRender={dateCellRender} monthCellRender={monthCellRender} />
 
-    <Footer style = {{marginTop: "300px", height:"300px", backgroundColor: "#88322F"}}>
+    <Footer style = {{ marginTop: '300px', height: '300px', backgroundColor: '#88322F' }}>
     </Footer>
-    
+
     </>
-  );
+  )
 }
-
-

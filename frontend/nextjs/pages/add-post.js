@@ -1,67 +1,71 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
-import Menu from '../components/menu';
-import styles from '../styles/Home.module.css';
+import Menu from '../components/menu'
+import styles from '../styles/Home.module.css'
 
-export default function AddPost() {
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [error, setError] = useState('');
-    const [message, setMessage] = useState('');
+export default function AddPost () {
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
+  const [error, setError] = useState('')
+  const [message, setMessage] = useState('')
 
-    const handlePost = async (e) => {
-        e.preventDefault();
+  const handlePost = async (e) => {
+    e.preventDefault()
 
-        // reset error and message
-        setError('');
-        setMessage('');
+    // reset error and message
+    setError('')
+    setMessage('')
 
-        // fields check
-        if (!title || !content) return setError('All fields are required');
+    // fields check
+    if (!title || !content) return setError('All fields are required')
 
-        // post structure
-        let post = {
-            title,
-            content,
-            published: false,
-            createdAt: new Date().toISOString(),
-        };
-        // save the post
-        let response = await fetch('/api/comments', {
-            method: 'POST',
-            body: JSON.stringify(post),
-        });
+    // post structure
+    const post = {
+      title,
+      content,
+      published: false,
+      createdAt: new Date().toISOString()
+    }
+    // save the post
+    const response = await fetch('/api/comments', {
+      method: 'POST',
+      body: JSON.stringify(post)
+    })
 
-        // get the data
-        let data = await response.json();
+    // get the data
+    const data = await response.json()
 
-        if (data.success) {
-            // reset the fields
-            setTitle('');
-            setContent('');
-            // set the message
-            return setMessage(data.message);
-        } else {
-            // set the error
-            return setError(data.message);
-        }
-    };
+    if (data.success) {
+      // reset the fields
+      setTitle('')
+      setContent('')
+      // set the message
+      return setMessage(data.message)
+    } else {
+      // set the error
+      return setError(data.message)
+    }
+  }
 
-    return (
+  return (
         <div>
             {/* <Menu /> */}
             <div className={styles.container}>
                 <form onSubmit={handlePost} className={styles.form}>
-                    {error ? (
+                    {error
+                      ? (
                         <div className={styles.formItem}>
                             <h3 className={styles.error}>{error}</h3>
                         </div>
-                    ) : null}
-                    {message ? (
+                        )
+                      : null}
+                    {message
+                      ? (
                         <div className={styles.formItem}>
                             <h3 className={styles.message}>{message}</h3>
                         </div>
-                    ) : null}
+                        )
+                      : null}
                     <div className={styles.formItem}>
                         <label>Title</label>
                         <input
@@ -87,5 +91,5 @@ export default function AddPost() {
                 </form>
             </div>
         </div>
-    );
+  )
 }

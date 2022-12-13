@@ -1,15 +1,15 @@
-import Head from 'next/head';
-import Link from 'next/link';
-import Menu from '../components/menu';
-import Selfmenu from '../components/menuv2';
-import PostCard from '../components/postCard';
-import AddPost from './add-post';
-import PostAMessageForum from '../components/post_a_comment_forum';
-import {Layout} from'antd';
-const {Footer}=Layout;
+import Head from 'next/head'
+import Link from 'next/link'
+import Menu from '../components/menu'
+import Selfmenu from '../components/menuv2'
+import PostCard from '../components/postCard'
+import AddPost from './add-post'
+import PostAMessageForum from '../components/post_a_comment_forum'
+import { Layout } from 'antd'
+const { Footer } = Layout
 
-export default function Post({ posts }) {
-    return (
+export default function Post ({ posts }) {
+  return (
         <div>
             <Head>
                 <title>Post</title>
@@ -35,12 +35,12 @@ export default function Post({ posts }) {
             {/* <ScrollableDisplayPostsForum/> */}
             {/* <AddPost/> */}
             <PostAMessageForum/>
-                                
+
             {/* <Link href="/add-post">
                  <a>Add post</a>
              </Link> */}
-        <Footer style = {{marginTop: "300px", height:"300px", backgroundColor: "#88322F"}}>
+        <Footer style = {{ marginTop: '300px', height: '300px', backgroundColor: '#88322F' }}>
     </Footer>
         </div>
-    );
+  )
 }

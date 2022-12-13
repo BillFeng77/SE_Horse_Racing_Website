@@ -1,36 +1,36 @@
-import { React, useState } from 'react';
-import Nav from '../components/menu';
-import { Layout, Menu } from 'antd';
-import ManageAccounts from '../components/admin-manage-accounts';
+import { React, useState } from 'react'
+import Nav from '../components/menu'
+import { Layout, Menu } from 'antd'
+import ManageAccounts from '../components/admin-manage-accounts'
 import PublishAnAnnouncement from '../components/admin-publish-an-announcement'
-import PublishANews from '../components/admin-publish-a-news';
-const { Header, Content, Footer, Sider } = Layout;
-export default function Admin() {
-    const [menuItem, setMenuItem]= useState('3');
-    const componentsSwitch = (key) => {
+import PublishANews from '../components/admin-publish-a-news'
+const { Header, Content, Footer, Sider } = Layout
+export default function Admin () {
+  const [menuItem, setMenuItem] = useState('3')
+  const componentsSwitch = (key) => {
     switch (key) {
       case '1':
-        return (<PublishANews 
+        return (<PublishANews
             style={{
-            padding: '0 20px',
-          }}>
-        </PublishANews>);
+              padding: '0 20px'
+            }}>
+        </PublishANews>)
       case '2':
-        return (<PublishAnAnnouncement 
+        return (<PublishAnAnnouncement
             style={{
-            padding: '0 20px',
-          }}>
-        </PublishAnAnnouncement>);
+              padding: '0 20px'
+            }}>
+        </PublishAnAnnouncement>)
       case '3':
         return (<ManageAccounts
             style={{
-            padding: '0 20px',
-          }}>
-        </ManageAccounts>);
+              padding: '0 20px'
+            }}>
+        </ManageAccounts>)
       default:
-        break;
-     }
+        break
     }
+  }
   return (
     <>
     <Nav/>
@@ -43,14 +43,14 @@ export default function Admin() {
     <Content
       style={{
         padding: '0px 100px',
-        margin: '0px 150px',
+        margin: '0px 150px'
       }}
     >
-      
+
       <Layout
         className="site-layout-background"
         style={{
-          padding: '50px 0',
+          padding: '50px 0'
         }}
       >
         {/* <AdminSider/> */}
@@ -60,10 +60,10 @@ export default function Admin() {
             defaultSelectedKeys={['3']}
             defaultOpenKeys={['3']}
             selectedKeys={menuItem}
-            onClick={(e) => 
-                setMenuItem(e.key)}
+            onClick={(e) =>
+              setMenuItem(e.key)}
             style={{
-              height: '100%',
+              height: '100%'
             }}
           >
             <Menu.Item key="1" >
@@ -83,18 +83,18 @@ export default function Admin() {
         <Content
           style={{
             padding: '0 24px',
-            minHeight: 280,
+            minHeight: 280
           }}
         >
         </Content>
         {componentsSwitch(menuItem)}
       </Layout>
     </Content>
-    
+
   </Layout>
-  <Footer style = {{marginTop: "300px", height:"300px", backgroundColor: "#88322F"}}>
+  <Footer style = {{ marginTop: '300px', height: '300px', backgroundColor: '#88322F' }}>
     </Footer>
-    
+
     </>
-  );
+  )
 }

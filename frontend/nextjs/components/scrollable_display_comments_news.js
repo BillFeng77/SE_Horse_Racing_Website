@@ -1,12 +1,12 @@
-import { Avatar, Divider, List, Skeleton } from 'antd';
-import React, { useEffect, useState } from 'react';
-import InfiniteScroll from 'react-infinite-scroll-component';
-import { UserOutlined } from '@ant-design/icons';
+import { Avatar, Divider, List, Skeleton } from 'antd'
+import React, { useEffect, useState } from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { UserOutlined } from '@ant-design/icons'
 import axios from 'axios'
 
-export default function ScrollableDisplayCommentsNews({
+export default function ScrollableDisplayCommentsNews ({
   loadMoreData,
-  data = [],
+  data = []
 }) {
   // const [loading, setLoading] = useState(false);
   // const [data, setData] = useState([]);
@@ -26,15 +26,15 @@ export default function ScrollableDisplayCommentsNews({
   //           setLoading(false);
   //   })
 
-    // fetch('http://127.0.0.1:5000/messages')
-    //   .then((res) => res.json())
-    //   .then((body) => {
-    //     setData([...data, ...body.results]);
-    //     setLoading(false);
-    //   })
-    //   .catch(() => {
-    //     setLoading(false);
-    //   });
+  // fetch('http://127.0.0.1:5000/messages')
+  //   .then((res) => res.json())
+  //   .then((body) => {
+  //     setData([...data, ...body.results]);
+  //     setLoading(false);
+  //   })
+  //   .catch(() => {
+  //     setLoading(false);
+  //   });
   // };
 
   // if (reload == true) {
@@ -53,38 +53,38 @@ export default function ScrollableDisplayCommentsNews({
   //   reload = False;
   // };
 
-    // const updateMessages = (message = getMessage()) => {
-    //   setData([message, ...data])
-    //   if (!value) return;
-    //   setSubmitting(true);
-    //   setTimeout(() => {
-    //     setSubmitting(false);
-    //     setValue('');
-        
-    //   axios.post('http://127.0.0.1:5000/messages', {
-    //       userName: "jny223",
-    //       content: value,
-    //       dislikes: 0,
-    //       likes: 0,
-    //       count: 0
-    //     }
-    // //   ,{
-    // //     headers: {
-    // //         'Content-Type': 'application/x-www-form-urlencoded'
-    // //       }
-    // //   }
-    //   )
-    //         .then(function(comment){
-    //             console.log(comment.data);
-    //             setData([comment, ...data])
-    //             // setMessages(response.data)
-    //    //Perform action based on response
-    //     })
-    //     .catch(function(error){
-    //         console.log(error);
-    // })
+  // const updateMessages = (message = getMessage()) => {
+  //   setData([message, ...data])
+  //   if (!value) return;
+  //   setSubmitting(true);
+  //   setTimeout(() => {
+  //     setSubmitting(false);
+  //     setValue('');
 
-    // }, 1000);
+  //   axios.post('http://127.0.0.1:5000/messages', {
+  //       userName: "jny223",
+  //       content: value,
+  //       dislikes: 0,
+  //       likes: 0,
+  //       count: 0
+  //     }
+  // //   ,{
+  // //     headers: {
+  // //         'Content-Type': 'application/x-www-form-urlencoded'
+  // //       }
+  // //   }
+  //   )
+  //         .then(function(comment){
+  //             console.log(comment.data);
+  //             setData([comment, ...data])
+  //             // setMessages(response.data)
+  //    //Perform action based on response
+  //     })
+  //     .catch(function(error){
+  //         console.log(error);
+  // })
+
+  // }, 1000);
   // };
 
   // useEffect(() => {
@@ -100,13 +100,13 @@ export default function ScrollableDisplayCommentsNews({
         overflow: 'auto',
         padding: '0 16px',
         border: '0.5px solid',
-        borderColor: "#a14845",
-        backgroundColor:"#faf6f6",
+        borderColor: '#a14845',
+        backgroundColor: '#faf6f6',
         // borderWidth:"2px",
         // margin: 50,
         margin: '0px auto',
-        marginTop:"60px",
-        marginLeft:"100px",
+        marginTop: '60px',
+        marginLeft: '100px'
       }}
     >
       <InfiniteScroll
@@ -117,12 +117,12 @@ export default function ScrollableDisplayCommentsNews({
           <Skeleton
             avatar
             paragraph={{
-              rows: 1,
+              rows: 1
             }}
             active
           />
         }
-        endMessage={<Divider plain style={{color: 'rgba(0, 0, 0, 0.45)'}}>END</Divider>}
+        endMessage={<Divider plain style={{ color: 'rgba(0, 0, 0, 0.45)' }}>END</Divider>}
         scrollableTarget="scrollableDiv"
       >
         <List
@@ -141,6 +141,6 @@ export default function ScrollableDisplayCommentsNews({
       </InfiniteScroll>
       {/* <PostAMessageForum handleSubmit={addAMessage}/> */}
     </div>
-  );
+  )
 };
 // export default ScrollableDisplayPostsForum;
