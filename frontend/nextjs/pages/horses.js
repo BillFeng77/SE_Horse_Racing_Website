@@ -1,4 +1,3 @@
-
 import Menu from '../components/menu'
 // import Selfmenu from '../components/menuv2'
 import React, { useState, useEffect } from 'react'
@@ -9,6 +8,8 @@ import ReactPlayer from 'react-player/youtube'
 
 export default function searchHorse () {
   const [data, setHorseData] = useState([])
+  const nameFilter=[]
+  const raceNameFilter= []
   useEffect(() => {
     axios.get('http://127.0.0.1:5000/api/horseInfo').then(function (response) {
       console.log(response.data)
@@ -16,18 +17,11 @@ export default function searchHorse () {
     }).catch(function (error) { console.log(error) })
   }, [])
 
-  const dataSource = []
-  for (let i = 0; i < data.length; i++) {
-    dataSource.push(data[i])
-  }
-  const nameFilter = []
   for (let j = 0; j < data.length; j++) {
-    nameFilter.push({ text: data[j].Horse, value: data[j].Horse })
+    nameFilter.push({ text: data[j].Horse, value: data[j].Horse})
+    raceNameFilter.push({ text: data[j].RaceName, value: data[j].RaceName })
   }
-  const raceNameFilter = []
-  for (let k = 0; k < data.length; k++) {
-    raceNameFilter.push({ text: data[k].RaceName, value: data[k].RaceName })
-  }
+
 
   const [filteredInfo, setFilteredInfo] = React.useState({})
   const [sortedInfo, setSortedInfo] = React.useState({})
@@ -94,19 +88,7 @@ export default function searchHorse () {
       title: 'Surf',
       dataIndex: 'Surface',
       key: 'surf',
-      filters: [
-        {
-          text: 'Turf',
-          value: '2'
-        },
-        {
-          text: 'Dirt',
-          value: '1'
-        }
-      ],
-      filteredValue: filteredInfo.surf || null,
-      onFilter: (value, record) => record.Surface.includes(value),
-      ellipsis: true
+
     },
     {
       title: 'DistanceFurlongs',
@@ -141,7 +123,7 @@ export default function searchHorse () {
       <Button onClick={clearAll}>Clear filters and sorters</Button>
     </Space>
 
-    <Table dataSource={dataSource}columns={columns}onChange={handleChange} />
+    <Table dataSource={data}columns={columns}onChange={handleChange} />
 
     </>
   )
