@@ -146,6 +146,7 @@ function registerPage () {
             value={password}
             label="Password"
             name="password"
+            type="password"
             variant="standard"
             />
             <PasswordStrengthBar style={{ width: 160 }} password={password} />

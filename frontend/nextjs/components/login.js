@@ -112,6 +112,7 @@ function Login (props) {
             value={password}
             label="Password"
             name="password"
+            type="password"
             variant="standard"
             />
             { error === false
