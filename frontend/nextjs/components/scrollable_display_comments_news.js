@@ -3,92 +3,10 @@ import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { UserOutlined } from '@ant-design/icons'
 
+// display news comments in a scrollable window
 export default function ScrollableDisplayCommentsNews ({
-  loadMoreData,
   data = []
 }) {
-  // const [loading, setLoading] = useState(false);
-  // const [data, setData] = useState([]);
-  // const loadMoreData = () => {
-  //   if (loading) {
-  //     return;
-  //   }
-  //   setLoading(true);
-  //   axios.get('http://127.0.0.1:5000/messages')
-  //       .then(function(response){
-  //           console.log(response.data);
-  //           setData(response.data);
-  //           setLoading(false);
-  //       })
-  //       .catch(() =>{
-  //           console.log(error);
-  //           setLoading(false);
-  //   })
-
-  // fetch('http://127.0.0.1:5000/messages')
-  //   .then((res) => res.json())
-  //   .then((body) => {
-  //     setData([...data, ...body.results]);
-  //     setLoading(false);
-  //   })
-  //   .catch(() => {
-  //     setLoading(false);
-  //   });
-  // };
-
-  // if (reload == true) {
-  //   console.log("reload");
-  //   setLoading(true);
-  //   axios.get('http://127.0.0.1:5000/messages')
-  //       .then(function(response){
-  //           console.log(response.data);
-  //           setData(response.data);
-  //           setLoading(false);
-  //       })
-  //       .catch(() =>{
-  //           console.log(error);
-  //           setLoading(false);
-  //   })
-  //   reload = False;
-  // };
-
-  // const updateMessages = (message = getMessage()) => {
-  //   setData([message, ...data])
-  //   if (!value) return;
-  //   setSubmitting(true);
-  //   setTimeout(() => {
-  //     setSubmitting(false);
-  //     setValue('');
-
-  //   axios.post('http://127.0.0.1:5000/messages', {
-  //       userName: "jny223",
-  //       content: value,
-  //       dislikes: 0,
-  //       likes: 0,
-  //       count: 0
-  //     }
-  // //   ,{
-  // //     headers: {
-  // //         'Content-Type': 'application/x-www-form-urlencoded'
-  // //       }
-  // //   }
-  //   )
-  //         .then(function(comment){
-  //             console.log(comment.data);
-  //             setData([comment, ...data])
-  //             // setMessages(response.data)
-  //    //Perform action based on response
-  //     })
-  //     .catch(function(error){
-  //         console.log(error);
-  // })
-
-  // }, 1000);
-  // };
-
-  // useEffect(() => {
-  //   loadMoreData();
-  // }, []);
 
   return (
     <div
@@ -101,8 +19,6 @@ export default function ScrollableDisplayCommentsNews ({
         border: '0.5px solid',
         borderColor: '#a14845',
         backgroundColor: '#faf6f6',
-        // borderWidth:"2px",
-        // margin: 50,
         margin: '0px auto',
         marginTop: '60px',
         marginLeft: '100px'
@@ -110,8 +26,6 @@ export default function ScrollableDisplayCommentsNews ({
     >
       <InfiniteScroll
         dataLength={data.length}
-        next={loadMoreData}
-        hasMore={data.length < 0}
         loader={
           <Skeleton
             avatar
@@ -133,13 +47,11 @@ export default function ScrollableDisplayCommentsNews ({
                 title={item.userName}
                 description={item.content}
               />
-              {/* <div>Content</div> */}
             </List.Item>
           )}
         />
       </InfiniteScroll>
-      {/* <PostAMessageForum handleSubmit={addAMessage}/> */}
     </div>
   )
 };
-// export default ScrollableDisplayPostsForum;
+

@@ -6,6 +6,7 @@ import useToken from './useToken'
 import ScrollableDisplayCommentsNews from './scrollable_display_comments_news'
 const { TextArea } = Input
 
+// post (text box and button) implementation
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
   <>
     <Form.Item>
@@ -19,14 +20,27 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
   </>
 )
 
+// handle get and post news comments
 const PostACommentNews = ({ newsTitle }) => {
   const [submitting, setSubmitting] = useState(false)
   const [value, setValue] = useState('')
   const { token, removeToken, setToken } = useToken()
   const [username, setUserName] = useState(null)
-  const [loading, setLoading] = useState(false)
   const [data, setData] = useState([])
 
+  // get comments of the news from db, update data for display
+  const loadComments = () => {
+    axios.get(`http://127.0.0.1:5000/api/${newsTitle}/comments`)
+      .then(function (response) {
+        console.log(response.data)
+        setData(response.data)
+      })
+      .catch(() => {
+        console.log(error)
+      })
+  }
+
+  // check login status and save comments to db on posting, update data for display
   const handleSubmit = () => {
     if (!value) return
     setSubmitting(true)
@@ -40,16 +54,14 @@ const PostACommentNews = ({ newsTitle }) => {
       }
       , {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded', // seems only pass data as string type
+          'Content-Type': 'application/x-www-form-urlencoded',
           Authorization: 'Bearer ' + token
         }
-      }
-      )
+      })
         .then(function (response) {
           console.log(response.data)
           setData([])
-          loadMoreData() // update messages display after posting
-          // Perform action based on response
+          loadComments()
         })
         .catch(function (error) {
           console.log(error)
@@ -59,43 +71,26 @@ const PostACommentNews = ({ newsTitle }) => {
     }, 1000)
   }
 
+  // synchronize {value} when typing in the text box
   const handleChange = (e) => {
     setValue(e.target.value)
   }
 
-  const loadMoreData = () => {
-    if (loading) {
-      return
-    }
-    setLoading(true)
-    axios.get(`http://127.0.0.1:5000/api/${newsTitle}/comments`)
-      .then(function (response) {
-        console.log(response.data)
-        setData(response.data)
-        setLoading(false)
-      })
-      .catch(() => {
-        console.log(error)
-        setLoading(false)
-      })
-  }
-
+  // initiate data
   useEffect(() => {
-    loadMoreData()
+    loadComments()
     const username = localStorage.getItem('username')
     setUserName(username)
   }, [])
 
   return (
     <>
-    <ScrollableDisplayCommentsNews loadMoreData={loadMoreData} data = {data}/>
-      {/* {messages.length > 0 && <CommentList messages={messages} />} */}
+    <ScrollableDisplayCommentsNews data = {data}/>
       <Comment
       style = {{
         width: 400,
         margin: '0px auto',
         marginLeft: '100px'
-        // display: "flex",
       }}
         content={
           <Editor

@@ -4,11 +4,13 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import axios from 'axios'
 import { DislikeFilled, LikeFilled, UserOutlined } from '@ant-design/icons'
 
+// display messages in a scrollable window, handle like and dislike functions
 export default function ScrollableDisplayPostsForum ({
-  loadMoreData,
   loadMessages,
   data
-}) {
+}) 
+{
+ // handle like function, update data for display 
   const handleLikeClick = (id) => {
     axios.post(`http://127.0.0.1:5000/api/messages/${id}/likes`)
       .then(function (response) {
@@ -17,9 +19,10 @@ export default function ScrollableDisplayPostsForum ({
       )
     setTimeout(() => {
       loadMessages()
-    }, 800)
+    }, 500)
   }
 
+  // handle dislike function, update data for display 
   const handleDislikeClick = (id) => {
     axios.post(`http://127.0.0.1:5000/api/messages/${id}/dislikes`)
       .then(function (response) {
@@ -28,7 +31,7 @@ export default function ScrollableDisplayPostsForum ({
       )
     setTimeout(() => {
       loadMessages()
-    }, 800)
+    }, 500)
   }
 
   return (
@@ -45,8 +48,6 @@ export default function ScrollableDisplayPostsForum ({
     >
       <InfiniteScroll
         dataLength={data.length}
-        next={loadMoreData}
-        hasMore={data.length < 1}
         loader={
           <Skeleton
             avatar

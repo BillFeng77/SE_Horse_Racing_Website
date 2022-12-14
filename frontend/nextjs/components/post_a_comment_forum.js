@@ -6,6 +6,7 @@ import useToken from './useToken'
 import ScrollableDisplayPostsForum from './scrollable_display_posts_forum'
 const { TextArea } = Input
 
+// post (text box and button) implementation
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
   <>
     <Form.Item>
@@ -19,29 +20,27 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
   </>
 )
 
+// handle get and post messages
 const PostAMessageForum = () => {
   const [submitting, setSubmitting] = useState(false)
   const [value, setValue] = useState('')
   const { token, removeToken, setToken } = useToken()
   const [username, setUserName] = useState(null)
-  const [loading, setLoading] = useState(false)
   const [data, setData] = useState([])
 
+  // get messages from db, update data for display
   const loadMessages = () => {
     axios.get('http://127.0.0.1:5000/api/messages')
       .then(function (response) {
-        console.log(response.data)
         setData(response.data)
-        setLoading(false)
       })
       .catch(function (error) {
         console.log(error)
-        setLoading(false)
       })
   }
 
+  // check login status and save messages to db on posting, update data for display
   const handleSubmit = () => {
-    console.log('here we are')
     console.log(token)
     if (!value) return
     setSubmitting(true)
@@ -55,16 +54,14 @@ const PostAMessageForum = () => {
       }
       , {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded', // seems only pass data as string type
+          'Content-Type': 'application/x-www-form-urlencoded',
           Authorization: 'Bearer ' + token
         }
-      }
-      )
+      })
         .then(function (response) {
           console.log(response.data)
           setData([])
-          loadMoreData() // update messages display after posting
-          // Perform action based on response
+          loadMessages() // update comments display after posting
         })
         .catch(function (error) {
           console.log(error)
@@ -74,27 +71,21 @@ const PostAMessageForum = () => {
     }, 1000)
   }
 
+  // synchronize {value} when typing in the text box
   const handleChange = (e) => {
     setValue(e.target.value)
   }
 
-  const loadMoreData = () => {
-    if (loading) {
-      return
-    }
-    setLoading(true)
-    loadMessages()
-  }
-
+  // initiate data
   useEffect(() => {
-    loadMoreData()
+    loadMessages()
     const username = localStorage.getItem('username')
     setUserName(username)
   }, [])
 
   return (
     <>
-    <ScrollableDisplayPostsForum loadMessages= {loadMessages} loadMoreData={loadMoreData} data = {data}/>
+    <ScrollableDisplayPostsForum loadMessages= {loadMessages} data = {data}/>
       <Comment
       style = {{
         width: 1000,

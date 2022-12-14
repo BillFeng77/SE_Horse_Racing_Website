@@ -1,15 +1,15 @@
 import React from 'react'
-// import Selfmenu from '../components/menuv2'
 import Menu from '../components/menu'
 import { Badge, Calendar, Layout } from 'antd'
 import styles from '../styles/calendar.module.css'
 const { Footer } = Layout
 
-export default function Home () {
+// calendar implementation, manually set events
+export default function SelfCalendar () {
   const getListData = (value) => {
     let listData
     switch (value.date()) {
-      case 1:
+      case 10:
         listData = [
           {
             type: 'warning',
@@ -21,11 +21,25 @@ export default function Home () {
           }
         ]
         break
+        case 13:
+        listData = [
+          {
+            type: 'warning',
+            content: 'Horse racing today'
+          }
+        ]
+        break
+        case 22:
+        listData = [
+          {
+            type: 'warning',
+            content: 'Horse racing today'
+          }
+        ]
+        break
       default:
     }
     return listData || []
-  }
-  const monthCellRender = () => {
   }
   const dateCellRender = (value) => {
     const listData = getListData(value)
@@ -43,9 +57,7 @@ export default function Home () {
   return (
     <>
     <Menu/>
-
-    <Calendar style={{ width: '80%', margin: '0 auto', backgroundColor: '#88322F' }} dateCellRender={dateCellRender} monthCellRender={monthCellRender} />
-
+    <Calendar style={{ width: '80%', margin: '0 auto', backgroundColor: '#88322F' }} dateCellRender={dateCellRender} />
     <Footer style = {{ marginTop: '300px', height: '300px', backgroundColor: '#88322F' }}>
     </Footer>
 
