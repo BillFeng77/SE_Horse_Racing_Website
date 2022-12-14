@@ -11,7 +11,13 @@ function loginPage () {
         {!token || token === '' || token === undefined
           ? <Login setToken={setToken}/>
           : (
-            <h1>You've already logged in</h1>
+            <h1 style={{
+              "marginTop":"50px","display": "flex",
+              "alignItems": "center",
+              "justifyContent": "center"
+            }}>
+              You've already logged in
+            </h1>
             )
         }
         </>
