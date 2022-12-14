@@ -74,7 +74,7 @@ export default function Menu () {
                 { usertype === 'admin'
                   ? (
                         <>
-                        <Button variant='text' style={{marginRight:"15px"}}>
+                        <Button variant='text' style={{ marginRight: '15px' }}>
                             <Link href="/admin"><a>Admin</a></Link>
                         </Button>
                         </>

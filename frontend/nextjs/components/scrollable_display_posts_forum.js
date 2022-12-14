@@ -8,9 +8,8 @@ import { DislikeFilled, LikeFilled, UserOutlined } from '@ant-design/icons'
 export default function ScrollableDisplayPostsForum ({
   loadMessages,
   data
-}) 
-{
- // handle like function, update data for display 
+}) {
+  // handle like function, update data for display
   const handleLikeClick = (id) => {
     axios.post(`http://127.0.0.1:5000/api/messages/${id}/likes`)
       .then(function (response) {
@@ -22,7 +21,7 @@ export default function ScrollableDisplayPostsForum ({
     }, 500)
   }
 
-  // handle dislike function, update data for display 
+  // handle dislike function, update data for display
   const handleDislikeClick = (id) => {
     axios.post(`http://127.0.0.1:5000/api/messages/${id}/dislikes`)
       .then(function (response) {

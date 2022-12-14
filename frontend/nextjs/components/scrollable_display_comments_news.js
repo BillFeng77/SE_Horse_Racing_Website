@@ -7,7 +7,6 @@ import { UserOutlined } from '@ant-design/icons'
 export default function ScrollableDisplayCommentsNews ({
   data = []
 }) {
-
   return (
     <div
       id="scrollableDiv"
@@ -54,4 +53,3 @@ export default function ScrollableDisplayCommentsNews ({
     </div>
   )
 };
-
