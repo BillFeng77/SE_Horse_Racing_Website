@@ -4,6 +4,7 @@ import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
 import Menu from './menu'
+import React from 'react'
 
 const name = 'Horse Racing Web'
 export const siteTitle = 'Next.js Sample Website'

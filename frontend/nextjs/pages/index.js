@@ -1,4 +1,3 @@
-// import NewsLinks from '../components/newsLinks';
 import Image from 'next/image'
 // import Selfmenu from '../components/menuv2'
 import Menu from '../components/menu'

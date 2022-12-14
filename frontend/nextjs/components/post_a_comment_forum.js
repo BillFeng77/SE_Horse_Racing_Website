@@ -1,5 +1,4 @@
-import { Avatar, Button, Comment, Form, Input, List } from 'antd'
-import moment from 'moment'
+import { Button, Comment, Form, Input } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Router from 'next/router'
@@ -21,15 +20,12 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
 )
 
 const PostAMessageForum = () => {
-  const [messages, setMessages] = useState([])
   const [submitting, setSubmitting] = useState(false)
   const [value, setValue] = useState('')
   const { token, removeToken, setToken } = useToken()
   const [username, setUserName] = useState(null)
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState([])
-
-  const updatedData = []
 
   const loadMessages = () => {
     axios.get('http://127.0.0.1:5000/api/messages')
@@ -38,7 +34,7 @@ const PostAMessageForum = () => {
         setData(response.data)
         setLoading(false)
       })
-      .catch(() => {
+      .catch(function (error) {
         console.log(error)
         setLoading(false)
       })

@@ -1,8 +1,7 @@
-import { Avatar, Button, Comment, Form, Input, List, message, Popconfirm } from 'antd'
-import moment from 'moment'
+import { Button, Comment, Form, Input, message, Popconfirm } from 'antd'
+
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-const { TextArea } = Input
+import React, { useState } from 'react'
 
 // const CommentList = ({ comments }) => (
 //   <List
@@ -13,13 +12,8 @@ const { TextArea } = Input
 //   />
 // );
 
-const confirm = (e) => {
-  console.log(e)
-  message.success('Click on Yes')
-}
 const cancel = (e) => {
   console.log(e)
-  // message.error('Click on No');
 }
 
 const Editor = ({ onChange1, onSubmit, submitting, value1, messages }) => (
@@ -39,7 +33,6 @@ const Editor = ({ onChange1, onSubmit, submitting, value1, messages }) => (
     <Button htmlType="submit" loading={submitting} type="primary" style={{ fontWeight: '500' }}>
         Terminate Account
       </Button>
-    {/* <a href="#">Delete</a> */}
   </Popconfirm>
 
       <p
@@ -57,8 +50,6 @@ const PublishAnAnnouncement = () => {
   const [messages, setMessages] = useState(' ')
   const [submitting, setSubmitting] = useState(false)
   const [value1, setValue1] = useState('')
-
-  // const [loading, setLoading] = useState(false);
 
   const handleSubmit = () => {
     if (!value1) return

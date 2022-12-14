@@ -28,7 +28,7 @@ export default function News () {
   }
 
   const [news, setNews] = useState([])
-  if (news.length == 0) {
+  if (news.length === 0) {
     axios.get('http://127.0.0.1:5000/api/news')
       .then(function (response) {
         console.log(response.data)
@@ -39,7 +39,7 @@ export default function News () {
       })
   }
   console.log(news)
-  if (news.length != 0 && news[0].title != undefined) {
+  if (news.length !== 0 && news[0].title !== undefined) {
     return (
             <>
             <div style={styles.container}>

@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react'
 import Router from 'next/router'
 import * as React from 'react'
 import { styled } from '@mui/material/styles'
-import Stack from '@mui/material/Stack'
 import { red } from '@mui/material/colors'
 
 function Login (props) {
@@ -19,19 +18,19 @@ function Login (props) {
   function handleChange (event) {
     setError(false)
     const { value, name } = event.target
-    if (name == 'email') {
+    if (name === 'email') {
       setEmail(value)
     }
-    if (name == 'password') {
+    if (name === 'password') {
       setPassword(value)
     }
   }
 
   useEffect(() => {
-    if (email.length != 0) {
+    if (email.length !== 0) {
       setEmailEmpty(false)
     }
-    if (password.length != 0) {
+    if (password.length !== 0) {
       setPasswordEmpty(false)
     }
   }, [email, password])
@@ -56,13 +55,13 @@ function Login (props) {
         Router.push('/')
       }).catch((error) => {
         if (error.response) {
-          if (password.length == 0) {
+          if (password.length === 0) {
             setPasswordEmpty(true)
           }
-          if (email.length == 0) {
+          if (email.length === 0) {
             setEmailEmpty(true)
           }
-          if (email.length != 0 && password.length != 0) {
+          if (email.length !== 0 && password.length !== 0) {
             setError(true)
           }
           console.log(error.response)
@@ -97,7 +96,7 @@ function Login (props) {
             <TextField
             id="standard-basic"
             onChange={handleChange}
-            error={emailEmpty == true}
+            error={emailEmpty === true}
             helperText={emailEmpty === true ? 'Empty field!' : ''}
             value={email}
             label="Email"
@@ -108,14 +107,14 @@ function Login (props) {
             <TextField
             id="standard-basic"
             onChange={handleChange}
-            error={passwordEmpty == true}
+            error={passwordEmpty === true}
             helperText={passwordEmpty === true ? 'Empty field!' : ''}
             value={password}
             label="Password"
             name="password"
             variant="standard"
             />
-            { error == false
+            { error === false
               ? <p></p>
               : (
                 <p style={{ color: 'red' }}>email or password is incorrect!</p>

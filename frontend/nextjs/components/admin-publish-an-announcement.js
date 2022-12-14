@@ -1,7 +1,6 @@
-import { Avatar, Button, Comment, Form, Input, List } from 'antd'
-import moment from 'moment'
+import { Button, Comment, Form, Input } from 'antd'
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 const { TextArea } = Input
 
 // const CommentList = ({ comments }) => (

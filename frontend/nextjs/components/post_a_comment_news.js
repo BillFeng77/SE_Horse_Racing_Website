@@ -1,5 +1,4 @@
-import { Avatar, Button, Comment, Form, Input, List } from 'antd'
-import moment from 'moment'
+import { Button, Comment, Form, Input } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Router from 'next/router'
@@ -21,15 +20,12 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
 )
 
 const PostACommentNews = ({ newsTitle }) => {
-  const [messages, setMessages] = useState([])
   const [submitting, setSubmitting] = useState(false)
   const [value, setValue] = useState('')
   const { token, removeToken, setToken } = useToken()
   const [username, setUserName] = useState(null)
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState([])
-
-  const updatedData = []
 
   const handleSubmit = () => {
     if (!value) return

@@ -25,14 +25,7 @@ export default function Home () {
     }
     return listData || []
   }
-  const monthCellRender = (value) => {
-    // const num = getMonthData(value);
-    // return num ? (
-    //   <div className={styles.notes-month}>
-    //     <section>{num}</section>
-    //     <span>Backlog number</span>
-    //   </div>
-    // ) : null;
+  const monthCellRender = () => {
   }
   const dateCellRender = (value) => {
     const listData = getListData(value)

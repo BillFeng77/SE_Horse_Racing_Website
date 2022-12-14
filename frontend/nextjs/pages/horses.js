@@ -8,8 +8,8 @@ import ReactPlayer from 'react-player/youtube'
 
 export default function searchHorse () {
   const [data, setHorseData] = useState([])
-  const nameFilter=[]
-  const raceNameFilter= []
+  const nameFilter = []
+  const raceNameFilter = []
   useEffect(() => {
     axios.get('http://127.0.0.1:5000/api/horseInfo').then(function (response) {
       console.log(response.data)
@@ -18,10 +18,9 @@ export default function searchHorse () {
   }, [])
 
   for (let j = 0; j < data.length; j++) {
-    nameFilter.push({ text: data[j].Horse, value: data[j].Horse})
+    nameFilter.push({ text: data[j].Horse, value: data[j].Horse })
     raceNameFilter.push({ text: data[j].RaceName, value: data[j].RaceName })
   }
-
 
   const [filteredInfo, setFilteredInfo] = React.useState({})
   const [sortedInfo, setSortedInfo] = React.useState({})
@@ -87,7 +86,7 @@ export default function searchHorse () {
     {
       title: 'Surf',
       dataIndex: 'Surface',
-      key: 'surf',
+      key: 'surf'
 
     },
     {

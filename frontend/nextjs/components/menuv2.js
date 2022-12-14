@@ -1,9 +1,6 @@
 import Link from 'next/link'
-import { Dropdown, Space } from 'antd'
-import styles from '../styles/menu.module.css'
 import useToken from './useToken'
 import { useState, useEffect } from 'react'
-import Router from 'next/router'
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
 import axios from 'axios'
 import Logout from '@mui/icons-material/Logout'
@@ -18,7 +15,6 @@ import BedroomBabyIcon from '@mui/icons-material/BedroomBaby'
 import ForumIcon from '@mui/icons-material/Forum'
 import LoginIcon from '@mui/icons-material/Login'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
-import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import Tooltip from '@mui/material/Tooltip'
@@ -126,7 +122,7 @@ const Selfmenu = () => {
             Logout
           </MenuItem>
         </Menu>)};
-        {username == 'Admin' && (<Menu
+        {username === 'Admin' && (<Menu
           anchorEl={anchorEl}
           id="account-menu"
           open={open}

@@ -21,7 +21,7 @@ export default function Menu () {
       method: 'POST',
       url: 'http://127.0.0.1:5000/api/logout'
     })
-      .then((response) => {
+      .then(() => {
         removeToken()
         localStorage.removeItem('username')
         localStorage.removeItem('usertype')
@@ -64,14 +64,14 @@ export default function Menu () {
         </div>
 
         <div className={styles.userName}>
-            {username == null && usertype == null && (<div><Link href="/auth/login">
+            {username === null && usertype === null && (<div><Link href="/auth/login">
                         <a>Login</a>
                     </Link></div>)}
             { username !== null && usertype !== null
               ? (
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <p>Welcome, {username}!</p>
-                { usertype == 'admin'
+                { usertype === 'admin'
                   ? (
                         <>
                         <Button variant='text'>

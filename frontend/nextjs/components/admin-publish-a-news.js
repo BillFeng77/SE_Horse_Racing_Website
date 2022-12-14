@@ -1,7 +1,6 @@
-import { Avatar, Button, Comment, Form, Input, List } from 'antd'
-import moment from 'moment'
+import { Button, Comment, Form, Input } from 'antd'
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 const { TextArea } = Input
 
 // const CommentList = ({ comments }) => (
@@ -22,7 +21,6 @@ const Editor = ({ onChange1, onChange2, onChange3, onSubmit, submitting, value1,
    <Form.Item>
     <p>News Information</p>
     <TextArea rows={2} onChange={onChange2} value={value2} placeholder="author | date | source" style={{ marginTop: '7px', border: '1.5px solid rgba(136, 50, 47, 0.4)' }}/>
-   {/* <Input placeholder="author | date | source" /> */}
    </Form.Item>
     <Form.Item>
     <p>Content</p>
@@ -49,9 +47,6 @@ const PublishANews = () => {
   const [value1, setValue1] = useState('')
   const [value2, setValue2] = useState('')
   const [value3, setValue3] = useState('')
-
-  // const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([])
 
   const handleSubmit = () => {
     if (!value1 || !value2 || !value3) return

@@ -1,8 +1,8 @@
-import { Avatar, Divider, Space, List, Skeleton } from 'antd'
+import { Avatar, Divider, List, Skeleton } from 'antd'
 import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import axios from 'axios'
-import { DislikeFilled, LikeFilled,  UserOutlined } from '@ant-design/icons'
+import { DislikeFilled, LikeFilled, UserOutlined } from '@ant-design/icons'
 
 export default function ScrollableDisplayPostsForum ({
   loadMoreData,
@@ -40,7 +40,6 @@ export default function ScrollableDisplayPostsForum ({
         overflow: 'auto',
         padding: '0 16px',
         border: '1px solid rgba(140, 140, 140, 0.35)',
-        margin: 50,
         margin: '0px auto'
       }}
     >

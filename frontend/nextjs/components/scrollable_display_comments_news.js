@@ -1,8 +1,7 @@
 import { Avatar, Divider, List, Skeleton } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { UserOutlined } from '@ant-design/icons'
-import axios from 'axios'
 
 export default function ScrollableDisplayCommentsNews ({
   loadMoreData,
