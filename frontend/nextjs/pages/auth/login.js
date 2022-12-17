@@ -3,6 +3,9 @@ import Menu from '../../components/menu'
 import Login from '../../components/login'
 import useToken from '../../components/useToken'
 
+/**
+ * /login page
+ */
 function loginPage () {
   const { token, setToken } = useToken()
   return (

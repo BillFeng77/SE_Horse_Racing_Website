@@ -4,8 +4,12 @@ import styles from '../styles/menu.module.css'
 import useToken from './useToken'
 import axios from 'axios'
 import { Button } from '@mui/material'
+
+/**
+ * menu component
+ */
 export default function Menu () {
-  const { token, removeToken, setToken } = useToken()
+  const { removeToken } = useToken()
   const [usertype, setUserType] = useState(null)
   const [username, setUserName] = useState(null)
 
@@ -15,7 +19,10 @@ export default function Menu () {
     setUserName(name)
     setUserType(usertype)
   }, [])
-
+ /**
+ * log out button click function 
+ * @function
+ */
   function logMeOut () {
     axios({
       method: 'POST',
@@ -42,22 +49,22 @@ export default function Menu () {
             <ul className={styles.list}>
                 <li className={styles.item}>
                     <Link href="/">
-                        <a>Home</a>
+                        Home
                     </Link>
                 </li>
                 <li className={styles.item}>
                     <Link href="/calendar">
-                        <a>Calendar</a>
+                        Calendar
                     </Link>
                 </li>
                 <li className={styles.item}>
                     <Link href="/horses">
-                        <a>Horse</a>
+                        Horse
                     </Link>
                 </li>
                 <li className={styles.item}>
                     <Link href="/forum">
-                        <a>Forum</a>
+                        Forum
                     </Link>
                 </li>
             </ul>
@@ -65,7 +72,7 @@ export default function Menu () {
 
         <div className={styles.userName}>
             {username === null && usertype === null && (<div><Link href="/auth/login">
-                        <a>Login</a>
+                        Login
                     </Link></div>)}
             { username !== null && usertype !== null
               ? (
@@ -75,7 +82,7 @@ export default function Menu () {
                   ? (
                         <>
                         <Button variant='text' style={{ marginRight: '15px' }}>
-                            <Link href="/admin"><a>Admin</a></Link>
+                            <Link href="/admin">Admin</Link>
                         </Button>
                         </>
                     )

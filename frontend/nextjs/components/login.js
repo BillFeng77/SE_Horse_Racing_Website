@@ -8,14 +8,18 @@ import Router from 'next/router'
 import * as React from 'react'
 import { styled } from '@mui/material/styles'
 import { red } from '@mui/material/colors'
-
+/**
+ * log in component
+ * @param {object} props - an object which contains setToken function
+ */
 function Login (props) {
   const [error, setError] = useState(false)
   const [emailEmpty, setEmailEmpty] = useState(false)
   const [passwordEmpty, setPasswordEmpty] = useState(false)
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
-  function handleChange (event) {
+
+  function handleChange (event) {//update the value of inputs when user types
     setError(false)
     const { value, name } = event.target
     if (name === 'email') {
@@ -26,7 +30,7 @@ function Login (props) {
     }
   }
 
-  useEffect(() => {
+  useEffect(() => {//check if inputs are empty
     if (email.length !== 0) {
       setEmailEmpty(false)
     }
@@ -35,6 +39,9 @@ function Login (props) {
     }
   }, [email, password])
 
+  /**
+   * log in function
+   */
   async function handleSubmit (event) {
     setPasswordEmpty(false)
     setEmailEmpty(false)
@@ -82,7 +89,6 @@ function Login (props) {
   return (
         <>
         <Box
-            // sx={{width:200}}
             display="flex"
             flexDirection="column"
             justifyContent="center"

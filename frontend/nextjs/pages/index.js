@@ -1,5 +1,4 @@
 import Image from 'next/image'
-// import Selfmenu from '../components/menuv2'
 import Menu from '../components/menu'
 import { Carousel, Alert, Card, Layout, Col, Row, Space } from 'antd'
 import React, { useState } from 'react'
