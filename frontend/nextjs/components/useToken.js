@@ -1,6 +1,11 @@
 import { useState } from 'react'
 
-// useToken here performing as an assistant to identify the state of the user
+/** 
+ * set token related functions
+ * @return {function} setToken function
+ * @return {string} token
+ * @return {function} removeToken function 
+ */
 function useToken () {
   function getToken () {
     let userToken

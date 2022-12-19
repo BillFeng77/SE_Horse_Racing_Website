@@ -11,6 +11,9 @@ import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import PasswordStrengthBar from 'react-password-strength-bar'
 
+/**
+ * /register page
+ */
 function registerPage () {
   const [error, setError] = useState(false)
   const [username, setUserName] = useState('')
@@ -21,12 +24,18 @@ function registerPage () {
   const [passwordEmpty, setPasswordEmpty] = useState(false)
   const [usertype, setUserType] = useState('user')
 
-  // Select the userType that gonna register as, user or admin
+  /**
+   * update the input of usertype
+   * @param {object} event - event.target.value is the value that user select
+   */
   const handleSelect = (event) => {
-    console.log(event.target.value)
     setUserType(event.target.value)
   }
 
+  /**
+   * update the inputs of username/email/password
+   * @param {object} event - event.target.value is the value that user input, event.target.name is what the user input is
+   */
   function handleChange (event) {
     setError(false)
     const { value, name } = event.target
@@ -41,7 +50,7 @@ function registerPage () {
     }
   }
 
-  useEffect(() => {
+  useEffect(() => {//cancel empty message
     if (email.length !== 0) {
       setEmailEmpty(false)
     }
@@ -52,8 +61,11 @@ function registerPage () {
       setUserNameEmpty(false)
     }
   }, [email, password, username])
-
-  // handling the username email and password, and post these information into database to finish register
+  
+  /**
+   * submit register information
+   * @function
+   */
   async function handleSubmit (event) {
     setPasswordEmpty(false)
     setEmailEmpty(false)
@@ -107,7 +119,6 @@ function registerPage () {
         <>
         <Menu/>
         <Box
-            // sx={{width:200}}
             display="flex"
             flexDirection="column"
             justifyContent="center"
@@ -148,6 +159,7 @@ function registerPage () {
             value={password}
             label="Password"
             name="password"
+            type="password"
             variant="standard"
             />
             <PasswordStrengthBar style={{ width: 160 }} password={password} />

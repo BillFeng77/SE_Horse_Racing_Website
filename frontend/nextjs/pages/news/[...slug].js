@@ -6,7 +6,9 @@ import { Col, Row, Layout } from 'antd'
 import PostACommentNews from '../../components/post_a_comment_news'
 import { DislikeFilled, LikeFilled } from '@ant-design/icons'
 const { Footer } = Layout
-
+/**
+ * /news/{newTitle} pages
+ */
 export default function newsContent () {
   const router = useRouter()
   const [news, setNews] = useState([])
@@ -23,7 +25,10 @@ export default function newsContent () {
     }
   }, [router.isReady, slug])
 
-  // Get news data from database
+  /**
+   * get news data from db and set the data
+   * @function
+   */
   const populateData = async () => {
     if (news.length === 0) {
       axios.get('http://127.0.0.1:5000/api/news')
@@ -44,8 +49,7 @@ export default function newsContent () {
     }
   }
 
-  // adding news information to hook
-  useEffect(() => {
+  useEffect(() => {//set corresponding news data 
     for (let i = 0; i < news.length; i++) {
       if (slug[0] === news[i].title) {
         setNewsInfo(news[i])
@@ -56,7 +60,10 @@ export default function newsContent () {
     }
   }, [news])
 
-  // performs like button
+  /**
+   * get the number of times that "thumb down" has been clicked
+   * @function
+  */
   const like = () => {
     axios.post(`http://127.0.0.1:5000/api/news/${newsInfo.title}/likes`)
       .then(function (response) {
@@ -65,8 +72,10 @@ export default function newsContent () {
       )
     setLikes(likes + 1)
   }
-
-  // performs dislike button
+  /**
+   * get the number of times that "thumb down" has been clicked
+   * @function
+  */
   const dislike = () => {
     axios.post(`http://127.0.0.1:5000/api/news/${newsInfo.title}/dislikes`)
       .then(function (response) {

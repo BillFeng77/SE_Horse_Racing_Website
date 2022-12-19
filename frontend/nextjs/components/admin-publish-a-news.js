@@ -2,8 +2,17 @@ import { Button, Comment, Form, Input } from 'antd'
 import axios from 'axios'
 import React, { useState } from 'react'
 const { TextArea } = Input
-
-// Editor performing prepare and editing news
+/**
+ * @param {function} onChange1
+ * @param {function} onChange2
+ * @param {function} onChange3
+ * @param {function} onSubmit
+ * @param {boolean} submitting - submitting state
+ * @param {messages} messages - the return message from backend
+ * @param {string} value1 - news title
+ * @param {string} value2 - news info
+ * @param {string} value3 - news content
+ */
 const Editor = ({ onChange1, onChange2, onChange3, onSubmit, submitting, value1, value2, value3, messages }) => (
   <>
   <Form.Item>
@@ -63,7 +72,6 @@ const PublishANews = () => {
       }
       )
         .then(function (response) {
-          console.log(response.data)
           setMessages(response.data)
         })
         .catch(function (error) {

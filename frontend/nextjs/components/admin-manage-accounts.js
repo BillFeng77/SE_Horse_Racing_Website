@@ -1,4 +1,4 @@
-import { Button, Comment, Form, Input, message, Popconfirm } from 'antd'
+import { Button, Comment, Form, Input, Popconfirm } from 'antd'
 
 import axios from 'axios'
 import React, { useState } from 'react'
@@ -6,7 +6,13 @@ import React, { useState } from 'react'
 const cancel = (e) => {
   console.log(e)
 }
-
+/**
+ * @param {function} onChange1
+ * @param {function} onSubmit
+ * @param {boolean} submitting - submitting state
+ * @param {messages} messages - the return message from backend
+ * @param {string} value1 - account username
+ */
 const Editor = ({ onChange1, onSubmit, submitting, value1, messages }) => (
   <>
   <Form.Item>
@@ -37,11 +43,15 @@ const Editor = ({ onChange1, onSubmit, submitting, value1, messages }) => (
   </>
 )
 
-const PublishAnAnnouncement = () => {
+const ManageAccounts = () => {
   const [messages, setMessages] = useState(' ')
   const [submitting, setSubmitting] = useState(false)
   const [value1, setValue1] = useState('')
 
+  /**
+   * delete account in db
+   * @function
+   */
   const handleSubmit = () => {
     if (!value1) return
     setSubmitting(true)
@@ -95,4 +105,4 @@ const PublishAnAnnouncement = () => {
     </>
   )
 }
-export default PublishAnAnnouncement
+export default ManageAccounts

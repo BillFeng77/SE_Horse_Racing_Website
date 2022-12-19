@@ -1,5 +1,4 @@
 import Menu from '../components/menu'
-// import Selfmenu from '../components/menuv2'
 import React, { useState, useEffect } from 'react'
 import { Button, Table, Space } from 'antd'
 import axios from 'axios'

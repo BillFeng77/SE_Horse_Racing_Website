@@ -47,7 +47,6 @@ export default function Layout ({ children, home }) {
           : (
           <>
             <Link href="/">
-              <a>
                 <Image
                   priority
                   src="/images/horse_racing.jpeg"
@@ -56,11 +55,10 @@ export default function Layout ({ children, home }) {
                   width={108}
                   alt=""
                 />
-              </a>
             </Link>
             <h2 className={utilStyles.headingLg}>
-              <Link href="/">
-                <a className={utilStyles.colorInherit}>{name}</a>
+              <Link className={utilStyles.colorInherit} href="/">
+                {name}
               </Link>
             </h2>
           </>
@@ -70,7 +68,7 @@ export default function Layout ({ children, home }) {
       {!home && (
         <div className={styles.backToHome}>
           <Link href="/">
-            <a>← Back to home</a>
+            ← Back to home
           </Link>
         </div>
       )}
