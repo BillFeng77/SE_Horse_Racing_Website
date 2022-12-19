@@ -4,16 +4,6 @@ import { Layout, Menu } from 'antd'
 import ManageAccounts from '../components/admin-manage-accounts'
 import PublishAnAnnouncement from '../components/admin-publish-an-announcement'
 import PublishANews from '../components/admin-publish-a-news'
-<<<<<<< HEAD
-const { Content, Footer, Sider } = Layout
-
-// This page allows admin to add news/ publish announcement/ block user
-export default function Admin () {
-  const [menuItem, setMenuItem] = useState('3')
-
-  // Switch between Publish news/announcement and manage account
-  const componentsSwitch = (key) => {
-=======
 import Router from 'next/router'
 const { Content, Footer, Sider } = Layout
 /**
@@ -22,7 +12,6 @@ const { Content, Footer, Sider } = Layout
 export default function Admin () {
   const [menuItem, setMenuItem] = useState('3')
   const componentsSwitch = (key) => {//switch admin components
->>>>>>> 15c28318365c9652c1b07981fe11379247af94de
     switch (key) {
       case '1':
         return (<PublishANews
