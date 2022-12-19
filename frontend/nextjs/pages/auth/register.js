@@ -21,6 +21,7 @@ function registerPage () {
   const [passwordEmpty, setPasswordEmpty] = useState(false)
   const [usertype, setUserType] = useState('user')
 
+  // Select the userType that gonna register as, user or admin
   const handleSelect = (event) => {
     console.log(event.target.value)
     setUserType(event.target.value)
@@ -52,6 +53,7 @@ function registerPage () {
     }
   }, [email, password, username])
 
+  // handling the username email and password, and post these information into database to finish register
   async function handleSubmit (event) {
     setPasswordEmpty(false)
     setEmailEmpty(false)

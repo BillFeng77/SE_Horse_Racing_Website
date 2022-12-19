@@ -19,6 +19,7 @@ import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import Tooltip from '@mui/material/Tooltip'
 
+// Selfmenu is the 2nd version of Menu, which incorparated with more ui design
 const Selfmenu = () => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
@@ -61,7 +62,7 @@ const Selfmenu = () => {
           <Typography sx={{ minWidth: 250 }}><BedroomBabyIcon/><Link href="/horses"><a>Horse </a></Link></Typography>
           <Typography sx={{ minWidth: 250 }}><ForumIcon/><Link href="/forum"><a>Forum </a></Link></Typography>
           <Typography sx={{ minWidth: 250 }}><CalendarMonthIcon/><Link href="/calendar"><a>Calendar</a></Link></Typography>
-          {/* username=="" && username==undefined&& */<Typography sx={{ minWidth: 200 }}><AdminPanelSettingsIcon/><Link href="/auth/login"><a>Admin Login </a></Link></Typography> &&
+          {<Typography sx={{ minWidth: 200 }}><AdminPanelSettingsIcon/><Link href="/auth/login"><a>Admin Login </a></Link></Typography> &&
           <Typography sx={{ minWidth: 200 }}><LoginIcon/><Link href="/auth/login"><a>User Login </a></Link></Typography>
           }
           <Typography sx={{ minWidth: 200 }}><AdminPanelSettingsIcon/><Link href="/auth/login"><a>Admin Login </a></Link></Typography>

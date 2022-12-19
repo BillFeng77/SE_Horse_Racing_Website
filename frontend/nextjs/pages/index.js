@@ -14,6 +14,7 @@ import Horse7 from '../public/images/Horse7.jpeg'
 import Link from 'next/link'
 import Searchnews from '../components/searchNews'
 
+// This page is the home page of horse website, including menu, a carousel, search, and news card
 const carouselStyle = {
   height: '600px',
   color: '#e6e6e6',
@@ -26,6 +27,7 @@ const { Footer } = Layout
 const { Meta } = Card
 
 export default function Home () {
+  // get announcement text from the database
   const [annoucements, setAnnouncements] = useState('')
   axios.get('http://127.0.0.1:5000/api/announcements')
     .then(function (response) {

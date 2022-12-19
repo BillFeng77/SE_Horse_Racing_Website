@@ -9,6 +9,7 @@ import React from 'react'
 const name = 'Horse Racing Web'
 export const siteTitle = 'Next.js Sample Website'
 
+// Define general layout for each page
 export default function Layout ({ children, home }) {
   return (
     <div className={styles.container}>

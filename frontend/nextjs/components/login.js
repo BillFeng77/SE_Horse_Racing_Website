@@ -35,6 +35,7 @@ function Login (props) {
     }
   }, [email, password])
 
+  // handling submit email and password to login controller
   async function handleSubmit (event) {
     setPasswordEmpty(false)
     setEmailEmpty(false)
@@ -72,6 +73,7 @@ function Login (props) {
     event.preventDefault()
   }
 
+  // Stylize login button
   const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(red[900]),
     backgroundColor: red[900],
@@ -82,7 +84,6 @@ function Login (props) {
   return (
         <>
         <Box
-            // sx={{width:200}}
             display="flex"
             flexDirection="column"
             justifyContent="center"

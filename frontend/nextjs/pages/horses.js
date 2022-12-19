@@ -6,10 +6,13 @@ import axios from 'axios'
 
 import ReactPlayer from 'react-player/youtube'
 
+// This page allows users to look for their favorite horses and guide them to select a horse based on several factors
 export default function searchHorse () {
   const [data, setHorseData] = useState([])
   const nameFilter = []
   const raceNameFilter = []
+
+  // get horse information from the database
   useEffect(() => {
     axios.get('http://127.0.0.1:5000/api/horseInfo').then(function (response) {
       console.log(response.data)
@@ -17,11 +20,13 @@ export default function searchHorse () {
     }).catch(function (error) { console.log(error) })
   }, [])
 
+  // Add horse information into different feature list
   for (let j = 0; j < data.length; j++) {
     nameFilter.push({ text: data[j].Horse, value: data[j].Horse })
     raceNameFilter.push({ text: data[j].RaceName, value: data[j].RaceName })
   }
 
+  // Hook to store the different horse features
   const [filteredInfo, setFilteredInfo] = React.useState({})
   const [sortedInfo, setSortedInfo] = React.useState({})
   const handleChange = (pagination, filters, sorter) => {
@@ -48,6 +53,8 @@ export default function searchHorse () {
       columnKey: 'WinningDate'
     })
   }
+
+  // exhibit horse data and performs sorting/searching functions
   const columns = [
     {
       title: 'Name',
@@ -63,10 +70,6 @@ export default function searchHorse () {
       title: 'RaceName',
       dataIndex: 'RaceName',
       key: 'RaceName',
-      filters: raceNameFilter,
-      filteredValue: filteredInfo.Racename || null,
-      filterSearch: true,
-      onFilter: (value, record) => record.RaceName.includes(value),
       ellipsis: true
     },
     {

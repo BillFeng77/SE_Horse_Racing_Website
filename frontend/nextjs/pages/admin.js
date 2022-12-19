@@ -4,9 +4,13 @@ import { Layout, Menu } from 'antd'
 import ManageAccounts from '../components/admin-manage-accounts'
 import PublishAnAnnouncement from '../components/admin-publish-an-announcement'
 import PublishANews from '../components/admin-publish-a-news'
-const { Header, Content, Footer, Sider } = Layout
+const { Content, Footer, Sider } = Layout
+
+// This page allows admin to add news/ publish announcement/ block user
 export default function Admin () {
   const [menuItem, setMenuItem] = useState('3')
+
+  // Switch between Publish news/announcement and manage account
   const componentsSwitch = (key) => {
     switch (key) {
       case '1':
@@ -36,10 +40,6 @@ export default function Admin () {
     <Nav/>
 
     <Layout>
-    {/* <Header className="header">
-      <div className="logo" />
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} items={items1} />
-    </Header> */}
     <Content
       style={{
         padding: '0px 100px',
@@ -53,7 +53,6 @@ export default function Admin () {
           padding: '50px 0'
         }}
       >
-        {/* <AdminSider/> */}
         <Sider className="site-layout-background" width={250}>
           <Menu
             mode="inline"

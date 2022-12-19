@@ -26,7 +26,7 @@ export default function News () {
       width: '50%'
     }
   }
-
+  // Get news title/author/content from database
   const [news, setNews] = useState([])
   if (news.length === 0) {
     axios.get('http://127.0.0.1:5000/api/news')

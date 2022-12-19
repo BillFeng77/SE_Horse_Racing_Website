@@ -23,6 +23,7 @@ export default function newsContent () {
     }
   }, [router.isReady, slug])
 
+  // Get news data from database
   const populateData = async () => {
     if (news.length === 0) {
       axios.get('http://127.0.0.1:5000/api/news')
@@ -43,6 +44,7 @@ export default function newsContent () {
     }
   }
 
+  // adding news information to hook
   useEffect(() => {
     for (let i = 0; i < news.length; i++) {
       if (slug[0] === news[i].title) {
@@ -54,6 +56,7 @@ export default function newsContent () {
     }
   }, [news])
 
+  // performs like button
   const like = () => {
     axios.post(`http://127.0.0.1:5000/api/news/${newsInfo.title}/likes`)
       .then(function (response) {
@@ -63,6 +66,7 @@ export default function newsContent () {
     setLikes(likes + 1)
   }
 
+  // performs dislike button
   const dislike = () => {
     axios.post(`http://127.0.0.1:5000/api/news/${newsInfo.title}/dislikes`)
       .then(function (response) {

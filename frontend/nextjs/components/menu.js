@@ -8,14 +8,14 @@ export default function Menu () {
   const { token, removeToken, setToken } = useToken()
   const [usertype, setUserType] = useState(null)
   const [username, setUserName] = useState(null)
-
+  // use localStorage to store current state of user
   useEffect(() => {
     const name = localStorage.getItem('username')
     const usertype = localStorage.getItem('usertype')
     setUserName(name)
     setUserType(usertype)
   }, [])
-
+  // Handling logout Request
   function logMeOut () {
     axios({
       method: 'POST',
