@@ -5,10 +5,13 @@ import ManageAccounts from '../components/admin-manage-accounts'
 import PublishAnAnnouncement from '../components/admin-publish-an-announcement'
 import PublishANews from '../components/admin-publish-a-news'
 import Router from 'next/router'
-const { Header, Content, Footer, Sider } = Layout
+const { Content, Footer, Sider } = Layout
+/**
+ * /admin page
+ */
 export default function Admin () {
   const [menuItem, setMenuItem] = useState('3')
-  const componentsSwitch = (key) => {
+  const componentsSwitch = (key) => {//switch admin components
     switch (key) {
       case '1':
         return (<PublishANews
@@ -34,7 +37,7 @@ export default function Admin () {
   }
 
   if (typeof window !== 'undefined') {
-    if (localStorage.getItem('usertype')!=='admin'){
+    if (localStorage.getItem('usertype')!=='admin'){//if visitor doesn't have admin permission, reject his access
       Router.push('/')
       alert("Warning: You don't have access to this page!")
     } else {
@@ -43,10 +46,6 @@ export default function Admin () {
         <Nav/>
     
         <Layout>
-        {/* <Header className="header">
-          <div className="logo" />
-          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} items={items1} />
-        </Header> */}
         <Content
           style={{
             padding: '0px 100px',
@@ -60,7 +59,6 @@ export default function Admin () {
               padding: '50px 0'
             }}
           >
-            {/* <AdminSider/> */}
             <Sider className="site-layout-background" width={250}>
               <Menu
                 mode="inline"

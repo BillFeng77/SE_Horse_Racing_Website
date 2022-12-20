@@ -24,7 +24,7 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
 const PostACommentNews = ({ newsTitle }) => {
   const [submitting, setSubmitting] = useState(false)
   const [value, setValue] = useState('')
-  const { token, removeToken, setToken } = useToken()
+  const { token } = useToken()
   const [username, setUserName] = useState(null)
   const [data, setData] = useState([])
 

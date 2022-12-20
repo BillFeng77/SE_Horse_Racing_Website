@@ -2,16 +2,13 @@ import { Button, Comment, Form, Input } from 'antd'
 import axios from 'axios'
 import React, { useState } from 'react'
 const { TextArea } = Input
-
-// const CommentList = ({ comments }) => (
-//   <List
-//     dataSource={comments}
-//     header={`${comments.length} ${comments.length > 1 ? 'replies' : 'reply'}`}
-//     itemLayout="horizontal"
-//     renderItem={(props) => <Comment {...props} />}
-//   />
-// );
-
+/**
+ * @param {function} onChange1
+ * @param {function} onSubmit
+ * @param {boolean} submitting - submitting state
+ * @param {messages} messages - the return message from backend
+ * @param {string} value1 - announcement content
+ */
 const Editor = ({ onChange1, onSubmit, submitting, value1, messages }) => (
   <>
   <Form.Item>
@@ -33,12 +30,11 @@ const Editor = ({ onChange1, onSubmit, submitting, value1, messages }) => (
   </>
 )
 
+// Publish the text in Editor into database
 const PublishAnAnnouncement = () => {
   const [messages, setMessages] = useState(' ')
   const [submitting, setSubmitting] = useState(false)
   const [value1, setValue1] = useState('')
-
-  // const [loading, setLoading] = useState(false);
 
   const handleSubmit = () => {
     if (!value1) return
@@ -48,31 +44,17 @@ const PublishAnAnnouncement = () => {
       setSubmitting(false)
       setValue1('')
 
-      //   setComments([
-      //     ...comments,
-      //     {
-      //       author: 'Han Solo',
-      //       avatar: 'https://joeschmoe.io/api/v1/random',
-      //       content: <p>{value}</p>,
-      //       datetime: moment('2016-11-22').fromNow(),
-      //     },
-      //   ]);
-
       axios.post('http://127.0.0.1:5000/api/announcements', {
         content: value1
       }
       , {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded' // seems only pass data as string type
+          'Content-Type': 'application/x-www-form-urlencoded'
         }
       }
       )
         .then(function (response) {
-          console.log(response.data)
           setMessages(response.data)
-          // setData([])
-          // loadMoreData();  // update messages display after posting
-          // Perform action based on response
         })
         .catch(function (error) {
           console.log(error)
@@ -92,7 +74,6 @@ const PublishAnAnnouncement = () => {
         width: 1000,
         margin: '0px auto'
       }}
-        // avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
         content={
           <Editor
             onChange1={handleChange1}

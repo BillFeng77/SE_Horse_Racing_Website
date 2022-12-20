@@ -2,16 +2,17 @@ import { Button, Comment, Form, Input } from 'antd'
 import axios from 'axios'
 import React, { useState } from 'react'
 const { TextArea } = Input
-
-// const CommentList = ({ comments }) => (
-//   <List
-//     dataSource={comments}
-//     header={`${comments.length} ${comments.length > 1 ? 'replies' : 'reply'}`}
-//     itemLayout="horizontal"
-//     renderItem={(props) => <Comment {...props} />}
-//   />
-// );
-
+/**
+ * @param {function} onChange1
+ * @param {function} onChange2
+ * @param {function} onChange3
+ * @param {function} onSubmit
+ * @param {boolean} submitting - submitting state
+ * @param {messages} messages - the return message from backend
+ * @param {string} value1 - news title
+ * @param {string} value2 - news info
+ * @param {string} value3 - news content
+ */
 const Editor = ({ onChange1, onChange2, onChange3, onSubmit, submitting, value1, value2, value3, messages }) => (
   <>
   <Form.Item>
@@ -41,6 +42,7 @@ const Editor = ({ onChange1, onChange2, onChange3, onSubmit, submitting, value1,
   </>
 )
 
+// Publish the news in Editor into database
 const PublishANews = () => {
   const [messages, setMessages] = useState(' ')
   const [submitting, setSubmitting] = useState(false)
@@ -57,15 +59,6 @@ const PublishANews = () => {
       setValue1('')
       setValue2('')
       setValue3('')
-      //   setComments([
-      //     ...comments,
-      //     {
-      //       author: 'Han Solo',
-      //       avatar: 'https://joeschmoe.io/api/v1/random',
-      //       content: <p>{value}</p>,
-      //       datetime: moment('2016-11-22').fromNow(),
-      //     },
-      //   ]);
 
       axios.post('http://127.0.0.1:5000/api/news', {
         title: value1,
@@ -74,16 +67,12 @@ const PublishANews = () => {
       }
       , {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded' // seems only pass data as string type
+          'Content-Type': 'application/x-www-form-urlencoded'
         }
       }
       )
         .then(function (response) {
-          console.log(response.data)
           setMessages(response.data)
-          // setData([])
-          // loadMoreData();  // update messages display after posting
-          // Perform action based on response
         })
         .catch(function (error) {
           console.log(error)
@@ -106,27 +95,6 @@ const PublishANews = () => {
     setMessages(' ')
   }
 
-  // const loadMoreData = () => {
-  //   if (loading) {
-  //     return;
-  //   }
-  //   setLoading(true);
-  //   axios.get('http://127.0.0.1:5000/api/messages')
-  //       .then(function(response){
-  //           console.log(response.data);
-  //           setData(response.data);
-  //           setLoading(false);
-  //       })
-  //       .catch(() =>{
-  //           console.log(error);
-  //           setLoading(false);
-  //   })
-  // };
-
-  //  useEffect(() => {
-  //    loadMoreData();
-  // }, []);
-
   return (
     <>
       <Comment
@@ -134,7 +102,6 @@ const PublishANews = () => {
         width: 1000,
         margin: '0px auto'
       }}
-        // avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
         content={
           <Editor
             onChange1={handleChange1}

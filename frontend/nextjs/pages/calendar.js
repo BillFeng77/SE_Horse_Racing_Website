@@ -21,7 +21,7 @@ export default function SelfCalendar () {
           }
         ]
         break
-        case 13:
+      case 13:
         listData = [
           {
             type: 'warning',
@@ -29,7 +29,7 @@ export default function SelfCalendar () {
           }
         ]
         break
-        case 22:
+      case 22:
         listData = [
           {
             type: 'warning',
@@ -41,6 +41,8 @@ export default function SelfCalendar () {
     }
     return listData || []
   }
+
+  // get list data and manage the result of data into cell, and render it
   const dateCellRender = (value) => {
     const listData = getListData(value)
     return (
