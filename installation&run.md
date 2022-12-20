@@ -41,4 +41,4 @@ cd frontend/nextjs
 npm run dev
 ```
 
-Then go to localhost:3000 and you can see the app.
+Then visit localhost:3000 (default port) and you can see the app.
