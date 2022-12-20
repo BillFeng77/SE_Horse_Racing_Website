@@ -1,46 +1,43 @@
-.header{
-    display: flex; 
-    width: 100%;
-    border-bottom: 1px solid #ccc;
-    align-items:baseline;
-    margin-top: 28px;
-    margin-bottom: 30px;
+.header {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  align-items: baseline;
+  margin-top: 28px;
+  margin-bottom: 30px;
 }
 
 .nav {
-    margin: 0 auto;
-    justify-content: center;
-    display: flex; 
-    width: 300px; 
+  margin: 0 auto;
+  justify-content: center;
+  display: flex;
+  width: 300px;
 }
 
 .list {
-    display: flex;
-    justify-content: center;
-    list-style-type: none;
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
 }
 
 .item {
-    margin-right: 40px;
-    font-size: 18px;
-    font-weight: 500;
+  margin-right: 40px;
+  font-size: 18px;
+  font-weight: 500;
 }
 
-.title{
-    margin-left: 100px;
-    width: 100px;
-    color: rgb(0, 0, 0);
-    justify-content: center;
-    font-size: 18px;
-    font-weight: 500;
-  }
+.title {
+  margin-left: 100px;
+  width: 100px;
+  color: rgb(0, 0, 0);
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 500;
+}
 
-
-.userName{
-    margin-right: 100px;
-    width: 100px;
-    text-align: center;
-    font-size: 18px;
-  }
-
-
+.userName {
+  margin-right: 100px;
+  width: 100px;
+  text-align: center;
+  font-size: 18px;
+}
