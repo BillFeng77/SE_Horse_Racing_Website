@@ -1,0 +1,1373 @@
+{
+	"info": {
+		"_postman_id": "e14e7e74-3622-4757-8767-5505ebf630e8",
+		"name": "Horseracing webapp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23913197"
+	},
+	"item": [
+		{
+			"name": "prepare: user log out",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.globals.set(\"token\", \"\");\r",
+							"pm.globals.set(\"username\", \"\");\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "123@nyu.edu",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/logout",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json()\r",
+							"\r",
+							"pm.test(\"Status code is 200 or 409\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 409]);\r",
+							"    if (pm.response.code == 200){\r",
+							"        pm.expect(response.msg).to.eql(\"successfully registered!\");\r",
+							"    }\r",
+							"     if (pm.response.code == 409){\r",
+							"        pm.expect(response.msg).to.eql(\"account already existed\");\r",
+							"        console.log(\"Register: account already existed\")\r",
+							"     }\r",
+							"    \r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "{{newUsername}}",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "{{newEmail}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "111111",
+							"type": "text"
+						},
+						{
+							"key": "usertype",
+							"value": "user",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/register",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json()\r",
+							"\r",
+							"pm.test(\"Response body is valid\", function () {\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.expect(response).to.be.an(\"object\");\r",
+							"    pm.expect(response.access_token).to.be.a(\"string\");\r",
+							"    pm.expect(response.username).to.be.a(\"string\");\r",
+							"    pm.expect(response.usertype).to.eql(\"user\");\r",
+							"});\r",
+							"\r",
+							"var token = response.access_token;\r",
+							"var username = response.username;\r",
+							"\r",
+							"pm.globals.set( \"token\", token);\r",
+							"pm.globals.set( \"username\", username);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "123@nyu.edu",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/usertoken",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"usertoken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get announcements",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response body is valid\", function () {\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.expect(response).to.be.an(\"object\");\r",
+							"    pm.expect(response.content).to.be.a(\"string\");\r",
+							"    pm.expect(response.id).to.be.a(\"number\");\r",
+							"    \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"        pm.response.to.have.header(\"Content-Type\");\r",
+							"    });\r",
+							"    pm.test(\"Content-Type header is correct\", () => {\r",
+							"        pm.expect(pm.response.headers.get('Content-Type')).to.eql('text/html; charset=utf-8');\r",
+							"     });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{baseurl}}/announcements",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"announcements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get horse information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Response body is valid\", function () {\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    for (var i = 0; i < response.length; i++) {\r",
+							"        pm.expect(response[i]).to.be.an(\"object\");\r",
+							"        pm.expect(response[i].Age).to.be.a(\"string\");\r",
+							"        pm.expect(response[i].Country).to.be.a(\"string\");\r",
+							"        pm.expect(response[i].Date).to.be.a(\"string\");\r",
+							"        pm.expect(response[i].DistanceFurlongs).to.be.a(\"string\");\r",
+							"        pm.expect(response[i].Horse).to.be.a(\"string\");\r",
+							"        pm.expect(response[i].RaceName).to.be.a(\"string\");\r",
+							"        pm.expect(response[i].Surface).to.be.a(\"string\");\r",
+							"    };\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"        pm.response.to.have.header(\"Content-Type\");\r",
+							"    });\r",
+							"    pm.test(\"Content-Type header is correct\", () => {\r",
+							"        pm.expect(pm.response.headers.get('Content-Type')).to.eql('text/html; charset=utf-8');\r",
+							"     });\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/horseInfo",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"horseInfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post a message in forum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"token = pm.globals.get( \"token\");\r",
+							"\r",
+							"if (token){\r",
+							"\r",
+							"    pm.test(\"Status code is 200\", function () {\r",
+							"        pm.response.to.have.status(200);\r",
+							"    });\r",
+							"\r",
+							"    const response = pm.response.json()\r",
+							"\r",
+							"    pm.test(\"Response body is valid\", function () {\r",
+							"        pm.response.to.be.withBody;\r",
+							"        pm.response.to.be.json;\r",
+							"        pm.expect(response).to.be.an(\"object\");\r",
+							"        pm.expect(response.userName).to.be.a(\"string\");\r",
+							"        pm.expect(response.content).to.be.a(\"string\");\r",
+							"        pm.expect(response.likes).to.eql(0);\r",
+							"        pm.expect(response.dislikes).to.eql(0);\r",
+							"        pm.expect(response.id).to.be.a(\"number\");\r",
+							"    });\r",
+							"\r",
+							"    pm.test(\"Content-Type header is present\", () => {\r",
+							"        pm.response.to.have.header(\"Content-Type\");\r",
+							"    });\r",
+							"    pm.test(\"Content-Type header is correct\", () => {\r",
+							"        pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+							"     });\r",
+							"\r",
+							"\r",
+							"}else{\r",
+							"    console.log(\"need log in\")\r",
+							"}\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userName",
+							"value": "{{username}}",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "hello hello",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/messages",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"messages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get messages in forum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Response body is valid\", function () {\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    for (var i = 0; i < response.length; i++) {\r",
+							"        pm.expect(response[i]).to.be.an(\"object\");\r",
+							"        pm.expect(response[i].userName).to.be.a(\"string\");\r",
+							"        pm.expect(response[i].content).to.be.a(\"string\");\r",
+							"        pm.expect(response[i].likes).to.be.a(\"number\");\r",
+							"        pm.expect(response[i].dislikes).be.a(\"number\");\r",
+							"        pm.expect(response[i].id).to.be.a(\"number\");\r",
+							"    };\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"        pm.response.to.have.header(\"Content-Type\");\r",
+							"    });\r",
+							"    pm.test(\"Content-Type header is correct\", () => {\r",
+							"        pm.expect(pm.response.headers.get('Content-Type')).to.eql('text/html; charset=utf-8');\r",
+							"     });\r",
+							"\r",
+							"// pick a random message for later testing (like/dislike)\r",
+							"message = response[_.random (0,response.length-1)]\r",
+							"pm.globals.set(\"messageId\", message.id);\r",
+							"pm.globals.set(\"messageLikesPrev\", message.likes);\r",
+							"pm.globals.set(\"messageDislikesPrev\", message.dislikes);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/messages",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"messages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "like a message in forum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const likes = parseInt(pm.response.json());\r",
+							"messageLikesPrev = pm.globals.get(\"messageLikesPrev\");\r",
+							"pm.test(\"Likes number increased by 1\", function () {\r",
+							"    pm.expect(likes).to.eql(messageLikesPrev + 1);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{baseurl}}/messages/:message_id/likes",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"messages",
+						":message_id",
+						"likes"
+					],
+					"variable": [
+						{
+							"key": "message_id",
+							"value": "{{messageId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dislike a message in forum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const dislikes = parseInt(pm.response.json());\r",
+							"messageDislikesPrev = pm.globals.get(\"messageDislikesPrev\");\r",
+							"pm.test(\"Dislikes number increased by 1\", function () {\r",
+							"    pm.expect(dislikes).to.eql(messageDislikesPrev + 1);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{baseurl}}/messages/:message_id/dislikes",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"messages",
+						":message_id",
+						"dislikes"
+					],
+					"variable": [
+						{
+							"key": "message_id",
+							"value": "{{messageId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search news",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"query = pm.globals.get(\"searchQuery\");\r",
+							"\r",
+							"pm.test(\"Response body is valid\", function () {\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    for (var i = 0; i < response.length; i++) {\r",
+							"        pm.expect(response[i]).to.be.an(\"object\");\r",
+							"        pm.expect(response[i].title).to.be.a(\"string\");\r",
+							"        pm.expect(response[i].title).to.include(query);\r",
+							"        pm.expect(response[i].content).to.be.a(\"string\");\r",
+							"        pm.expect(response[i].publishInformation).to.be.a(\"string\");\r",
+							"        pm.expect(response[i].likes).to.be.a(\"number\");\r",
+							"        pm.expect(response[i].dislikes).be.a(\"number\");\r",
+							"    };\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"        pm.response.to.have.header(\"Content-Type\");\r",
+							"    });\r",
+							"    pm.test(\"Content-Type header is correct\", () => {\r",
+							"        pm.expect(pm.response.headers.get('Content-Type')).to.eql('text/html; charset=utf-8');\r",
+							"     });\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/search?q={{searchQuery}}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{searchQuery}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all news",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Response body is valid\", function () {\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    for (var i = 0; i < response.length; i++) {\r",
+							"        pm.expect(response[i]).to.be.an(\"object\");\r",
+							"        pm.expect(response[i].title).to.be.a(\"string\");\r",
+							"        pm.expect(response[i].content).to.be.a(\"string\");\r",
+							"        pm.expect(response[i].publishInformation).to.be.a(\"string\");\r",
+							"        pm.expect(response[i].likes).to.be.a(\"number\");\r",
+							"        pm.expect(response[i].dislikes).be.a(\"number\");\r",
+							"    };\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"        pm.response.to.have.header(\"Content-Type\");\r",
+							"    });\r",
+							"    pm.test(\"Content-Type header is correct\", () => {\r",
+							"        pm.expect(pm.response.headers.get('Content-Type')).to.eql('text/html; charset=utf-8');\r",
+							"     });\r",
+							"\r",
+							"// pick a random news for later testing (like/dislike, post a news comment)\r",
+							"news = response[_.random (0,response.length-1)]\r",
+							"pm.globals.set(\"newsTitle\", news.title);\r",
+							"pm.globals.set(\"newsLikesPrev\", news.likes);\r",
+							"pm.globals.set(\"newsDislikesPrev\", news.dislikes);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/news",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"news"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "like a news",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const likes = parseInt(pm.response.json());\r",
+							"newsLikesPrev = pm.globals.get(\"newsLikesPrev\");\r",
+							"pm.test(\"Likes number increased by 1\", function () {\r",
+							"    pm.expect(likes).to.eql(newsLikesPrev + 1);\r",
+							"});\r",
+							"\r",
+							"pm.globals.set(\"newsLikesPrev\", newsLikesPrev + 1);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{baseurl}}/news/:news_title/likes",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"news",
+						":news_title",
+						"likes"
+					],
+					"variable": [
+						{
+							"key": "news_title",
+							"value": "{{newsTitle}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dislike a news",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const dislikes = parseInt(pm.response.json());\r",
+							"newsDislikesPrev = pm.globals.get(\"newsDislikesPrev\");\r",
+							"\r",
+							"pm.test(\"Dislikes number increased by 1\", function () {\r",
+							"    pm.expect(dislikes).to.eql(newsDislikesPrev + 1);\r",
+							"});\r",
+							"\r",
+							"pm.globals.set(\"newsDislikesPrev\", newsDislikesPrev + 1);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{baseurl}}/news/:news_title/dislikes",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"news",
+						":news_title",
+						"dislikes"
+					],
+					"variable": [
+						{
+							"key": "news_title",
+							"value": "{{newsTitle}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get news comments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"newsTitle = pm.globals.get(\"newsTitle\");\r",
+							"\r",
+							"pm.test(\"Response body is valid\", function () {\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    for (var i = 0; i < response.length; i++) {\r",
+							"        pm.expect(response[i]).to.be.an(\"object\");\r",
+							"        pm.expect(response[i].userName).to.be.a(\"string\");\r",
+							"        pm.expect(response[i].content).to.be.a(\"string\");\r",
+							"        pm.expect(response[i].id).to.be.a(\"number\");\r",
+							"        pm.expect(response[i].type).to.eql(newsTitle);\r",
+							"    };\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"        pm.response.to.have.header(\"Content-Type\");\r",
+							"    });\r",
+							"    pm.test(\"Content-Type header is correct\", () => {\r",
+							"        pm.expect(pm.response.headers.get('Content-Type')).to.eql('text/html; charset=utf-8');\r",
+							"     });\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/:news_title/comments",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						":news_title",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "news_title",
+							"value": "{{newsTitle}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post a news comment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"token = pm.globals.get( \"token\");\r",
+							"\r",
+							"if (token){\r",
+							"\r",
+							"    pm.test(\"Status code is 200\", function () {\r",
+							"        pm.response.to.have.status(200);\r",
+							"    });\r",
+							"\r",
+							"    const response = pm.response.json()\r",
+							"    newsTitle = pm.globals.get(\"newsTitle\");\r",
+							"\r",
+							"    pm.test(\"Response body is valid\", function () {\r",
+							"        pm.response.to.be.withBody;\r",
+							"        pm.response.to.be.json;\r",
+							"        pm.expect(response).to.be.an(\"object\");\r",
+							"        pm.expect(response.userName).to.be.a(\"string\");\r",
+							"        pm.expect(response.content).to.be.a(\"string\");\r",
+							"        pm.expect(response.id).to.be.a(\"number\");\r",
+							"        pm.expect(response.type).to.eql(newsTitle);\r",
+							"    });\r",
+							"\r",
+							"\r",
+							"    pm.test(\"Content-Type header is present\", () => {\r",
+							"        pm.response.to.have.header(\"Content-Type\");\r",
+							"    });\r",
+							"    pm.test(\"Content-Type header is correct\", () => {\r",
+							"        pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+							"     });\r",
+							"\r",
+							"}else{\r",
+							"    console.log(\"need log in\")\r",
+							"}\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userName",
+							"value": "{{username}}",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "hello hello",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/:news_title/comments",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						":news_title",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "news_title",
+							"value": "{{newsTitle}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user log out",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.globals.set(\"token\", \"\");\r",
+							"pm.globals.set(\"username\", \"\");\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "123@nyu.edu",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/logout",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json()\r",
+							"\r",
+							"pm.test(\"Response body is valid\", function () {\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.expect(response).to.be.an(\"object\");\r",
+							"    pm.expect(response.access_token).to.be.a(\"string\");\r",
+							"    pm.expect(response.username).to.be.a(\"string\");\r",
+							"    pm.expect(response.usertype).to.eql(\"admin\");\r",
+							"});\r",
+							"\r",
+							"var token = response.access_token;\r",
+							"var username = response.username;\r",
+							"\r",
+							"pm.globals.set( \"token\", token);\r",
+							"pm.globals.set( \"username\", username);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "bill@nyu.edu",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/usertoken",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"usertoken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "publish a news",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Title test",
+							"type": "text"
+						},
+						{
+							"key": "publishInformation",
+							"value": "PublishInformation test",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "Content test",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/news",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"news"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "publish an announcement",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "content",
+							"value": "Content test",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/announcements",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"announcements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a user account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{baseurl}}/users/:username",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"users",
+						":username"
+					],
+					"variable": [
+						{
+							"key": "username",
+							"value": "{{newUsername}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseurl",
+			"value": "http://127.0.0.1:5000"
+		}
+	]
+}
