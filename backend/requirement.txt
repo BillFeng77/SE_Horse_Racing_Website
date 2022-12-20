@@ -3,3 +3,4 @@ flask_cors
 flask_pymongo
 pymongo
 flask_jwt_extended
+bson
