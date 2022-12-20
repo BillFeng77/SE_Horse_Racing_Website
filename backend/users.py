@@ -5,9 +5,12 @@ from flask_jwt_extended import create_access_token, \
 db = mongo.db
 
 
-# user authentication and authorization, return access token, username, and usertype
 @app.route('/api/usertoken', methods=["POST"])
 def create_token():
+    # User authentication and authorization, return access token, username, and usertype
+
+    # Returns:
+    #    data(obj): authorization information
     email = request.form.get("email")
     password = request.form.get("password")
     find = db["UserList"].find({"email": email, "password": password})
@@ -20,9 +23,12 @@ def create_token():
     return response
 
 
-# register, save user information to db
 @app.route('/api/register', methods=["POST"])
 def register():
+    # Register, save user information to db
+
+    # Returns:
+    #    (obj): register notification
     email = request.form.get("email")
     username = request.form.get("username")
     password = request.form.get("password")
@@ -37,17 +43,26 @@ def register():
         return {"msg": "account already existed"}, 409
 
 
-# logout, terminate access token
 @app.route("/api/logout", methods=["POST"])
 def logout():
+    # Logout, terminate access token
+
+    # Returns:
+    #    response(json): logout notification
     response = jsonify({"msg": "logout successful"})
     unset_jwt_cookies(response)
     return response
 
 
-# delete a user from db
 @app.route("/api/users/<username>", methods=['DELETE'])
 def delete_a_user_in_db(username):
+    # Delete a user from db
+
+    # Parameters:
+    #    username (str): username of the account to be deleted
+
+    # Returns:
+    #    (str): deletion notification
     is_exist = db["UserList"].count_documents({"username": username}, limit=1)
     if is_exist == False:
         return "Account does not exist"

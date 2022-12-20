@@ -4,9 +4,12 @@ from bson.json_util import dumps
 db = mongo.db
 
 
-# find and return news whose title contain the query param from db
 @app.route('/api/search')
 def search():
+    # Find and return news whose title contain the query param from db
+
+    # Returns:
+    #    data(json): all matching news
     query = request.args.get("q")
     query = query.title()
     results = db["News"].find(

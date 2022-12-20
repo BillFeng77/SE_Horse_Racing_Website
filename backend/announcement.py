@@ -6,17 +6,23 @@ from flask_pymongo import ObjectId
 db = mongo.db
 
 
-# return the latest announcements from db
 @app.route("/api/announcements", methods=['GET'])
 def get_announcements_from_db():
-    print(db)
+    # Return the latest announcements from db
+
+    # Returns:
+    #    returnData(json):the latest announcements
     result = db["Announcements"].find().sort("id", -1)
-    return dumps(list(result)[0])
+    returnData = dumps(list(result)[0])
+    return returnData
 
 
-# save an announcement to db and add new field (id)
 @app.route("/api/announcements", methods=['POST'])
 def insert_an_announcement_to_db():
+    # Save an announcement to db and add new field (id)
+
+    # Returns:
+    #    (str): a notification
     data = request.form
     newdata = json.dumps(data)
     doc = json.loads(newdata)
@@ -27,11 +33,14 @@ def insert_an_announcement_to_db():
     return "Published sccessfully"
 
 
-# generate new ids for announcements based on time sequence
 def update_counter_announcements():
+    # Generate new ids for announcements based on time sequence
+
+    # Returns:
+    #    counter(int): a new id for announcement
     db = mongo.db
     db["Counters_Announcements"].find_one_and_update(
         {'type': "announcements"},
         {'$inc': {'counter': 1}})
-
-    return db["Counters_Announcements"].find_one()['counter']
+    counter = db["Counters_Announcements"].find_one()['counter']
+    return counter

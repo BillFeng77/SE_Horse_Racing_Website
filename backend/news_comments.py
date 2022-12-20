@@ -6,18 +6,31 @@ from flask import request
 from flask_jwt_extended import jwt_required
 
 
-# get all comments of a news from db and sort them based on their ids
 @app.route('/api/<news_title>/comments', methods=['GET'])
 def get_comments_from_mongodb(news_title):
+    # Get all comments of a news from db and sort them based on their ids
+
+    # Parameters:
+    #    news_title (str): title of the news that is accessed
+
+    # Returns:
+    #    returnData(json): all comments for the news
     db = mongo.db
     result = db["News_Comments"].find({'type': news_title}).sort("id", -1)
-    return dumps(list(result))
+    returnData = dumps(list(result))
+    return returnData
 
 
-# save a comments in db (check login status prior), add new fields(id, type)
 @app.route('/api/<news_title>/comments', methods=['POST'])
 @jwt_required()
 def insert_comments_to_mongodb(news_title):
+    # Save a comments in db, add new fields(id, type)
+
+    # Parameters:
+    #    news_title (str): title of the news that is commented
+
+    # Returns:
+    #    returnData(obj): comment that is jsut saved
     db = mongo.db
     data = request.form
     newdata = json.dumps(data)  # type: str
@@ -25,7 +38,7 @@ def insert_comments_to_mongodb(news_title):
     id = db["News_Comments"].insert_one(doc).inserted_id
     counter = update_counter_news_comments(news_title)
     db["News_Comments"].update_one(
-        {'_id': ObjectId(id)}, {"$set": {'id': counter}})  # assign new id based on 评论的先后顺序
+        {'_id': ObjectId(id)}, {"$set": {'id': counter}})  # assign new id based on the order of comments
     db["News_Comments"].update_one(
         {'_id': ObjectId(id)}, {"$set": {'type': news_title}})
 
@@ -41,8 +54,14 @@ def insert_comments_to_mongodb(news_title):
     return returnData
 
 
-# generate new ids for each news's comments based on time sequence
 def update_counter_news_comments(news_title):
+    # Generate new ids for each news's comments based on time sequence
+
+    # Parameters:
+    #    news_title (str): title of the news that the comment belongs to
+
+    # Returns:
+    #    counter(int): a new id for the comment
     db = mongo.db
     is_exist = db["Counters_News_Comments"].count_documents(
         {'type': news_title}, limit=1)
@@ -50,12 +69,13 @@ def update_counter_news_comments(news_title):
     if is_exist == False:
         db["Counters_News_Comments"].insert_one(
             {'type': news_title, 'counter': 0})
-        print("insert")
-        return 0
+        counter = 0
+        return counter
     else:
         db["Counters_News_Comments"].find_one_and_update(
             {'type': news_title},
             {'$inc': {'counter': 1}})
         print("update")
-
-        return db["Counters_News_Comments"].find_one({'type': news_title})['counter']
+        counter = db["Counters_News_Comments"].find_one(
+            {'type': news_title})['counter']
+        return counter
