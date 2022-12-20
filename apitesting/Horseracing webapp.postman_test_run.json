@@ -1,0 +1,818 @@
+{
+	"id": "b227d690-81a8-4a42-8fb0-184c18799ebc",
+	"name": "Horseracing webapp",
+	"timestamp": "2022-12-15T08:17:10.304Z",
+	"collection_id": "23913197-e14e7e74-3622-4757-8767-5505ebf630e8",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 50,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "1ff0b39a-458d-402d-b5d9-e7c1a1dd0a0b",
+			"name": "prepare: user log out",
+			"url": "http://127.0.0.1:5000/api/logout",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "a4c2ee45-c8b0-4c9f-8e5b-f3d15df79d98",
+			"name": "register",
+			"url": "http://127.0.0.1:5000/api/register",
+			"time": 624,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 409": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 409": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				624
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 409": true
+				}
+			]
+		},
+		{
+			"id": "b4a7b866-0f0e-4e88-a593-4dcab915a87f",
+			"name": "user login",
+			"url": "http://127.0.0.1:5000/api/usertoken",
+			"time": 213,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response body is valid": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is valid": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				213
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response body is valid": true
+				}
+			]
+		},
+		{
+			"id": "de12d807-b8a2-4c25-a660-929a1a5ed117",
+			"name": "get announcements",
+			"url": "http://127.0.0.1:5000/api/announcements",
+			"time": 242,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response body is valid": true,
+				"Content-Type header is present": true,
+				"Content-Type header is correct": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type header is present": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type header is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				242
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response body is valid": true,
+					"Content-Type header is present": true,
+					"Content-Type header is correct": true
+				}
+			]
+		},
+		{
+			"id": "a02a52ae-204c-4626-8143-39a7feab37c2",
+			"name": "get horse information",
+			"url": "http://127.0.0.1:5000/api/horseInfo",
+			"time": 1924,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response body is valid": true,
+				"Content-Type header is present": true,
+				"Content-Type header is correct": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type header is present": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type header is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1924
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response body is valid": true,
+					"Content-Type header is present": true,
+					"Content-Type header is correct": true
+				}
+			]
+		},
+		{
+			"id": "b474bed7-eba2-40b1-9bf4-0a0a25abf5bb",
+			"name": "post a message in forum",
+			"url": "http://127.0.0.1:5000/api/messages",
+			"time": 1267,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response body is valid": true,
+				"Content-Type header is present": true,
+				"Content-Type header is correct": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type header is present": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type header is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1267
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response body is valid": true,
+					"Content-Type header is present": true,
+					"Content-Type header is correct": true
+				}
+			]
+		},
+		{
+			"id": "ea3952b1-0d53-45e5-911d-aff90d4f388d",
+			"name": "get messages in forum",
+			"url": "http://127.0.0.1:5000/api/messages",
+			"time": 216,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response body is valid": true,
+				"Content-Type header is present": true,
+				"Content-Type header is correct": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type header is present": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type header is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				216
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response body is valid": true,
+					"Content-Type header is present": true,
+					"Content-Type header is correct": true
+				}
+			]
+		},
+		{
+			"id": "5ea1df5e-189c-4452-be5f-a36215194bf4",
+			"name": "like a message in forum",
+			"url": "http://127.0.0.1:5000/api/messages/36/likes",
+			"time": 624,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Likes number increased by 1": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Likes number increased by 1": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				624
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Likes number increased by 1": true
+				}
+			]
+		},
+		{
+			"id": "43fe9d02-341b-43b3-bcb3-de34663bf8b3",
+			"name": "dislike a message in forum",
+			"url": "http://127.0.0.1:5000/api/messages/36/dislikes",
+			"time": 750,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Dislikes number increased by 1": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Dislikes number increased by 1": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				750
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Dislikes number increased by 1": true
+				}
+			]
+		},
+		{
+			"id": "a3b3b132-ecee-4cab-ad8e-69f11b6b1385",
+			"name": "search news",
+			"url": "http://127.0.0.1:5000/api/search?q=Disease",
+			"time": 259,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response body is valid": true,
+				"Content-Type header is present": true,
+				"Content-Type header is correct": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type header is present": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type header is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				259
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response body is valid": true,
+					"Content-Type header is present": true,
+					"Content-Type header is correct": true
+				}
+			]
+		},
+		{
+			"id": "09ddd231-855b-45e5-a30d-006bee23e5fb",
+			"name": "get all news",
+			"url": "http://127.0.0.1:5000/api/news",
+			"time": 321,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response body is valid": true,
+				"Content-Type header is present": true,
+				"Content-Type header is correct": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type header is present": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type header is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				321
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response body is valid": true,
+					"Content-Type header is present": true,
+					"Content-Type header is correct": true
+				}
+			]
+		},
+		{
+			"id": "08234192-7c48-4669-84ad-16370c4381d4",
+			"name": "like a news",
+			"url": "http://127.0.0.1:5000/api/news/Title%20test/likes",
+			"time": 760,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Likes number increased by 1": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Likes number increased by 1": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				760
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Likes number increased by 1": true
+				}
+			]
+		},
+		{
+			"id": "8471ac50-5ea8-4027-9fea-af8cb9754596",
+			"name": "dislike a news",
+			"url": "http://127.0.0.1:5000/api/news/Title%20test/dislikes",
+			"time": 783,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Dislikes number increased by 1": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Dislikes number increased by 1": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				783
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Dislikes number increased by 1": true
+				}
+			]
+		},
+		{
+			"id": "8caa103f-c8a0-4976-836f-ab4f2c528c15",
+			"name": "get news comments",
+			"url": "http://127.0.0.1:5000/api/Title%20test/comments",
+			"time": 263,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response body is valid": true,
+				"Content-Type header is present": true,
+				"Content-Type header is correct": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type header is present": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type header is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				263
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response body is valid": true,
+					"Content-Type header is present": true,
+					"Content-Type header is correct": true
+				}
+			]
+		},
+		{
+			"id": "8e8afbee-9227-40a4-8c4c-1acf296f398e",
+			"name": "post a news comment",
+			"url": "http://127.0.0.1:5000/api/Title%20test/comments",
+			"time": 1295,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response body is valid": true,
+				"Content-Type header is present": true,
+				"Content-Type header is correct": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type header is present": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type header is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1295
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response body is valid": true,
+					"Content-Type header is present": true,
+					"Content-Type header is correct": true
+				}
+			]
+		},
+		{
+			"id": "3b145480-956f-4cc8-9edc-f53a58e6ba36",
+			"name": "user log out",
+			"url": "http://127.0.0.1:5000/api/logout",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "9c6bf4b8-28c3-4b42-a9c4-f7c8d88476f8",
+			"name": "admin login",
+			"url": "http://127.0.0.1:5000/api/usertoken",
+			"time": 288,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response body is valid": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is valid": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				288
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response body is valid": true
+				}
+			]
+		},
+		{
+			"id": "ee742e27-1731-49da-8028-7ac86569907b",
+			"name": "publish a news",
+			"url": "http://127.0.0.1:5000/api/news",
+			"time": 698,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				698
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "860046a5-989d-424e-a1a3-6d49a30b1f03",
+			"name": "publish an announcement",
+			"url": "http://127.0.0.1:5000/api/announcements",
+			"time": 976,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				976
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "c667948a-cc29-44f5-b55f-9d4c87e04a7c",
+			"name": "delete a user account",
+			"url": "http://127.0.0.1:5000/api/users/newUser",
+			"time": 541,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				541
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 12064,
+	"collection": {
+		"requests": [
+			{
+				"id": "1ff0b39a-458d-402d-b5d9-e7c1a1dd0a0b",
+				"method": "POST"
+			},
+			{
+				"id": "a4c2ee45-c8b0-4c9f-8e5b-f3d15df79d98",
+				"method": "POST"
+			},
+			{
+				"id": "b4a7b866-0f0e-4e88-a593-4dcab915a87f",
+				"method": "POST"
+			},
+			{
+				"id": "de12d807-b8a2-4c25-a660-929a1a5ed117",
+				"method": "GET"
+			},
+			{
+				"id": "a02a52ae-204c-4626-8143-39a7feab37c2",
+				"method": "GET"
+			},
+			{
+				"id": "b474bed7-eba2-40b1-9bf4-0a0a25abf5bb",
+				"method": "POST"
+			},
+			{
+				"id": "ea3952b1-0d53-45e5-911d-aff90d4f388d",
+				"method": "GET"
+			},
+			{
+				"id": "5ea1df5e-189c-4452-be5f-a36215194bf4",
+				"method": "POST"
+			},
+			{
+				"id": "43fe9d02-341b-43b3-bcb3-de34663bf8b3",
+				"method": "POST"
+			},
+			{
+				"id": "a3b3b132-ecee-4cab-ad8e-69f11b6b1385",
+				"method": "GET"
+			},
+			{
+				"id": "09ddd231-855b-45e5-a30d-006bee23e5fb",
+				"method": "GET"
+			},
+			{
+				"id": "08234192-7c48-4669-84ad-16370c4381d4",
+				"method": "POST"
+			},
+			{
+				"id": "8471ac50-5ea8-4027-9fea-af8cb9754596",
+				"method": "POST"
+			},
+			{
+				"id": "8caa103f-c8a0-4976-836f-ab4f2c528c15",
+				"method": "GET"
+			},
+			{
+				"id": "8e8afbee-9227-40a4-8c4c-1acf296f398e",
+				"method": "POST"
+			},
+			{
+				"id": "3b145480-956f-4cc8-9edc-f53a58e6ba36",
+				"method": "POST"
+			},
+			{
+				"id": "9c6bf4b8-28c3-4b42-a9c4-f7c8d88476f8",
+				"method": "POST"
+			},
+			{
+				"id": "ee742e27-1731-49da-8028-7ac86569907b",
+				"method": "POST"
+			},
+			{
+				"id": "860046a5-989d-424e-a1a3-6d49a30b1f03",
+				"method": "POST"
+			},
+			{
+				"id": "c667948a-cc29-44f5-b55f-9d4c87e04a7c",
+				"method": "DELETE"
+			}
+		]
+	}
+}
